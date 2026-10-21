@@ -46,21 +46,24 @@ struct PairingSheet: View {
 
 // ── design tokens (from web/dashboard-mockup.html) ──────────────────────────────
 enum C {
-    static let navy   = Color(hex: 0x131A2A)
-    static let navy2  = Color(hex: 0x0C1220)
-    static let ground = Color(hex: 0xEEF1F6)
-    static let card   = Color.white
-    static let ink    = Color(hex: 0x171F2E)
-    static let inkSoft = Color(hex: 0x5A6478)
-    static let inkFaint = Color(hex: 0x939CAF)
-    static let line   = Color(hex: 0xE4E8F0)
-    static let accent = Color(hex: 0xF7931A)
-    static let accentDeep = Color(hex: 0xE27D0B)
-    static let accentSoft = Color(hex: 0xFFF2E0)
-    static let ok = Color(hex: 0x1F9E63);   static let okSoft = Color(hex: 0xE7F5EE)
-    static let sync = Color(hex: 0x2C7BE5); static let syncSoft = Color(hex: 0xE7F0FD)
-    static let err = Color(hex: 0xE5484D);  static let errSoft = Color(hex: 0xFCEBEB)
-    static let pause = Color(hex: 0xB7791F); static let pauseSoft = Color(hex: 0xFBF1DD)
+    // "The Personal Archive" palette (publish/… website DESIGN.md, 2026-10-21): paper surfaces, evergreen
+    // structure, leaf accents, clay for interaction. Status colours stay semantic but sit in the same key.
+    static let navy   = Color(hex: 0x183E34)   // evergreen — hero + dark surfaces
+    static let navy2  = Color(hex: 0x10302A)
+    static let ground = Color(hex: 0xF5F3EB)   // paper
+    static let card   = Color(hex: 0xFFFEF9)
+    static let ink    = Color(hex: 0x1D302B)
+    static let inkSoft = Color(hex: 0x56645B)
+    static let inkFaint = Color(hex: 0x89988A)
+    static let line   = Color(hex: 0xD4D8CD)
+    static let accent = Color(hex: 0xBA562C)   // clay — interaction, focus, Pro
+    static let accentDeep = Color(hex: 0x9E4722)
+    static let accentSoft = Color(hex: 0xF3E4DC)
+    static let leaf = Color(hex: 0xD5E8AD)     // leaf — DIY / selection / highlight on evergreen
+    static let ok = Color(hex: 0x2D5647);   static let okSoft = Color(hex: 0xE3EFD3)
+    static let sync = Color(hex: 0x3B6E8F); static let syncSoft = Color(hex: 0xE2ECF1)
+    static let err = Color(hex: 0xB3362F);  static let errSoft = Color(hex: 0xF6E2DF)
+    static let pause = Color(hex: 0x9A6A1E); static let pauseSoft = Color(hex: 0xF4ECD8)
 }
 
 extension Color {
@@ -189,12 +192,12 @@ struct DashboardView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            HeaderBar(model: model)
+            HeaderBar(model: model, backfill: backfill)
             if model.readOnly { MonitorBanner(model: model) }
             if !model.recoveryBackedUp && !model.readOnly { BackupNudge(model: model) }
             ScrollView {
                 VStack(alignment: .leading, spacing: 12) {
-                    Lead(model: model)
+                    Lead(model: model, backfill: backfill)
                     if !model.readOnly {
                         PermissionsCard(model: perms)      // only renders while a grant is still missing
                             .onAppear { perms.onDriveGranted = { model.onDriveGranted?($0) } }
@@ -228,14 +231,27 @@ struct DashboardView: View {
     }
 }
 
+/// Lanes that are healthy on paper but whose source is still holding items back (iCloud has not delivered them
+/// yet) — the tiles show these as "Waiting". The headline must never say "everything's protected" while one of
+/// them is non-empty: freshness and exceptions beat a blanket healthy line (website design brief, 2026-10-21).
+func waitingLanes(_ model: DashboardModel, _ backfill: BackfillModel) -> [SourceID] {
+    SourceID.allCases.filter { id in
+        model.enabled.contains(id) && model.snapshot.heartbeats[id]?.status == .healthy
+            && (backfill.jobs[id]?.progress.deferred?.count ?? 0) > 0
+    }
+}
+
 private struct HeaderBar: View {
     @ObservedObject var model: DashboardModel
+    @ObservedObject var backfill: BackfillModel
     @EnvironmentObject var loc: Localizer
     @State private var showLang = false
     @State private var showLicense = false
     var body: some View {
-        let sc = statusColor(model.overall)
-        let label = model.overall == .healthy ? "header.protected"
+        let waiting = model.overall == .healthy && !waitingLanes(model, backfill).isEmpty
+        let sc = statusColor(waiting ? .stale : model.overall)
+        let label = waiting ? "header.catchingUp"
+                  : model.overall == .healthy ? "header.protected"
                   : model.overall == .syncing ? "header.syncing"
                   : model.overall == .error ? "header.attention" : "header.idle"
         HStack(spacing: 10) {
@@ -357,14 +373,25 @@ private struct LicenseSheet: View {
 
 private struct Lead: View {
     @ObservedObject var model: DashboardModel
+    @ObservedObject var backfill: BackfillModel
     @EnvironmentObject var loc: Localizer
     var body: some View {
-        HStack(alignment: .firstTextBaseline) {
-            Text(loc.t(model.overall == .error ? "lead.attention" : "lead.protected"))
-                .font(.system(size: 23, weight: .bold)).kerning(-0.3).foregroundColor(C.ink)
-            Spacer()
-            if let last = model.lastChange {
-                Text(loc.t("lead.lastChange", ago(last, now: model.tick, loc: loc)))
+        let waiting = waitingLanes(model, backfill)
+        let catchingUp = model.overall == .syncing || !waiting.isEmpty
+        let key = model.overall == .error ? "lead.attention" : catchingUp ? "lead.almost" : "lead.protected"
+        VStack(alignment: .leading, spacing: 4) {
+            HStack(alignment: .firstTextBaseline) {
+                Text(loc.t(key))
+                    .font(.system(size: 23, weight: .bold)).kerning(-0.3).foregroundColor(C.ink)
+                Spacer()
+                if let last = model.lastChange {
+                    Text(loc.t("lead.lastChange", ago(last, now: model.tick, loc: loc)))
+                        .font(.system(size: 13)).foregroundColor(C.inkSoft)
+                }
+            }
+            // name the exception rather than hide it behind the headline: "Mail is waiting on Apple."
+            if !waiting.isEmpty {
+                Text(loc.t("lead.waiting", waiting.map { loc.t(meta($0).titleKey) }.joined(separator: ", ")))
                     .font(.system(size: 13)).foregroundColor(C.inkSoft)
             }
         }

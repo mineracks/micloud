@@ -48,3 +48,7 @@
 "source.bookmarks" = "ブックマーク";
 "source.mail"      = "メール";
 "source.health"    = "ヘルスケア";
+"hdr.catchingUp" = "追いつき中";
+"lead.almost" = "コピーはほぼ最新です。";
+"lead.waiting" = "%@はAppleからの配信を待っています。";
+"lead.protected" = "すべて保護されています。";

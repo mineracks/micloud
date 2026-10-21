@@ -151,3 +151,6 @@
 "onb.preflight"       = "micloud klasörünüzde zaten bulunan %1$@ öğe bulundu — yeniden yüklenmeyecek, kaldığı yerden sürdürülecek. Diğer dosyalarınıza dokunulmaz.";
 "nudge.backup"        = "Verilerinizi korumak için kurtarma ifadenizi yedekleyin";
 "nudge.backupNow"     = "Şimdi yedekle";
+"lead.almost"      = "Kopyanız neredeyse güncel.";
+"lead.waiting"     = "%@ Apple’ı bekliyor.";
+"header.catchingUp" = "Yetişiyor";

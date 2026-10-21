@@ -117,3 +117,7 @@
 "health.locked"      = "Paused until your iPhone is unlocked";
 "health.backfilling" = "%1$@ records archived · working back through %2$@";
 "health.archived"    = "%@ records archived to your storage";
+"hdr.catchingUp" = "Catching up";
+"lead.almost" = "Your copy is almost current.";
+"lead.waiting" = "%@ is waiting on Apple.";
+"lead.protected" = "Everything's protected.";

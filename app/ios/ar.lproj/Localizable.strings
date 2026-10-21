@@ -48,3 +48,7 @@
 "source.bookmarks" = "الإشارات المرجعية";
 "source.mail"      = "البريد";
 "source.health"    = "الصحة";
+"hdr.catchingUp" = "جارٍ اللحاق";
+"lead.almost" = "نسختك محدّثة تقريبًا.";
+"lead.waiting" = "%@ في انتظار Apple.";
+"lead.protected" = "كل شيء محمي.";

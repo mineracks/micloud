@@ -48,3 +48,7 @@
 "source.bookmarks" = "책갈피";
 "source.mail"      = "메일";
 "source.health"    = "건강";
+"hdr.catchingUp" = "따라잡는 중";
+"lead.almost" = "복사본이 거의 최신 상태입니다.";
+"lead.waiting" = "%@이(가) Apple을 기다리는 중입니다.";
+"lead.protected" = "모두 보호되고 있습니다.";

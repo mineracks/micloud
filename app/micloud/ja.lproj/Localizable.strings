@@ -150,3 +150,6 @@
 "onb.preflight"         = "あなたの micloud フォルダにすでに %1$@ 件の項目が見つかりました — 再アップロードではなく再開されます。ほかのファイルはそのままです。";
 "nudge.backup"          = "データを保護するため、リカバリーフレーズをバックアップしてください";
 "nudge.backupNow"       = "今すぐバックアップ";
+"lead.almost"      = "コピーはほぼ最新です。";
+"lead.waiting"     = "%@はAppleからの配信を待っています。";
+"header.catchingUp" = "追いつき中";

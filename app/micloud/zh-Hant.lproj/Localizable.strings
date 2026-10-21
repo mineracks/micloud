@@ -150,3 +150,6 @@
 "onb.preflight"         = "在您的 micloud 資料夾中已找到 %1$@ 個項目——它們將會繼續，而不會重新上傳。您的其他檔案不受影響。";
 "nudge.backup"          = "備份您的復原助記詞以保護您的資料";
 "nudge.backupNow"       = "立即備份";
+"lead.almost"      = "您的副本已大致同步。";
+"lead.waiting"     = "%@正在等待 Apple。";
+"header.catchingUp" = "正在追趕";

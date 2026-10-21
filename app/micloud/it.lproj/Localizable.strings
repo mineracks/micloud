@@ -151,3 +151,6 @@
 "onb.preflight"       = "Trovati %1$@ elementi già presenti nella tua cartella micloud — verranno ripresi, non ricaricati. Gli altri file restano intatti.";
 "nudge.backup"        = "Esegui il backup della tua frase di recupero per proteggere i tuoi dati";
 "nudge.backupNow"     = "Esegui il backup ora";
+"lead.almost"      = "La tua copia è quasi aggiornata.";
+"lead.waiting"     = "%@ è in attesa di Apple.";
+"header.catchingUp" = "In recupero";

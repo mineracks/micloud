@@ -151,3 +151,6 @@
 "onb.preflight"       = "%1$@ items gevonden die al in uw micloud-map staan — ze worden hervat, niet opnieuw geüpload. Uw andere bestanden blijven ongemoeid.";
 "nudge.backup"        = "Maak een back-up van uw herstelzin om uw gegevens te beschermen";
 "nudge.backupNow"     = "Nu back-uppen";
+"lead.almost"      = "Je kopie is bijna actueel.";
+"lead.waiting"     = "%@ wacht op Apple.";
+"header.catchingUp" = "Inhalen";

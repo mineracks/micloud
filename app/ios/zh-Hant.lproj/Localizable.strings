@@ -48,3 +48,7 @@
 "source.bookmarks" = "書籤";
 "source.mail"      = "郵件";
 "source.health"    = "健康";
+"hdr.catchingUp" = "正在追趕";
+"lead.almost" = "您的副本已大致同步。";
+"lead.waiting" = "%@正在等待 Apple。";
+"lead.protected" = "一切都已受到保護。";

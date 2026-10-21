@@ -151,3 +151,6 @@
 "onb.preflight"         = "%1$@ éléments déjà présents dans votre dossier micloud ont été trouvés — ils seront repris, non re-téléversés. Vos autres fichiers restent intacts.";
 "nudge.backup"    = "Sauvegardez votre phrase de récupération pour protéger vos données";
 "nudge.backupNow" = "Sauvegarder maintenant";
+"lead.almost"      = "Votre copie est presque à jour.";
+"lead.waiting"     = "%@ attend Apple.";
+"header.catchingUp" = "Rattrapage";

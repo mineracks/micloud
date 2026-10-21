@@ -151,3 +151,6 @@
 "onb.preflight"       = "Znaleziono %1$@ elementów już obecnych w Twoim folderze micloud — zostaną wznowione, a nie przesłane ponownie. Twoje pozostałe pliki pozostają nietknięte.";
 "nudge.backup"        = "Utwórz kopię zapasową swojej frazy odzyskiwania, aby chronić dane";
 "nudge.backupNow"     = "Utwórz kopię teraz";
+"lead.almost"      = "Twoja kopia jest prawie aktualna.";
+"lead.waiting"     = "%@ czeka na Apple.";
+"header.catchingUp" = "Nadrabianie";

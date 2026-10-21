@@ -48,3 +48,7 @@
 "source.bookmarks" = "Lesezeichen";
 "source.mail"      = "Mail";
 "source.health"    = "Health";
+"hdr.catchingUp" = "Holt auf";
+"lead.almost" = "Deine Kopie ist fast aktuell.";
+"lead.waiting" = "%@ wartet auf Apple.";
+"lead.protected" = "Alles ist geschützt.";

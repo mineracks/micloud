@@ -48,3 +48,7 @@
 "source.bookmarks" = "Bladwijzers";
 "source.mail"      = "Mail";
 "source.health"    = "Gezondheid";
+"hdr.catchingUp" = "Inhalen";
+"lead.almost" = "Je kopie is bijna actueel.";
+"lead.waiting" = "%@ wacht op Apple.";
+"lead.protected" = "Alles is beschermd.";

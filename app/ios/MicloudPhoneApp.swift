@@ -17,11 +17,12 @@ extension Color { init(h: UInt32) { self.init(.sRGB, red: Double((h>>16)&0xFF)/2
 enum K {
     /// Widest the card column goes: an iPad shows the same column, centred, not a stretched phone.
     static let columnWidth: CGFloat = 680
-    static let navy = Color(h: 0x131A2A), navy2 = Color(h: 0x0C1220), ground = Color(h: 0xEEF1F6)
-    static let card = Color.white, ink = Color(h: 0x171F2E), inkSoft = Color(h: 0x5A6478), inkFaint = Color(h: 0x939CAF)
-    static let line = Color(h: 0xE4E8F0), accent = Color(h: 0xF7931A), accentDeep = Color(h: 0xE27D0B), accentSoft = Color(h: 0xFFF2E0)
-    static let ok = Color(h: 0x1F9E63), okSoft = Color(h: 0xE7F5EE), sync = Color(h: 0x2C7BE5), syncSoft = Color(h: 0xE7F0FD)
-    static let err = Color(h: 0xE5484D), errSoft = Color(h: 0xFCEBEB), track = Color(h: 0xEAEEF5), barLight = Color(h: 0xFFC873)
+    // Same "Personal Archive" palette as the Mac app (Dashboard.swift `C`): paper, evergreen, leaf, clay.
+    static let navy = Color(h: 0x183E34), navy2 = Color(h: 0x10302A), ground = Color(h: 0xF5F3EB)
+    static let card = Color(h: 0xFFFEF9), ink = Color(h: 0x1D302B), inkSoft = Color(h: 0x56645B), inkFaint = Color(h: 0x89988A)
+    static let line = Color(h: 0xD4D8CD), accent = Color(h: 0xBA562C), accentDeep = Color(h: 0x9E4722), accentSoft = Color(h: 0xF3E4DC)
+    static let ok = Color(h: 0x2D5647), okSoft = Color(h: 0xE3EFD3), sync = Color(h: 0x3B6E8F), syncSoft = Color(h: 0xE2ECF1)
+    static let err = Color(h: 0xB3362F), errSoft = Color(h: 0xF6E2DF), track = Color(h: 0xE8E6DC), barLight = Color(h: 0xD5E8AD)
 }
 func sc(_ s: SourceStatus) -> (Color, Color, String) {
     switch s {
@@ -279,8 +280,18 @@ struct StatusScreen: View {
         .sheet(isPresented: $showSettings) { SettingsSheet(pairing: pairing, model: model) }
     }
 
+    /// Lanes healthy on paper whose source is still holding items back ("Waiting" rows). The pill and the
+    /// headline must name that instead of claiming everything is protected (design brief, 2026-10-21).
+    private var waitingLanes: [SourceID] {
+        guard let r = model.report else { return [] }
+        return laneOrder.filter { id in
+            r.snapshot.heartbeats[id]?.status == .healthy && (r.lanes?[id]?.deferred?.count ?? 0) > 0
+        }
+    }
+    private var catchingUp: Bool { model.overall == .healthy && !waitingLanes.isEmpty }
+
     private var header: some View {
-        let s = sc(model.report == nil ? .disabled : model.overall)
+        let s = sc(model.report == nil ? .disabled : catchingUp ? .stale : model.overall)
         return VStack(spacing: 12) {
             HStack {
                 Spacer().frame(width: 30)
@@ -295,7 +306,7 @@ struct StatusScreen: View {
             }
             HStack(spacing: 7) {
                 Circle().fill(s.0).frame(width: 9, height: 9)
-                Text(model.report == nil ? L("hdr.checking") : model.overall == .healthy ? L("hdr.protected")
+                Text(model.report == nil ? L("hdr.checking") : catchingUp ? L("hdr.catchingUp") : model.overall == .healthy ? L("hdr.protected")
                      : model.overall == .syncing ? L("hdr.syncing") : model.overall == .error ? L("hdr.attention") : L("hdr.idle"))
                     .font(.system(size: 14, weight: .semibold)).foregroundColor(s.0)
             }
@@ -330,10 +341,18 @@ struct StatusScreen: View {
     }
 
     private func summary(_ r: StatusReport) -> some View {
-        HStack {
+        let waiting = waitingLanes
+        let headline = model.overall == .error ? L("hdr.attention")
+                     : (model.overall == .syncing || !waiting.isEmpty) ? L("lead.almost") : L("lead.protected")
+        return HStack {
             VStack(alignment: .leading, spacing: 3) {
-                Text(r.host).font(.system(size: 16, weight: .semibold)).foregroundColor(K.ink)
-                Text(L("summary.reported", ago(r.generatedAt, now: model.tick))).font(.system(size: 12.5)).foregroundColor(K.inkFaint)
+                Text(headline).font(.system(size: 18, weight: .bold)).foregroundColor(K.ink)
+                if !waiting.isEmpty {
+                    Text(L("lead.waiting", waiting.map { sourceName($0) }.joined(separator: ", ")))
+                        .font(.system(size: 12.5)).foregroundColor(K.inkSoft)
+                }
+                Text(L("summary.reported", ago(r.generatedAt, now: model.tick)) + " · " + r.host)
+                    .font(.system(size: 12.5)).foregroundColor(K.inkFaint)
             }
             Spacer()
             Button { Task { await model.refresh() } } label: {

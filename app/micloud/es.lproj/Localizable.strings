@@ -151,3 +151,6 @@
 "onb.preflight"         = "Se encontraron %1$@ elementos que ya estaban en tu carpeta micloud — se reanudarán, no se volverán a subir. Tus demás archivos permanecen intactos.";
 "nudge.backup"    = "Haz una copia de tu frase de recuperación para proteger tus datos";
 "nudge.backupNow" = "Hacer copia ahora";
+"lead.almost"      = "Tu copia está casi al día.";
+"lead.waiting"     = "%@ está esperando a Apple.";
+"header.catchingUp" = "Poniéndose al día";

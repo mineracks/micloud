@@ -150,3 +150,6 @@
 "onb.preflight"         = "%1$@ Elemente bereits in Ihrem micloud-Ordner gefunden — sie werden fortgesetzt, nicht erneut hochgeladen. Ihre übrigen Dateien bleiben unberührt.";
 "nudge.backup"          = "Sichern Sie Ihre Wiederherstellungsphrase, um Ihre Daten zu schützen";
 "nudge.backupNow"       = "Jetzt sichern";
+"lead.almost"      = "Deine Kopie ist fast aktuell.";
+"lead.waiting"     = "%@ wartet auf Apple.";
+"header.catchingUp" = "Holt auf";

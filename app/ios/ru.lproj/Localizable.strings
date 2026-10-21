@@ -48,3 +48,7 @@
 "source.bookmarks" = "Закладки";
 "source.mail"      = "Почта";
 "source.health"    = "Здоровье";
+"hdr.catchingUp" = "Догоняет";
+"lead.almost" = "Ваша копия почти актуальна.";
+"lead.waiting" = "%@ ожидает Apple.";
+"lead.protected" = "Всё защищено.";

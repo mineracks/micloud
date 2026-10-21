@@ -48,3 +48,7 @@
 "source.bookmarks" = "Yer İmleri";
 "source.mail"      = "Mail";
 "source.health"    = "Sağlık";
+"hdr.catchingUp" = "Yetişiyor";
+"lead.almost" = "Kopyanız neredeyse güncel.";
+"lead.waiting" = "%@ Apple’ı bekliyor.";
+"lead.protected" = "Her şey korunuyor.";

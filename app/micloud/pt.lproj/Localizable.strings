@@ -151,3 +151,6 @@
 "onb.preflight"         = "Foram encontrados %1$@ itens que já estavam na sua pasta micloud — serão retomados, não recarregados. Os seus outros ficheiros permanecem intactos.";
 "nudge.backup"    = "Faça uma cópia da sua frase de recuperação para proteger os seus dados";
 "nudge.backupNow" = "Fazer cópia agora";
+"lead.almost"      = "A sua cópia está quase atualizada.";
+"lead.waiting"     = "%@ está à espera da Apple.";
+"header.catchingUp" = "A recuperar";

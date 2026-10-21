@@ -151,3 +151,6 @@
 "onb.preflight"       = "micloud 폴더에 이미 있는 항목 %1$@개를 찾았습니다 — 다시 업로드하지 않고 이어서 진행합니다. 다른 파일은 그대로 유지됩니다.";
 "nudge.backup"        = "데이터를 보호하려면 복구 문구를 백업하세요";
 "nudge.backupNow"     = "지금 백업";
+"lead.almost"      = "복사본이 거의 최신 상태입니다.";
+"lead.waiting"     = "%@이(가) Apple을 기다리는 중입니다.";
+"header.catchingUp" = "따라잡는 중";

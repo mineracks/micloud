@@ -48,3 +48,7 @@
 "source.bookmarks" = "Marcadores";
 "source.mail"      = "Mail";
 "source.health"    = "Saúde";
+"hdr.catchingUp" = "A recuperar";
+"lead.almost" = "A sua cópia está quase atualizada.";
+"lead.waiting" = "%@ está à espera da Apple.";
+"lead.protected" = "Está tudo protegido.";

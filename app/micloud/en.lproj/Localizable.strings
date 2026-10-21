@@ -220,3 +220,6 @@
 /* recovery-phrase backup nudge (deferred-backup path) */
 "nudge.backup"    = "Back up your recovery phrase to protect your data";
 "nudge.backupNow" = "Back up now";
+"lead.almost"      = "Your copy is almost current.";
+"lead.waiting"     = "%@ is waiting on Apple.";
+"header.catchingUp" = "Catching up";

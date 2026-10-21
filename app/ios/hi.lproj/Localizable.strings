@@ -48,3 +48,7 @@
 "source.bookmarks" = "बुकमार्क";
 "source.mail"      = "Mail";
 "source.health"    = "स्वास्थ्य";
+"hdr.catchingUp" = "पकड़ रहा है";
+"lead.almost" = "आपकी प्रति लगभग अद्यतन है।";
+"lead.waiting" = "%@ Apple की प्रतीक्षा कर रहा है।";
+"lead.protected" = "सब कुछ सुरक्षित है।";
