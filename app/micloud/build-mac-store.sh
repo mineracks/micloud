@@ -31,8 +31,10 @@ KCPASS="${MICLOUD_KEYCHAIN_PASS:-$(cat "$HOME/.mineracks-build-keychain-pass" 2>
 security unlock-keychain -p "$KCPASS" "$KC" 2>/dev/null || true
 
 # icon: the generated iconset (gitignored) → .icns
-[ -f micloud.iconset/icon_512x512@2x.png ] || swift gen-icon.swift >/dev/null
-[ -f micloud.icns ] || iconutil -c icns micloud.iconset -o micloud.icns
+# ALWAYS regenerate: the iconset is gitignored, and a cached one on the build host shipped the previous mark in
+# TestFlight Mac 6 / iOS 17 (2026-10-21) after the brand refresh changed gen-icon.swift.
+swift gen-icon.swift >/dev/null
+iconutil -c icns micloud.iconset -o micloud.icns
 
 # 1 · the ordinary (non-relay) build: compiles, bundles resources, signs with whatever is at hand — re-signed below
 MICLOUD_RELAY=0 ./build.sh >/dev/null

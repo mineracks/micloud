@@ -37,7 +37,7 @@ done
 
 # ── asset catalog: AppIcon from the Mac iconset's 1024 px master ──
 ICONSRC=../micloud/icon-ios-1024.png   # opaque full-bleed square: the squircle master has alpha → ITMS-90717
-[ -f "$ICONSRC" ] || (cd ../micloud && swift gen-icon.swift ios >/dev/null)   # gitignored; a fresh clone has none → no icon on the phone
+(cd ../micloud && swift gen-icon.swift ios >/dev/null)   # gitignored; ALWAYS regenerate — a cached one shipped the old mark in build 17
 mkdir -p xcassets-build/Assets.xcassets/AppIcon.appiconset
 cp "$ICONSRC" xcassets-build/Assets.xcassets/AppIcon.appiconset/icon-1024.png
 cat > xcassets-build/Assets.xcassets/AppIcon.appiconset/Contents.json <<'JSON'
