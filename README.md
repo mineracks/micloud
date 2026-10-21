@@ -15,6 +15,9 @@ phone cannot wipe the copy.
 
 Website and guides: https://getmicloud.com
 
+<p align="center"><img src="docs/screenshots/dashboard-mac.png" width="760" alt="micloud dashboard on a Mac"></p>
+<p align="center"><img src="docs/screenshots/companion-iphone.png" width="240" alt="micloud iPhone companion"></p>
+
 ## What is in this repository
 
 | Path | What it is |
