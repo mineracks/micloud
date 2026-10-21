@@ -1,0 +1,153 @@
+/* micloud — हिन्दी */
+
+"header.protected" = "सुरक्षित · सब ठीक है";
+"header.syncing"   = "सिंक हो रहा है…";
+"header.attention" = "ध्यान देने की आवश्यकता";
+"header.idle"      = "निष्क्रिय";
+"header.syncNow"   = "अभी सिंक करें";
+
+"lead.protected"   = "सब कुछ सुरक्षित है।";
+"lead.attention"   = "आपके ध्यान की आवश्यकता है।";
+"lead.lastChange"  = "अंतिम बदलाव कॉपी किया गया %@";
+
+"hero.eyebrow"     = "आपका अपना स्टोरेज";
+"hero.body"        = "आपकी तस्वीरें और फ़ाइलें **आपके अपने स्टोरेज** में कॉपी की जाती हैं — आपके अपने हार्डवेयर पर Immich और Nextcloud।";
+"hero.stat.mirrored"     = "इस सत्र में कॉपी किया गया";
+"hero.stat.library"      = "लाइब्रेरी में तस्वीरें";
+"hero.stat.oneway"       = "एकतरफ़ा";
+"hero.stat.oneway.label" = "iCloud में कभी नहीं लिखता";
+
+"status.uptodate"  = "अद्यतित";
+"status.syncing"   = "सिंक हो रहा है";
+"status.stale"     = "पुराना";
+"status.error"     = "त्रुटि";
+"status.off"       = "बंद";
+"status.syncingN"  = "सिंक हो रहा है · %d";
+"tile.notEnabled"  = "अभी सक्षम नहीं";
+"tile.target"      = "→ %1$@ · %2$@";
+
+"source.photos"    = "फ़ोटो और वीडियो";
+"source.documents" = "दस्तावेज़ और फ़ाइलें";
+"source.calendars" = "कैलेंडर";
+"source.contacts"  = "संपर्क";
+"source.reminders" = "रिमाइंडर";
+"source.notes"     = "नोट्स";
+"source.bookmarks" = "बुकमार्क";
+
+"feed.title"    = "लाइव";
+"feed.subtitle" = "जैसे ही बदलाव इस Mac तक पहुँचते हैं";
+"feed.waiting"  = "पहले बदलाव की प्रतीक्षा में…";
+
+"activity.title"    = "गतिविधि";
+"activity.subtitle" = "आपके स्टोरेज में कॉपी किए गए आइटम";
+"activity.window"   = "पिछले 60 से॰";
+"activity.total"    = "इस मिनट में %d";
+
+"footer.text"   = "एकतरफ़ा · micloud आपके iCloud में कभी नहीं लिखता · लॉगिन पर खुलता है";
+
+"backfill.title"      = "%@ का बैकअप हो रहा है";
+"phase.scanning"      = "स्कैन हो रहा है";
+"phase.transferring"  = "बैकअप हो रहा है";
+"phase.paused"        = "रोका गया";
+"phase.done"          = "बैकअप हो गया";
+"phase.blocked"       = "ध्यान देने की आवश्यकता";
+"phase.stopped"       = "बंद किया गया";
+"metric.files" = "फ़ाइलें";
+"metric.data"  = "डेटा";
+"metric.speed" = "गति";
+"metric.est"   = "अनुमानित";
+"backfill.etaLeft"    = "%@ शेष";
+"backfill.unreadable" = "%d पढ़ी नहीं जा सकीं";
+"backfill.safeClose"  = "बंद करना सुरक्षित है — micloud जहाँ रुका था वहीं से जारी रखेगा।";
+
+"btn.pause"         = "रोकें";
+"btn.resume"        = "जारी रखें";
+"btn.stop"          = "रोकें";
+"btn.backupAnyway"  = "फिर भी बैकअप लें";
+"btn.ok"            = "ठीक है";
+"btn.notNow"        = "अभी नहीं";
+
+"capacity.tight.title"   = "%@ में जगह कम हो जाएगी";
+"capacity.wontfit.title" = "%@ पर पर्याप्त जगह नहीं";
+"capacity.tight.msg"     = "यह बैकअप %1$@ जोड़ता है। पूरा होने पर %2$@ %3$d%% भर जाएगा — micloud सीमा से ऊपर चेतावनी देता है ताकि आपका सर्वर न भर जाए।";
+"capacity.wontfit.msg"   = "इस बैकअप के लिए %1$@ चाहिए पर केवल %2$@ खाली है। micloud ऐसा बैकअप शुरू नहीं करता जिसे पूरा न कर सके — %3$@ खाली करें (या डिस्क जोड़ें) और पुनः प्रयास करें।";
+"capacity.diskline"      = "%1$@ डिस्क · %2$@ खाली · %3$@ जोड़ना है";
+
+"tip.wifi" = "आप Wi-Fi पर हैं। वायर्ड कनेक्शन आमतौर पर 3–5× तेज़ होता है — यह बैकअप %2$@ के बजाय लगभग %1$@ में पूरा हो सकता है। Ethernet लगाएँ और micloud अपने आप स्विच कर लेगा।";
+
+"lang.title"  = "भाषा";
+"lang.system" = "सिस्टम भाषा";
+
+"ago.now" = "अभी";
+
+"source.mail"   = "मेल";
+"source.health" = "स्वास्थ्य";
+"tile.proEdition" = "micloud pro edition में उपलब्ध";
+
+/* ── ऑनबोर्डिंग विज़ार्ड ── */
+"onb.step"              = "चरण %1$@ / %2$@";
+"onb.back"              = "पीछे";
+"onb.continue"          = "जारी रखें";
+
+"onb.welcome.title"     = "आपका iCloud, आपके अपने स्टोरेज पर";
+"onb.welcome.body"      = "micloud आपकी तस्वीरों, फ़ाइलों, कैलेंडर और बहुत कुछ की एक निजी, रियल-टाइम प्रति आपके अपने Nextcloud या Immich पर रखता है — एक दूसरी प्रति जिसे आप सचमुच खोल और ब्राउज़ कर सकते हैं, जो iCloud के साथ-साथ काम करती है।";
+"onb.welcome.begin"     = "शुरू करें";
+
+"onb.phrase.title"      = "अपना रिकवरी वाक्यांश सुरक्षित करें";
+"onb.phrase.body"       = "आप कनेक्ट हो गए हैं — micloud आपके डेटा की सुरक्षा के लिए तैयार है। आख़िरी बात: ये 12 शब्द ही आपकी एन्क्रिप्शन कुंजी हैं। इन्हें लिखकर किसी सुरक्षित और ऑफ़लाइन जगह रखें। जिसके पास ये होंगे वह आपका बैकअप पढ़ सकता है; जिसके पास नहीं होंगे — हमारे सहित — वह नहीं पढ़ सकता। हम ये शब्द कभी नहीं देखते और कभी रीसेट नहीं कर सकते।";
+"onb.phrase.copy"       = "कॉपी करें";
+"onb.phrase.regen"      = "फिर से बनाएँ";
+"onb.phrase.written"    = "मैंने इन्हें लिख लिया है";
+
+"onb.confirm.title"     = "अपना वाक्यांश पुष्टि करें";
+"onb.confirm.body"      = "यह साबित करने के लिए कि आपने इसे सहेज लिया है, हर स्थान के लिए सही शब्द चुनें।";
+"onb.confirm.word"      = "शब्द %1$@";
+"onb.confirm.wrong"     = "यह सही नहीं है — अपनी लिखी हुई प्रति जाँचें और फिर से प्रयास करें।";
+
+"onb.backend.title"     = "यह कहाँ जाना चाहिए?";
+"onb.backend.body"      = "चुनें कि micloud कहाँ बैकअप ले। दोनों ही हाल में यह आपका डेटा है, ऐसे स्टोरेज पर जिसे आप नियंत्रित करते हैं। (ज़ीरो-नॉलेज एन्क्रिप्शन चाहिए? इसे Pro में चालू करें।)";
+"onb.backend.diy.title" = "मेरा अपना सर्वर";
+"onb.backend.diy.body"  = "अपने मौजूदा Nextcloud और/या Immich को कनेक्ट करें। पूरी तरह स्वतंत्र, निःशुल्क।";
+"onb.backend.hosted.title" = "हमें इसे होस्ट करने दें";
+"onb.backend.hosted.body"  = "हम आपके लिए एक निजी Nextcloud + Immich तैयार करते हैं। 24 घंटे के लिए निःशुल्क आज़माएँ।";
+"onb.backend.hosted.badge" = "24 घंटे निःशुल्क ट्रायल";
+
+"onb.diy.title"         = "अपना Nextcloud कनेक्ट करें";
+"onb.diy.body"          = "अपना सर्वर पता और ऐप पासवर्ड दर्ज करें। तरीका नहीं पता? चरण-दर-चरण गाइड मौजूद है।";
+"onb.diy.url"           = "Nextcloud पता";
+"onb.diy.user"          = "उपयोगकर्ता नाम";
+"onb.diy.pass"          = "ऐप पासवर्ड";
+"onb.diy.immich"        = "Immich (वैकल्पिक, तस्वीरों के लिए)";
+"onb.diy.immichKey"     = "Immich API कुंजी";
+"onb.diy.verify"        = "कनेक्ट करें और सत्यापित करें";
+"onb.diy.verifying"     = "सत्यापित हो रहा है…";
+"onb.diy.ok"            = "कनेक्ट हो गया — %1$@ खाली";
+"onb.diy.fail"          = "कनेक्ट नहीं हो सका। पता और ऐप पासवर्ड जाँचें।";
+"onb.diy.fields"        = "अपना सर्वर पता, उपयोगकर्ता नाम और ऐप पासवर्ड दर्ज करें।";
+"onb.diy.guide"         = "ये कहाँ मिलेंगे?";
+"onb.diy.help"          = "अटक गए? विशेषज्ञ ऑनबोर्डिंग बुक करें";
+
+"onb.hosted.title"      = "हम इसे आपके लिए होस्ट करेंगे";
+"onb.hosted.body"       = "micloud सिर्फ़ आपके लिए एक निजी Nextcloud + Immich तैयार करता है — 24 घंटे के लिए निःशुल्क — ताकि आप अपने iCloud को ऐसी जगह देखें जिसे आप सचमुच ब्राउज़ कर सकें। सब्सक्राइब करके इसे बनाए रखें; अन्यथा ट्रायल समाप्त होने पर यह अपने आप हट जाता है।";
+"onb.hosted.soon"       = "होस्टेड ट्रायल जल्द ही शुरू हो रहे हैं। फ़िलहाल, अपना खुद का सर्वर कनेक्ट करें।";
+"onb.hosted.useDiy"     = "इसके बजाय मेरा अपना कनेक्ट करें";
+
+"onb.done.title"        = "आप सुरक्षित हैं";
+"onb.done.body"         = "micloud आपके iCloud पर नज़र रख रहा है और उसे आपके अपने स्टोरेज में कॉपी कर रहा है। आप इनमें से कुछ भी बाद में सेटिंग्स में बदल सकते हैं।";
+"onb.done.finish"       = "micloud खोलें";
+
+/* ── Pro edition / licensing ── */
+"pro.badge"           = "PRO";
+"pro.unlock"          = "Pro अनलॉक करें";
+"tile.proReady"       = "Pro में शामिल";
+"pro.sheet.title"     = "micloud Pro अनलॉक करें";
+"pro.sheet.body"      = "अपनी लाइसेंस कुंजी पेस्ट करें। इसे इसी Mac पर सत्यापित किया जाता है — micloud कभी भी आपका डेटा बाहर नहीं भेजता।";
+"pro.sheet.unlock"    = "अनलॉक करें";
+"pro.sheet.invalid"   = "यह कुंजी मान्य नहीं है, या इसकी अवधि समाप्त हो चुकी है।";
+"pro.sheet.buy"       = "आपके पास नहीं है? Pro पाएँ";
+
+/* ── ऑनबोर्डिंग परिवर्धन ── */
+"onb.phrase.later"      = "मुझे बाद में याद दिलाएँ";
+"onb.preflight"         = "आपके micloud फ़ोल्डर में पहले से %1$@ आइटम मिले — इन्हें फिर से अपलोड नहीं, बल्कि जारी रखा जाएगा। आपकी बाकी फ़ाइलें अछूती रहती हैं।";
+"nudge.backup"    = "अपने डेटा की सुरक्षा के लिए अपने रिकवरी वाक्यांश का बैकअप लें";
+"nudge.backupNow" = "अभी बैकअप लें";

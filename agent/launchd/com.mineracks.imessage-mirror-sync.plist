@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.mineracks.imessage-mirror-sync</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/USERNAME/bin/imessage-mirror-sync.sh</string>
+    </array>
+    <!-- Daily at 05:17 local. Offset from photo (:00/:30) and documents (:15) jobs so the
+         Studio never runs two osxphotos/imessage-exporter passes in the same minute. -->
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>5</integer>
+        <key>Minute</key>
+        <integer>17</integer>
+    </dict>
+    <key>RunAtLoad</key>
+    <false/>
+    <key>StandardOutPath</key>
+    <string>/Users/USERNAME/Library/Logs/imessage-mirror-sync-launchd.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/USERNAME/Library/Logs/imessage-mirror-sync-launchd.log</string>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+    </dict>
+</dict>
+</plist>

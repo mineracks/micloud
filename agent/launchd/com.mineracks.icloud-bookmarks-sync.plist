@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<!--
+  com.mineracks.icloud-bookmarks-sync — Phase 6.2
+
+  Mac-Studio launchd that mirrors Safari Bookmarks → Nextcloud Bookmarks.
+
+  Event-driven: WatchPaths on `~/Library/Safari/`. Unlike Reminders'
+  `~/Library/Group Containers/...`, the Safari dir is NOT under the TCC-
+  restricted Group Containers space, so launchd kqueue events surface
+  reliably without needing Full Disk Access. Whenever Safari (or
+  CloudKit-driven sync) updates Bookmarks.plist, the agent fires.
+
+  StartInterval is a long safety net. Bookmarks rarely change daily;
+  6h is plenty.
+
+  Loaded as a LaunchAgent (per-user) so it inherits Reminders Full Access
+  via `/usr/bin/env` as the responsible-process — same trick that
+  unblocked the Reminders LaunchAgent.
+
+  Install on Mac Studio:
+    cp applications/icloud-sync/scripts/LaunchAgents/com.mineracks.icloud-bookmarks-sync.plist \
+       ~/Library/LaunchAgents/
+    launchctl load -w ~/Library/LaunchAgents/com.mineracks.icloud-bookmarks-sync.plist
+-->
+<dict>
+  <key>Label</key>
+  <string>com.mineracks.icloud-bookmarks-sync</string>
+
+  <!-- Invoke through /usr/bin/env so env is the TCC responsible-process. -->
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/bin/env</string>
+    <string>/Users/USERNAME/bin/icloud-bookmarks-sync.sh</string>
+  </array>
+
+  <key>WatchPaths</key>
+  <array>
+    <string>/Users/USERNAME/Library/Safari</string>
+  </array>
+
+  <!-- 6-hour safety net. WatchPaths drives event-triggered runs. -->
+  <key>StartInterval</key>
+  <integer>21600</integer>
+
+  <key>RunAtLoad</key>
+  <true/>
+
+  <!-- 30s minimum spacing between exit and re-launch — coalesces a burst
+       of Safari plist writes (Apple flushes piecewise during sync) into
+       at most one sync run per 30s. -->
+  <key>ThrottleInterval</key>
+  <integer>30</integer>
+
+  <key>StandardOutPath</key>
+  <string>/Users/USERNAME/Library/Logs/icloud-bookmarks-sync/stdout.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/USERNAME/Library/Logs/icloud-bookmarks-sync/stderr.log</string>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key>
+    <string>/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+  </dict>
+
+  <key>ProcessType</key>
+  <string>Background</string>
+</dict>
+</plist>

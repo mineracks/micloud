@@ -1,0 +1,50 @@
+/* micloud iOS companion — Hindi (hi). */
+
+/* source status */
+"status.uptodate" = "अप-टू-डेट";
+"status.syncing"  = "सिंक हो रहा है";
+"status.stale"    = "पुराना";
+"status.error"    = "एरर";
+"status.off"      = "बंद";
+
+/* overall header */
+"hdr.protected" = "सुरक्षित · सब कुछ ठीक है";
+"hdr.syncing"   = "सिंक हो रहा है…";
+"hdr.attention" = "ध्यान देने की ज़रूरत है";
+"hdr.idle"      = "निष्क्रिय";
+"hdr.checking"  = "जाँच हो रही है…";
+
+/* errors */
+"err.notpaired"   = "अभी तक किसी Nextcloud से पेयर नहीं किया गया";
+"err.unreachable" = "आपके Mac की स्थिति तक नहीं पहुँच सका";
+
+/* summary + relative time */
+"summary.checked" = "%@ पहले जाँचा गया";
+"ago.now"  = "अभी-अभी";
+"ago.sec"  = "%@ सेकंड पहले";
+"ago.min"  = "%@ मिनट पहले";
+"ago.hour" = "%@ घंटे पहले";
+"ago.day"  = "%@ दिन पहले";
+
+/* Health card */
+"health.title"    = "स्वास्थ्य";
+"health.subtitle" = "अपने खुद के स्टोरेज में बैक अप लें";
+"health.action"   = "स्वास्थ्य का बैक अप लें";
+"health.busy"     = "बैक अप हो रहा है…";
+"health.requesting" = "स्वास्थ्य ऐक्सेस का अनुरोध किया जा रहा है…";
+"health.unavailable" = "इस डिवाइस पर स्वास्थ्य डेटा उपलब्ध नहीं है";
+"health.empty"    = "बैक अप के लिए कोई स्वास्थ्य डेटा नहीं मिला";
+"health.exporting" = "%1$@ एक्सपोर्ट हो रहा है (%2$d)…";
+"health.done"     = "%d स्वास्थ्य रिकॉर्ड आपके स्टोरेज में बैक अप हो गए";
+"health.failed"   = "स्वास्थ्य बैक अप विफल रहा: %@";
+
+/* source names */
+"source.photos"    = "फ़ोटो";
+"source.documents" = "डॉक्यूमेंट";
+"source.calendars" = "कैलेंडर";
+"source.contacts"  = "कॉन्टैक्ट";
+"source.reminders" = "रिमाइंडर";
+"source.notes"     = "नोट्स";
+"source.bookmarks" = "बुकमार्क";
+"source.mail"      = "Mail";
+"source.health"    = "स्वास्थ्य";

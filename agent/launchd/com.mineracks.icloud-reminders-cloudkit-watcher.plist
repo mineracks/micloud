@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<!--
+  com.mineracks.icloud-reminders-cloudkit-watcher — Phase 6.1.5 event trigger.
+
+  Long-running daemon that listens for EKEventStoreChangedNotification
+  via PyObjC and kickstarts the existing sync agent on debounced changes.
+
+  Why a separate LaunchAgent instead of folding into the sync plist:
+   - The sync runs to completion in 25-1200s and exits. It can't also be
+     a long-lived notification listener.
+   - Splitting the responsibilities means a hung sync doesn't stop us
+     receiving subsequent change notifications.
+   - launchd's KeepAlive=true respawns the watcher if it crashes, while
+     leaving the sync agent's lifecycle independent.
+
+  Install on Mac Studio:
+    cp applications/icloud-sync/scripts/LaunchAgents/com.mineracks.icloud-reminders-cloudkit-watcher.plist \
+       ~/Library/LaunchAgents/
+    launchctl load -w ~/Library/LaunchAgents/com.mineracks.icloud-reminders-cloudkit-watcher.plist
+
+  Pre-flight permissions: same as the sync agent (Reminders Full Access
+  via the responsible-process chain, no FDA needed).
+-->
+<dict>
+  <key>Label</key>
+  <string>com.mineracks.icloud-reminders-cloudkit-watcher</string>
+
+  <!-- Invoke through /usr/bin/env so env is the responsible process for TCC.
+       env already has a Reminders Automation grant (System Settings shows it
+       in Privacy & Security → Reminders). Running python3 directly under
+       launchd lands TCC against /usr/bin/python3, which has no entry and
+       can't get one (Apple removed the manual "+" button in this pane).
+       env-as-launcher is the supported way to inherit a working grant. -->
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/bin/env</string>
+    <string>/usr/bin/python3</string>
+    <string>/Users/USERNAME/bin/icloud-reminders-cloudkit-watcher.py</string>
+  </array>
+
+  <!-- Daemon: keep alive forever. launchd will respawn on crash. -->
+  <key>KeepAlive</key>
+  <true/>
+
+  <key>RunAtLoad</key>
+  <true/>
+
+  <!-- Throttle so a crashing daemon doesn't tight-loop launchd. -->
+  <key>ThrottleInterval</key>
+  <integer>30</integer>
+
+  <key>StandardOutPath</key>
+  <string>/Users/USERNAME/Library/Logs/icloud-reminders-cloudkit-sync/watcher.stdout.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/USERNAME/Library/Logs/icloud-reminders-cloudkit-sync/watcher.stderr.log</string>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key>
+    <string>/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+  </dict>
+
+  <key>ProcessType</key>
+  <string>Background</string>
+</dict>
+</plist>

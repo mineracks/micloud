@@ -1,0 +1,50 @@
+/* micloud iOS companion — Japanese translation. Bundled per-language; iOS picks the user's language. */
+
+/* source status */
+"status.uptodate" = "最新";
+"status.syncing"  = "同期中";
+"status.stale"    = "古い状態";
+"status.error"    = "エラー";
+"status.off"      = "オフ";
+
+/* overall header */
+"hdr.protected" = "保護済み · すべて正常です";
+"hdr.syncing"   = "同期中…";
+"hdr.attention" = "対応が必要です";
+"hdr.idle"      = "アイドル";
+"hdr.checking"  = "確認中…";
+
+/* errors */
+"err.notpaired"   = "まだNextcloudとペアリングされていません";
+"err.unreachable" = "お使いのMacのステータスを取得できませんでした";
+
+/* summary + relative time */
+"summary.checked" = "%@に確認しました";
+"ago.now"  = "たった今";
+"ago.sec"  = "%@秒前";
+"ago.min"  = "%@分前";
+"ago.hour" = "%@時間前";
+"ago.day"  = "%@日前";
+
+/* Health card */
+"health.title"    = "ヘルスケア";
+"health.subtitle" = "自分のストレージにバックアップします";
+"health.action"   = "ヘルスケアをバックアップ";
+"health.busy"     = "バックアップ中…";
+"health.requesting" = "ヘルスケアへのアクセスをリクエスト中…";
+"health.unavailable" = "このデバイスではヘルスケアデータを利用できません";
+"health.empty"    = "バックアップするヘルスケアデータが見つかりません";
+"health.exporting" = "%1$@をエクスポート中（%2$d）…";
+"health.done"     = "%d件のヘルスケアデータをストレージにバックアップしました";
+"health.failed"   = "ヘルスケアのバックアップに失敗しました：%@";
+
+/* source names */
+"source.photos"    = "写真";
+"source.documents" = "書類";
+"source.calendars" = "カレンダー";
+"source.contacts"  = "連絡先";
+"source.reminders" = "リマインダー";
+"source.notes"     = "メモ";
+"source.bookmarks" = "ブックマーク";
+"source.mail"      = "メール";
+"source.health"    = "ヘルスケア";

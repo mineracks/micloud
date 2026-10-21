@@ -1,0 +1,73 @@
+{
+  "uid": "icloud-drive-hourly-stale",
+  "folderUID": "ffjlhxwamqfpca",
+  "ruleGroup": "Sentinel",
+  "title": "iCloud Drive (hourly) sync stale (no successful run in 4h)",
+  "condition": "fire",
+  "data": [
+    {
+      "refId": "successful_runs",
+      "queryType": "instant",
+      "relativeTimeRange": {
+        "from": 14400,
+        "to": 0
+      },
+      "datasourceUid": "P8E80F9AEF21F6940",
+      "model": {
+        "editorMode": "code",
+        "expr": "sum(count_over_time({job=\"icloud_drive_sync\", script=\"drive-hourly\", event=~\"idle|uploaded\"}[4h]))",
+        "intervalMs": 1000,
+        "maxDataPoints": 43200,
+        "queryType": "instant"
+      }
+    },
+    {
+      "refId": "fire",
+      "queryType": "",
+      "relativeTimeRange": {
+        "from": 0,
+        "to": 0
+      },
+      "datasourceUid": "__expr__",
+      "model": {
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                1
+              ],
+              "type": "lt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": []
+            },
+            "reducer": {
+              "type": "last"
+            }
+          }
+        ],
+        "expression": "successful_runs",
+        "intervalMs": 1000,
+        "maxDataPoints": 43200,
+        "type": "threshold"
+      }
+    }
+  ],
+  "noDataState": "Alerting",
+  "execErrState": "Error",
+  "for": "15m",
+  "keep_firing_for": "0s",
+  "annotations": {
+    "description": "Mac Studio's `~/bin/icloud-drive-sync.sh` (Desktop + Documents + iCloud Drive misc → Nextcloud) heartbeats `started`/`idle`/`uploaded`/`failed`/`locked` events to Loki on every run. Fires hourly via launchd. Zero `idle`/`uploaded` events for 4h means launchd is unloaded, the script is broken, the Mac Studio is offline, Nextcloud auth has expired, or Loki ingest is failing. Check `launchctl list | grep icloud-drive`, `~/icloud-drive-sync.log`, `~/Library/Logs/rclone-documents-sync-launchd.log`. Dashboard: /d/immich-sync/icloud-synchronisation",
+    "summary": "iCloud Drive hourly sync stale: zero successful runs in 4 hours"
+  },
+  "labels": {
+    "sentinel": "phase1"
+  },
+  "isPaused": false,
+  "notification_settings": null,
+  "record": null
+}

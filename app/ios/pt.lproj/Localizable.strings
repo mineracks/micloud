@@ -1,0 +1,50 @@
+/* micloud iOS companion — Portuguese (pt). */
+
+/* source status */
+"status.uptodate" = "Atualizado";
+"status.syncing"  = "A sincronizar";
+"status.stale"    = "Desatualizado";
+"status.error"    = "Erro";
+"status.off"      = "Desativado";
+
+/* overall header */
+"hdr.protected" = "Protegido · tudo em ordem";
+"hdr.syncing"   = "A sincronizar…";
+"hdr.attention" = "Requer atenção";
+"hdr.idle"      = "Inativo";
+"hdr.checking"  = "A verificar…";
+
+/* errors */
+"err.notpaired"   = "Ainda não está associado a um Nextcloud";
+"err.unreachable" = "Não foi possível obter o estado do seu Mac";
+
+/* summary + relative time */
+"summary.checked" = "verificado há %@";
+"ago.now"  = "agora mesmo";
+"ago.sec"  = "há %@ s";
+"ago.min"  = "há %@ min";
+"ago.hour" = "há %@ h";
+"ago.day"  = "há %@ d";
+
+/* Health card */
+"health.title"    = "Saúde";
+"health.subtitle" = "Faça uma cópia de segurança para um armazenamento seu";
+"health.action"   = "Fazer cópia da Saúde";
+"health.busy"     = "A fazer cópia de segurança…";
+"health.requesting" = "A solicitar acesso à Saúde…";
+"health.unavailable" = "Os dados da Saúde não estão disponíveis neste dispositivo";
+"health.empty"    = "Não foram encontrados dados da Saúde para a cópia de segurança";
+"health.exporting" = "A exportar %1$@ (%2$d)…";
+"health.done"     = "Cópia de segurança de %d registos de saúde efetuada no seu armazenamento";
+"health.failed"   = "Falha na cópia de segurança da Saúde: %@";
+
+/* source names */
+"source.photos"    = "Fotos";
+"source.documents" = "Documentos";
+"source.calendars" = "Calendários";
+"source.contacts"  = "Contactos";
+"source.reminders" = "Lembretes";
+"source.notes"     = "Notas";
+"source.bookmarks" = "Marcadores";
+"source.mail"      = "Mail";
+"source.health"    = "Saúde";

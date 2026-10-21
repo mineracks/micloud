@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  icloud-sovereign-backup Phase 2.6 (Photos) — EVENT-DRIVEN trigger for the photo forwarder.
+  FSEvents-watches ~/Pictures/Photos Library.photoslibrary; a new photo appearing (cloudphotod
+  wrote it in) fires photo-delta-sync.sh after an ~8s debounce, so it reaches Immich + Nextcloud
+  within seconds of becoming visible locally — not on an hourly tick. Replaces the hourly
+  com.mineracks.photo-delta-sync timer. The weekly com.mineracks.photo-delta-sync-mopup (21-day)
+  remains as the deep backstop. Uses /usr/bin/python3 (system python has PyObjC + FSEvents).
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.mineracks.photo-delta-watch</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/bin/python3</string>
+    <string>/Users/USERNAME/bin/photo-delta-watch.py</string>
+  </array>
+  <key>RunAtLoad</key>
+  <true/>
+  <key>KeepAlive</key>
+  <true/>
+  <key>ThrottleInterval</key>
+  <integer>30</integer>
+  <key>StandardOutPath</key>
+  <string>/Users/USERNAME/Library/Logs/photo-delta-sync.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/USERNAME/Library/Logs/photo-delta-sync.log</string>
+</dict>
+</plist>

@@ -1,0 +1,50 @@
+/* micloud iOS companion — Korean table. Bundled per-language; iOS picks the user's language. */
+
+/* source status */
+"status.uptodate" = "최신 상태";
+"status.syncing"  = "동기화 중";
+"status.stale"    = "오래됨";
+"status.error"    = "오류";
+"status.off"      = "끔";
+
+/* overall header */
+"hdr.protected" = "보호됨 · 모두 정상";
+"hdr.syncing"   = "동기화 중…";
+"hdr.attention" = "주의 필요";
+"hdr.idle"      = "대기 중";
+"hdr.checking"  = "확인 중…";
+
+/* errors */
+"err.notpaired"   = "아직 Nextcloud에 연결되지 않음";
+"err.unreachable" = "Mac의 상태를 가져올 수 없음";
+
+/* summary + relative time */
+"summary.checked" = "%@ 확인함";
+"ago.now"  = "방금 전";
+"ago.sec"  = "%@초 전";
+"ago.min"  = "%@분 전";
+"ago.hour" = "%@시간 전";
+"ago.day"  = "%@일 전";
+
+/* Health card */
+"health.title"    = "건강";
+"health.subtitle" = "직접 소유한 저장 공간에 백업하기";
+"health.action"   = "건강 백업";
+"health.busy"     = "백업 중…";
+"health.requesting" = "건강 접근 권한 요청 중…";
+"health.unavailable" = "이 기기에서는 건강 데이터를 사용할 수 없습니다";
+"health.empty"    = "백업할 건강 데이터가 없습니다";
+"health.exporting" = "%1$@ 내보내는 중 (%2$d)…";
+"health.done"     = "건강 기록 %d개를 저장 공간에 백업했습니다";
+"health.failed"   = "건강 백업 실패: %@";
+
+/* source names */
+"source.photos"    = "사진";
+"source.documents" = "문서";
+"source.calendars" = "캘린더";
+"source.contacts"  = "연락처";
+"source.reminders" = "미리 알림";
+"source.notes"     = "메모";
+"source.bookmarks" = "책갈피";
+"source.mail"      = "메일";
+"source.health"    = "건강";

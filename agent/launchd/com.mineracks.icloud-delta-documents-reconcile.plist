@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  icloud-sovereign-backup Phase 2.6 — weekly MOP-UP for the event-driven delta daemon.
+  The FSEvents daemon (com.mineracks.icloud-delta-documents) handles live changes; this catches
+  anything it could have missed (events dropped while the Mac was asleep/off, FSEvents kernel/user
+  drops, or changes from before the daemon first started). It runs the robust child-process scan
+  (SIGKILL-timeout so a dataless-dir readdir can't hang it) reconciled against the full Nextcloud
+  listing. Slow (WebDAV recursive listing) — hence weekly, off-hours.
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.mineracks.icloud-delta-documents-reconcile</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/bin/python3</string>
+    <string>/Users/USERNAME/bin/icloud-delta-sync.py</string>
+    <string>--reconcile</string>
+  </array>
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Weekday</key><integer>0</integer>
+    <key>Hour</key><integer>3</integer>
+    <key>Minute</key><integer>17</integer>
+  </dict>
+  <key>StandardOutPath</key>
+  <string>/Users/USERNAME/Library/Logs/icloud-delta-documents.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/USERNAME/Library/Logs/icloud-delta-documents.log</string>
+</dict>
+</plist>

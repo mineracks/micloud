@@ -1,0 +1,25 @@
+.DS_Store
+*.pyc
+__pycache__/
+*.output
+app/probes/*/kit/
+*drill-creds.env
+app/probes/*/*.app/
+app/micloud/kit/
+app/micloud/*.app/
+app/micloud/micloud.iconset/
+app/ios/kit/
+app/ios/*.app/
+app/ios/*.png
+app/ios/*.entitlements
+app/ios/*.mobileprovision
+
+# iOS build artefacts
+*.ipa
+
+# store build artefacts
+app/ios/xcassets-build/
+app/micloud/xcassets-build/
+app/micloud/micloud-store.entitlements
+*.pkg
+app/micloud/icon-ios-*.png

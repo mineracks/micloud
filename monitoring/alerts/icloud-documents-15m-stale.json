@@ -1,0 +1,73 @@
+{
+  "uid": "icloud-documents-15m-stale",
+  "folderUID": "ffjlhxwamqfpca",
+  "ruleGroup": "Sentinel",
+  "title": "iCloud Documents (15m) sync stale (no successful run in 4h)",
+  "condition": "fire",
+  "data": [
+    {
+      "refId": "successful_runs",
+      "queryType": "instant",
+      "relativeTimeRange": {
+        "from": 14400,
+        "to": 0
+      },
+      "datasourceUid": "P8E80F9AEF21F6940",
+      "model": {
+        "editorMode": "code",
+        "expr": "sum(count_over_time({job=\"icloud_drive_sync\", script=\"documents-15m\", event=~\"idle|uploaded\"}[4h]))",
+        "intervalMs": 1000,
+        "maxDataPoints": 43200,
+        "queryType": "instant"
+      }
+    },
+    {
+      "refId": "fire",
+      "queryType": "",
+      "relativeTimeRange": {
+        "from": 0,
+        "to": 0
+      },
+      "datasourceUid": "__expr__",
+      "model": {
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                1
+              ],
+              "type": "lt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": []
+            },
+            "reducer": {
+              "type": "last"
+            }
+          }
+        ],
+        "expression": "successful_runs",
+        "intervalMs": 1000,
+        "maxDataPoints": 43200,
+        "type": "threshold"
+      }
+    }
+  ],
+  "noDataState": "Alerting",
+  "execErrState": "Error",
+  "for": "15m",
+  "keep_firing_for": "0s",
+  "annotations": {
+    "description": "Mac Studio's `~/bin/rclone-documents-sync.sh` (Documents → Nextcloud, every 15 min) heartbeats events to Loki. Each run takes 60-90 min so most timer fires bail with `locked` — but at least one run should complete every ~2h. Zero `idle`/`uploaded` events for 4h means rclone is stuck, Nextcloud is unreachable, or the script is broken. Check `~/Library/Logs/rclone-documents-sync-ongoing.log`, `pgrep -fl rclone-documents-sync`, lockfile state. Dashboard: /d/immich-sync/icloud-synchronisation",
+    "summary": "iCloud Documents 15-min sync stale: zero successful runs in 4 hours"
+  },
+  "labels": {
+    "sentinel": "phase1"
+  },
+  "isPaused": false,
+  "notification_settings": null,
+  "record": null
+}

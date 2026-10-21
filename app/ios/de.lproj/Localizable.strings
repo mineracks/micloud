@@ -1,0 +1,50 @@
+/* micloud iOS companion — German translation. Bundled per-language; iOS picks the user's language. */
+
+/* source status */
+"status.uptodate" = "Aktuell";
+"status.syncing"  = "Wird synchronisiert";
+"status.stale"    = "Veraltet";
+"status.error"    = "Fehler";
+"status.off"      = "Aus";
+
+/* overall header */
+"hdr.protected" = "Geschützt · alles in Ordnung";
+"hdr.syncing"   = "Wird synchronisiert…";
+"hdr.attention" = "Aktion erforderlich";
+"hdr.idle"      = "Inaktiv";
+"hdr.checking"  = "Wird geprüft…";
+
+/* errors */
+"err.notpaired"   = "Noch nicht mit einer Nextcloud gekoppelt";
+"err.unreachable" = "Status deines Mac konnte nicht abgerufen werden";
+
+/* summary + relative time */
+"summary.checked" = "geprüft %@";
+"ago.now"  = "gerade eben";
+"ago.sec"  = "vor %@ Sek.";
+"ago.min"  = "vor %@ Min.";
+"ago.hour" = "vor %@ Std.";
+"ago.day"  = "vor %@ Tg.";
+
+/* Health card */
+"health.title"    = "Health";
+"health.subtitle" = "In deinem eigenen Speicher sichern";
+"health.action"   = "Health sichern";
+"health.busy"     = "Wird gesichert…";
+"health.requesting" = "Health-Zugriff wird angefordert…";
+"health.unavailable" = "Health-Daten sind auf diesem Gerät nicht verfügbar";
+"health.empty"    = "Keine Health-Daten zum Sichern gefunden";
+"health.exporting" = "%1$@ wird exportiert (%2$d)…";
+"health.done"     = "%d Health-Datensätze in deinem Speicher gesichert";
+"health.failed"   = "Health-Sicherung fehlgeschlagen: %@";
+
+/* source names */
+"source.photos"    = "Fotos";
+"source.documents" = "Dokumente";
+"source.calendars" = "Kalender";
+"source.contacts"  = "Kontakte";
+"source.reminders" = "Erinnerungen";
+"source.notes"     = "Notizen";
+"source.bookmarks" = "Lesezeichen";
+"source.mail"      = "Mail";
+"source.health"    = "Health";

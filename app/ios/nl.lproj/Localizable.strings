@@ -1,0 +1,50 @@
+/* micloud iOS companion — Dutch table. Bundled per-language; iOS picks the user's language. */
+
+/* source status */
+"status.uptodate" = "Actueel";
+"status.syncing"  = "Synchroniseren";
+"status.stale"    = "Verouderd";
+"status.error"    = "Fout";
+"status.off"      = "Uit";
+
+/* overall header */
+"hdr.protected" = "Beveiligd · alles in orde";
+"hdr.syncing"   = "Synchroniseren…";
+"hdr.attention" = "Aandacht vereist";
+"hdr.idle"      = "Inactief";
+"hdr.checking"  = "Controleren…";
+
+/* errors */
+"err.notpaired"   = "Nog niet gekoppeld aan een Nextcloud";
+"err.unreachable" = "Kan de status van je Mac niet bereiken";
+
+/* summary + relative time */
+"summary.checked" = "gecontroleerd %@";
+"ago.now"  = "zojuist";
+"ago.sec"  = "%@ s geleden";
+"ago.min"  = "%@ min geleden";
+"ago.hour" = "%@ u geleden";
+"ago.day"  = "%@ d geleden";
+
+/* Health card */
+"health.title"    = "Gezondheid";
+"health.subtitle" = "Maak een reservekopie op je eigen opslag";
+"health.action"   = "Reservekopie van Gezondheid";
+"health.busy"     = "Bezig met reservekopie…";
+"health.requesting" = "Toegang tot Gezondheid aanvragen…";
+"health.unavailable" = "Gezondheidsgegevens zijn niet beschikbaar op dit apparaat";
+"health.empty"    = "Geen gezondheidsgegevens gevonden voor een reservekopie";
+"health.exporting" = "%1$@ exporteren (%2$d)…";
+"health.done"     = "Reservekopie gemaakt van %d gezondheidsrecords op je opslag";
+"health.failed"   = "Reservekopie van Gezondheid mislukt: %@";
+
+/* source names */
+"source.photos"    = "Foto's";
+"source.documents" = "Documenten";
+"source.calendars" = "Agenda's";
+"source.contacts"  = "Contacten";
+"source.reminders" = "Herinneringen";
+"source.notes"     = "Notities";
+"source.bookmarks" = "Bladwijzers";
+"source.mail"      = "Mail";
+"source.health"    = "Gezondheid";

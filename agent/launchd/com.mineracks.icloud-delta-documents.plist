@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  icloud-sovereign-backup Phase 2.6 — EVENT-DRIVEN thin-cache delta sync of ~/Documents -> Nextcloud.
+  Long-running FSEvents daemon: a change on the iCloud filesystem is mirrored to Nextcloud within
+  ~seconds (FSEvents ~1s debounce + one rclone forward), then the local copy is evicted (thin cache).
+  KeepAlive restarts it if it ever exits; on restart it replays FSEvents since the stored checkpoint
+  so nothing is missed. The weekly --reconcile job (separate plist) is the mop-up for dropped events.
+  Uses /usr/bin/python3 (system python has PyObjC + FSEvents; Homebrew python3 does not).
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.mineracks.icloud-delta-documents</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/bin/python3</string>
+    <string>/Users/USERNAME/bin/icloud-delta-sync.py</string>
+    <string>--watch</string>
+  </array>
+  <key>RunAtLoad</key>
+  <true/>
+  <key>KeepAlive</key>
+  <true/>
+  <key>ThrottleInterval</key>
+  <integer>30</integer>
+  <key>StandardOutPath</key>
+  <string>/Users/USERNAME/Library/Logs/icloud-delta-documents.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/USERNAME/Library/Logs/icloud-delta-documents.log</string>
+</dict>
+</plist>

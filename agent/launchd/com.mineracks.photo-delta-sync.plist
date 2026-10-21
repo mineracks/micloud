@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  icloud-sovereign-backup Phase 2.6 (Photos) — new iCloud photos -> Immich + Nextcloud, hourly.
+  osxphotos export --download-missing (materialise Optimise-evicted originals on demand) -> Immich
+  + rclone Nextcloud, then delete the temp export (thin — the library stays on Optimise). Replaces
+  the Download-Originals-era immich-photo-sync / nextcloud-photo-sync (disabled), which read
+  originals/ directly and break on an Optimise library. Arg "2" = 2-day look-back buffer.
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.mineracks.photo-delta-sync</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/bash</string>
+    <string>/Users/USERNAME/bin/photo-delta-sync.sh</string>
+    <string>2</string>
+  </array>
+  <key>StartInterval</key>
+  <integer>3600</integer>
+  <key>RunAtLoad</key>
+  <false/>
+  <key>StandardOutPath</key>
+  <string>/Users/USERNAME/Library/Logs/photo-delta-sync.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/USERNAME/Library/Logs/photo-delta-sync.log</string>
+</dict>
+</plist>

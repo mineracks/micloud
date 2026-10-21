@@ -1,0 +1,152 @@
+/* micloud — 日本語 */
+
+"header.protected" = "保護済み · すべて正常";
+"header.syncing"   = "同期中…";
+"header.attention" = "対応が必要です";
+"header.idle"      = "待機中";
+"header.syncNow"   = "今すぐ同期";
+
+"lead.protected"   = "すべて保護されています。";
+"lead.attention"   = "対応が必要です。";
+"lead.lastChange"  = "最後の変更をコピー %@";
+
+"hero.eyebrow"     = "あなたのストレージ";
+"hero.body"        = "写真とファイルは**あなたのストレージ**にコピーされます — ご自身のハードウェア上の Immich と Nextcloud。";
+"hero.stat.mirrored"     = "このセッションでコピー";
+"hero.stat.library"      = "ライブラリの写真";
+"hero.stat.oneway"       = "一方向";
+"hero.stat.oneway.label" = "iCloud には書き込みません";
+
+"status.uptodate"  = "最新";
+"status.syncing"   = "同期中";
+"status.stale"     = "古い";
+"status.error"     = "エラー";
+"status.off"       = "オフ";
+"status.syncingN"  = "同期中 · %d";
+"tile.notEnabled"  = "未有効";
+"tile.target"      = "→ %1$@ · %2$@";
+
+"source.photos"    = "写真とビデオ";
+"source.documents" = "書類とファイル";
+"source.calendars" = "カレンダー";
+"source.contacts"  = "連絡先";
+"source.reminders" = "リマインダー";
+"source.notes"     = "メモ";
+"source.bookmarks" = "ブックマーク";
+
+"feed.title"    = "ライブ";
+"feed.subtitle" = "この Mac に変更が届くたびに";
+"feed.waiting"  = "最初の変更を待っています…";
+
+"activity.title"    = "アクティビティ";
+"activity.subtitle" = "ストレージにコピーされた項目";
+"activity.window"   = "過去 60 秒";
+"activity.total"    = "この1分間に %d 件";
+
+"footer.text"   = "一方向 · micloud は iCloud に書き込みません · ログイン時に開く";
+
+"backfill.title"      = "%@ をバックアップ中";
+"phase.scanning"      = "スキャン中";
+"phase.transferring"  = "バックアップ中";
+"phase.paused"        = "一時停止";
+"phase.done"          = "バックアップ済み";
+"phase.blocked"       = "対応が必要";
+"phase.stopped"       = "停止済み";
+"metric.files" = "ファイル";
+"metric.data"  = "データ";
+"metric.speed" = "速度";
+"metric.est"   = "推定";
+"backfill.etaLeft"    = "残り %@";
+"backfill.unreadable" = "%d 件を読み取れません";
+"backfill.safeClose"  = "閉じても大丈夫です — micloud は中断したところから再開します。";
+
+"btn.pause"         = "一時停止";
+"btn.resume"        = "再開";
+"btn.stop"          = "停止";
+"btn.backupAnyway"  = "それでもバックアップ";
+"btn.ok"            = "OK";
+"btn.notNow"        = "後で";
+
+"capacity.tight.title"   = "%@ の空きが少なくなります";
+"capacity.wontfit.title" = "%@ の空き容量が足りません";
+"capacity.tight.msg"     = "このバックアップで %1$@ 追加されます。完了時に %2$@ は %3$d%% になります — micloud はサーバーが満杯にならないよう上限を超えると警告します。";
+"capacity.wontfit.msg"   = "このバックアップには %1$@ が必要ですが、空きは %2$@ だけです。micloud は完了できないバックアップを開始しません — %3$@ を空ける（またはディスクを追加）してから再試行してください。";
+"capacity.diskline"      = "ディスク %1$@ · 空き %2$@ · 追加 %3$@";
+
+"tip.wifi" = "Wi-Fi に接続しています。有線接続は通常 3〜5 倍高速です — このバックアップは %2$@ ではなく約 %1$@ で完了する可能性があります。Ethernet を接続すると micloud が自動的に切り替えます。";
+
+"lang.title"  = "言語";
+"lang.system" = "システムの言語";
+
+"ago.now" = "たった今";
+
+"source.mail"   = "メール";
+"source.health" = "ヘルスケア";
+"tile.proEdition" = "micloud pro edition で利用可能";
+
+/* ── onboarding wizard ── */
+"onb.step"              = "ステップ %1$@／%2$@";
+"onb.back"              = "戻る";
+"onb.continue"          = "続ける";
+
+"onb.welcome.title"     = "あなたの iCloud を、あなたのストレージへ";
+"onb.welcome.body"      = "micloud は写真、ファイル、カレンダーなどのプライベートなコピーを、あなた自身のものである Nextcloud または Immich にリアルタイムで保管します — 実際に開いて閲覧できる2つ目のコピーが、iCloud と並んで機能します。";
+"onb.welcome.begin"     = "はじめる";
+
+"onb.phrase.title"      = "リカバリーフレーズを保護してください";
+"onb.phrase.body"       = "接続されました — micloud はあなたのデータを保護する準備ができています。最後に一つ、この12個の単語があなたの暗号化キーそのものです。書き留めて、オフラインの安全な場所に保管してください。これを持つ人は誰でもバックアップを読めます。持たない人は — 私たちを含め — 読めません。私たちはこの単語を一切見ることができず、リセットすることもできません。";
+"onb.phrase.copy"       = "コピー";
+"onb.phrase.regen"      = "再生成";
+"onb.phrase.written"    = "書き留めました";
+
+"onb.confirm.title"     = "フレーズの確認";
+"onb.confirm.body"      = "保存したことを確認するため、各位置に正しい単語を選んでください。";
+"onb.confirm.word"      = "%1$@ 番目の単語";
+"onb.confirm.wrong"     = "正しくありません — 書き留めた控えと照らし合わせて、もう一度お試しください。";
+
+"onb.backend.title"     = "どこに保存しますか？";
+"onb.backend.body"      = "micloud のバックアップ先を選んでください。どちらを選んでも、あなたが管理するストレージ上のあなたのデータです。（ゼロ知識暗号化をご希望ですか？ Pro でオンにできます。）";
+"onb.backend.diy.title" = "自分のサーバー";
+"onb.backend.diy.body"  = "既存の Nextcloud や Immich を接続します。完全に自己主権的で、無料です。";
+"onb.backend.hosted.title" = "私たちにホスティングを任せる";
+"onb.backend.hosted.body"  = "あなた専用のプライベートな Nextcloud ＋ Immich を用意します。24時間無料でお試しいただけます。";
+"onb.backend.hosted.badge" = "24時間無料トライアル";
+
+"onb.diy.title"         = "Nextcloud を接続";
+"onb.diy.body"          = "サーバーアドレスとアプリパスワードを入力してください。方法がわからない場合は、手順ガイドがあります。";
+"onb.diy.url"           = "Nextcloud のアドレス";
+"onb.diy.user"          = "ユーザー名";
+"onb.diy.pass"          = "アプリパスワード";
+"onb.diy.immich"        = "Immich（任意、写真用）";
+"onb.diy.immichKey"     = "Immich API キー";
+"onb.diy.verify"        = "接続して確認";
+"onb.diy.verifying"     = "確認中…";
+"onb.diy.ok"            = "接続済み — 空き %1$@";
+"onb.diy.fail"          = "接続できませんでした。アドレスとアプリパスワードをご確認ください。";
+"onb.diy.fields"        = "サーバーアドレス、ユーザー名、アプリパスワードを入力してください。";
+"onb.diy.guide"         = "これらはどこで見つかりますか？";
+"onb.diy.help"          = "お困りですか？専門家によるオンボーディングを予約";
+
+"onb.hosted.title"      = "私たちがホスティングします";
+"onb.hosted.body"       = "micloud があなた専用のプライベートな Nextcloud ＋ Immich を用意します — 24時間無料 — ので、実際に閲覧できる場所にある iCloud をご覧いただけます。サブスクリプションに登録すれば継続できます。登録しない場合、トライアル終了時に自動的に削除されます。";
+"onb.hosted.soon"       = "ホスティング型トライアルはまもなく開始します。今のところは、ご自身のサーバーを接続してください。";
+"onb.hosted.useDiy"     = "代わりに自分のサーバーを接続";
+
+"onb.done.title"        = "保護されました";
+"onb.done.body"         = "micloud はあなたの iCloud を監視し、あなたのものであるストレージにコピーしています。これらの設定は後から設定でいつでも変更できます。";
+"onb.done.finish"       = "micloud を開く";
+
+/* ── Pro edition / licensing ── */
+"pro.badge"           = "PRO";
+"pro.unlock"          = "Pro のロックを解除";
+"tile.proReady"       = "Pro に含まれます";
+"pro.sheet.title"     = "micloud Pro のロックを解除";
+"pro.sheet.body"      = "ライセンスキーを貼り付けてください。この Mac 上で検証されます — micloud が外部に通信することはありません。";
+"pro.sheet.unlock"    = "ロックを解除";
+"pro.sheet.invalid"   = "このキーは無効か、有効期限が切れています。";
+"pro.sheet.buy"       = "お持ちでないですか？ Pro を入手";
+
+"onb.phrase.later"      = "後で通知";
+"onb.preflight"         = "あなたの micloud フォルダにすでに %1$@ 件の項目が見つかりました — 再アップロードではなく再開されます。ほかのファイルはそのままです。";
+"nudge.backup"          = "データを保護するため、リカバリーフレーズをバックアップしてください";
+"nudge.backupNow"       = "今すぐバックアップ";

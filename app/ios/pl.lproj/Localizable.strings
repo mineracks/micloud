@@ -1,0 +1,50 @@
+/* micloud iOS companion — Polish table. Bundled per-language; iOS picks the user's language. */
+
+/* source status */
+"status.uptodate" = "Aktualne";
+"status.syncing"  = "Synchronizowanie";
+"status.stale"    = "Nieaktualne";
+"status.error"    = "Błąd";
+"status.off"      = "Wył.";
+
+/* overall header */
+"hdr.protected" = "Chronione · wszystko w porządku";
+"hdr.syncing"   = "Synchronizowanie…";
+"hdr.attention" = "Wymaga uwagi";
+"hdr.idle"      = "Bezczynne";
+"hdr.checking"  = "Sprawdzanie…";
+
+/* errors */
+"err.notpaired"   = "Jeszcze nie sparowano z Nextcloud";
+"err.unreachable" = "Nie można uzyskać statusu Twojego Maca";
+
+/* summary + relative time */
+"summary.checked" = "sprawdzono %@";
+"ago.now"  = "przed chwilą";
+"ago.sec"  = "%@ s temu";
+"ago.min"  = "%@ min temu";
+"ago.hour" = "%@ godz. temu";
+"ago.day"  = "%@ dni temu";
+
+/* Health card */
+"health.title"    = "Zdrowie";
+"health.subtitle" = "Utwórz kopię zapasową na własnej przestrzeni dyskowej";
+"health.action"   = "Utwórz kopię zapasową Zdrowia";
+"health.busy"     = "Tworzenie kopii zapasowej…";
+"health.requesting" = "Prośba o dostęp do Zdrowia…";
+"health.unavailable" = "Dane Zdrowia nie są dostępne na tym urządzeniu";
+"health.empty"    = "Nie znaleziono danych Zdrowia do utworzenia kopii zapasowej";
+"health.exporting" = "Eksportowanie %1$@ (%2$d)…";
+"health.done"     = "Utworzono kopię zapasową %d rekordów zdrowia w Twojej przestrzeni dyskowej";
+"health.failed"   = "Nie udało się utworzyć kopii zapasowej Zdrowia: %@";
+
+/* source names */
+"source.photos"    = "Zdjęcia";
+"source.documents" = "Dokumenty";
+"source.calendars" = "Kalendarze";
+"source.contacts"  = "Kontakty";
+"source.reminders" = "Przypomnienia";
+"source.notes"     = "Notatki";
+"source.bookmarks" = "Zakładki";
+"source.mail"      = "Mail";
+"source.health"    = "Zdrowie";

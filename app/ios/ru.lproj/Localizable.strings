@@ -1,0 +1,50 @@
+/* micloud iOS companion — Russian translation. Bundled per-language; iOS picks the user's language. */
+
+/* source status */
+"status.uptodate" = "Актуально";
+"status.syncing"  = "Синхронизация";
+"status.stale"    = "Устарело";
+"status.error"    = "Ошибка";
+"status.off"      = "Выкл.";
+
+/* overall header */
+"hdr.protected" = "Защищено · всё в порядке";
+"hdr.syncing"   = "Синхронизация…";
+"hdr.attention" = "Требуется внимание";
+"hdr.idle"      = "Ожидание";
+"hdr.checking"  = "Проверка…";
+
+/* errors */
+"err.notpaired"   = "Ещё не связано с Nextcloud";
+"err.unreachable" = "Не удалось получить статус вашего Mac";
+
+/* summary + relative time */
+"summary.checked" = "проверено %@";
+"ago.now"  = "только что";
+"ago.sec"  = "%@ с назад";
+"ago.min"  = "%@ мин назад";
+"ago.hour" = "%@ ч назад";
+"ago.day"  = "%@ дн назад";
+
+/* Health card */
+"health.title"    = "Здоровье";
+"health.subtitle" = "Копируйте в собственное хранилище";
+"health.action"   = "Скопировать «Здоровье»";
+"health.busy"     = "Копирование…";
+"health.requesting" = "Запрос доступа к «Здоровью»…";
+"health.unavailable" = "Данные «Здоровья» недоступны на этом устройстве";
+"health.empty"    = "Нет данных «Здоровья» для копирования";
+"health.exporting" = "Экспорт %1$@ (%2$d)…";
+"health.done"     = "%d записей «Здоровья» скопировано в ваше хранилище";
+"health.failed"   = "Не удалось создать копию «Здоровья»: %@";
+
+/* source names */
+"source.photos"    = "Фото";
+"source.documents" = "Документы";
+"source.calendars" = "Календари";
+"source.contacts"  = "Контакты";
+"source.reminders" = "Напоминания";
+"source.notes"     = "Заметки";
+"source.bookmarks" = "Закладки";
+"source.mail"      = "Почта";
+"source.health"    = "Здоровье";

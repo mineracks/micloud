@@ -1,0 +1,119 @@
+/* micloud iOS companion — English source table. Bundled per-language; iOS picks the user's language. */
+
+/* source status */
+"status.uptodate" = "Up to date";
+"status.syncing"  = "Syncing";
+"status.stale"    = "Stale";
+"status.error"    = "Error";
+"status.waiting"  = "Waiting";
+"status.off"      = "Off";
+
+/* overall header */
+"hdr.protected" = "Protected · all healthy";
+"hdr.syncing"   = "Syncing…";
+"hdr.attention" = "Attention needed";
+"hdr.idle"      = "Idle";
+"hdr.checking"  = "Checking…";
+
+/* errors */
+"err.notpaired"   = "Not paired to a Nextcloud yet";
+"err.unreachable" = "Couldn't reach your storage to read your Mac's status";
+"err.noReport"    = "Your Mac hasn't published a status yet. Open micloud on the Mac and it will appear here.";
+"hdr.offline"     = "%1$@ hasn't reported since %2$@";
+
+/* pairing */
+"pair.tagline"  = "Your iCloud, on storage you own";
+"pair.title"    = "Connect to your storage";
+"pair.body"     = "Sign in to the same Nextcloud your Mac backs up to. Your phone then shows that Mac's sync dashboard and backs up Apple Health to the same place.";
+"pair.server"   = "Nextcloud address";
+"pair.signin"   = "Sign in with Nextcloud";
+"pair.waiting"  = "Finish signing in in Safari, then come back here. Nothing to copy — this finishes by itself.";
+"pair.cancel"   = "Cancel";
+"pair.badServer" = "That doesn't look like a server address.";
+"pair.keychain"  = "Couldn't save the sign-in on this phone.";
+"pair.failed"    = "Couldn't connect: %@";
+"pair.footnote"  = "micloud only ever writes to your storage, never to iCloud. The sign-in it keeps is named “micloud on <your iPhone>” in Nextcloud → Settings → Security, where you can revoke it any time.";
+
+/* dashboard */
+"summary.reported" = "Mac reported %@";
+"phase.scanning"     = "Scanning";
+"phase.transferring" = "Backing up";
+"phase.paused"       = "Paused";
+"phase.done"         = "Backed up";
+"phase.blocked"      = "Needs attention";
+"phase.stopped"      = "Stopped";
+"metric.files"   = "items";
+"metric.data"    = "data";
+"metric.already" = "already there";
+"metric.speed"   = "speed";
+"metric.est"     = "left";
+"eta.underMinute" = "under a minute";
+"eta.minutes"     = "~%@ min";
+"eta.hours"       = "~%1$@h %2$@m";
+"eta.day"         = "~1 day";
+"activity.window" = "last 60s";
+"activity.total"  = "%d this minute";
+"eta.days"        = "~%@ days";
+"eta.waiting"     = "waiting";
+"lane.retrying"   = "%@ waiting to retry";
+"lane.unreadable" = "%@ couldn't be transferred";
+"lane.kept"       = "%@ kept from before — no longer on the Mac, still in your storage";
+"lane.capacity"   = "Storage check: %@";
+"lane.target.toGo"     = "%1$@ · %2$@ files · %3$@ to go";
+"lane.target.complete" = "complete · %@ files";
+"row.done"      = "%1$@ backed up · %2$@ were already there";
+"row.progress"  = "%1$@ of %2$@";
+"live.title" = "Live";
+"live.more"  = "Show more";
+"live.less"  = "Show less";
+"settings.title"   = "Settings";
+"settings.account" = "Connected storage";
+"settings.server"  = "Server";
+"settings.user"    = "Account";
+"settings.mac"     = "Mac";
+"settings.macVersion" = "micloud on the Mac";
+"settings.signout" = "Disconnect this iPhone";
+"settings.signout.note" = "Health backups stop and the dashboard disappears until you sign in again. Nothing on your storage is removed.";
+"btn.done" = "Done";
+"health.on"   = "On";
+"health.auto" = "Runs by itself: new Health data goes up within the hour, history fills in overnight while charging.";
+"health.checknow" = "Check now";
+
+/* summary + relative time */
+"summary.checked" = "checked in %@";
+"ago.now"  = "just now";
+"ago.sec"  = "%@s ago";
+"ago.min"  = "%@m ago";
+"ago.hour" = "%@h ago";
+"ago.day"  = "%@d ago";
+
+/* Health card */
+"health.title"    = "Apple Health";
+"health.subtitle" = "Back up to storage you own";
+"health.action"   = "Back up Health";
+"health.busy"     = "Backing up…";
+"health.checking" = "Checking %@…";
+"health.requesting" = "Requesting Health access…";
+"health.unavailable" = "Health data isn't available on this device";
+"health.empty"    = "No Health data found to back up";
+"health.exporting" = "Exporting %1$@ (%2$d)…";
+"health.done"     = "Backed up %d health records to your storage";
+"health.failed"   = "Health backup failed: %@";
+
+/* source names */
+"source.photos"    = "Photos";
+"source.documents" = "Documents";
+"source.calendars" = "Calendars";
+"source.contacts"  = "Contacts";
+"source.reminders" = "Reminders";
+"source.notes"     = "Notes";
+"source.bookmarks" = "Bookmarks";
+"source.mail"      = "Mail";
+"source.health"    = "Health";
+"source.messages"  = "Messages";
+
+/* full-history archive */
+"health.restored" = "Archive state restored from your storage · %d types";
+"health.locked"      = "Paused until your iPhone is unlocked";
+"health.backfilling" = "%1$@ records archived · working back through %2$@";
+"health.archived"    = "%@ records archived to your storage";

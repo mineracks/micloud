@@ -1,0 +1,707 @@
+apiVersion: 1
+groups:
+- orgId: 1
+  name: Sentinel
+  folder: Mineracks Alerts
+  interval: 1m
+  rules:
+  - uid: immich-sync-stale
+    title: Immich photo sync stale (no successful run in 6h)
+    condition: fire
+    data:
+    - refId: successful_runs
+      queryType: instant
+      relativeTimeRange:
+        from: 21600
+        to: 0
+      datasourceUid: P8E80F9AEF21F6940
+      model:
+        editorMode: code
+        expr: (sum(count_over_time({job="immich_sync", event=~"idle|uploaded"}[6h]))) or vector(0)
+        intervalMs: 1000
+        maxDataPoints: 43200
+        queryType: instant
+    - refId: fire
+      queryType: ''
+      relativeTimeRange:
+        from: 0
+        to: 0
+      datasourceUid: __expr__
+      model:
+        conditions:
+        - evaluator:
+            params:
+            - 1
+            type: lt
+          operator:
+            type: and
+          query:
+            params: []
+          reducer:
+            type: last
+        expression: successful_runs
+        intervalMs: 1000
+        maxDataPoints: 43200
+        type: threshold
+    noDataState: OK
+    execErrState: Error
+    for: 10m
+    annotations:
+      description: "The Mac Studio launchd sync (osxphotos export → immich-cli upload) heartbeats `started`/`idle`/`uploaded` events to Loki on every invocation. With WatchPaths + an hourly StartInterval safety net we expect >=6 successful events per 6 hours. Zero events for 6h means launchd is unloaded, the script is broken, the Mac Studio is offline, or Loki ingest is failing. Check `launchctl list | grep immich-photo-sync`, `~/immich-sync.log`, and Tailscale connectivity to logs:3100. Dashboard: /d/immich-sync/immich-photo-sync"
+      summary: 'Immich photo sync stale: zero successful runs in 6 hours'
+    labels:
+      sentinel: phase1
+      severity: warning
+    isPaused: false
+    notification_settings: null
+    record: null
+  - uid: icloud-drive-hourly-stale
+    title: iCloud Drive (hourly) sync stale (no successful run in 4h)
+    condition: fire
+    data:
+    - refId: successful_runs
+      queryType: instant
+      relativeTimeRange:
+        from: 14400
+        to: 0
+      datasourceUid: P8E80F9AEF21F6940
+      model:
+        editorMode: code
+        expr: (sum(count_over_time({job="icloud_drive_sync", script="drive-hourly", event=~"idle|uploaded"}[4h]))) or vector(0)
+        intervalMs: 1000
+        maxDataPoints: 43200
+        queryType: instant
+    - refId: fire
+      queryType: ''
+      relativeTimeRange:
+        from: 0
+        to: 0
+      datasourceUid: __expr__
+      model:
+        conditions:
+        - evaluator:
+            params:
+            - 1
+            type: lt
+          operator:
+            type: and
+          query:
+            params: []
+          reducer:
+            type: last
+        expression: successful_runs
+        intervalMs: 1000
+        maxDataPoints: 43200
+        type: threshold
+    noDataState: OK
+    execErrState: Error
+    for: 15m
+    annotations:
+      description: "Mac Studio's `~/bin/icloud-drive-sync.sh` (Desktop + iCloud Drive misc → Nextcloud) heartbeats `started`/`idle`/`uploaded`/`failed`/`locked` events to Loki on every run. Fires hourly via launchd. Zero `idle`/`uploaded` events for 4h means launchd is unloaded, the script is broken, the Mac Studio is offline, Nextcloud auth has expired, or Loki ingest is failing. Check `launchctl list | grep icloud-drive`, `~/icloud-drive-sync.log`, `~/Library/Logs/rclone-documents-sync-launchd.log`. Dashboard: /d/immich-sync/icloud-synchronisation"
+      summary: 'iCloud Drive hourly sync stale: zero successful runs in 4 hours'
+    labels:
+      sentinel: phase1
+      severity: warning
+    isPaused: false
+    notification_settings: null
+    record: null
+  - uid: icloud-documents-15m-stale
+    title: iCloud Documents (15m) sync stale (no successful run in 4h)
+    condition: fire
+    data:
+    - refId: successful_runs
+      queryType: instant
+      relativeTimeRange:
+        from: 14400
+        to: 0
+      datasourceUid: P8E80F9AEF21F6940
+      model:
+        editorMode: code
+        expr: (sum(count_over_time({job="icloud_drive_sync", script="documents-15m", event=~"idle|uploaded"}[4h]))) or vector(0)
+        intervalMs: 1000
+        maxDataPoints: 43200
+        queryType: instant
+    - refId: fire
+      queryType: ''
+      relativeTimeRange:
+        from: 0
+        to: 0
+      datasourceUid: __expr__
+      model:
+        conditions:
+        - evaluator:
+            params:
+            - 1
+            type: lt
+          operator:
+            type: and
+          query:
+            params: []
+          reducer:
+            type: last
+        expression: successful_runs
+        intervalMs: 1000
+        maxDataPoints: 43200
+        type: threshold
+    noDataState: OK
+    execErrState: Error
+    for: 15m
+    annotations:
+      description: "Mac Studio's `~/bin/rclone-documents-sync.sh` (Documents → Nextcloud, every 15 min) heartbeats events to Loki. Each run takes 30-40 min so most timer fires bail with `locked` — but at least one run should complete every ~hour. Zero `idle`/`uploaded` events for 4h means rclone is stuck, Nextcloud is unreachable, or the script is broken. Check `~/Library/Logs/rclone-documents-sync-ongoing.log`, `pgrep -fl rclone-documents-sync`, lockfile state. Dashboard: /d/immich-sync/icloud-synchronisation"
+      summary: 'iCloud Documents 15-min sync stale: zero successful runs in 4 hours'
+    labels:
+      sentinel: phase1
+      severity: warning
+    isPaused: false
+    notification_settings: null
+    record: null
+  - uid: icloud-dav-sync-stale
+    title: iCloud DAV sync (calendars + contacts) stale (no successful run in 30m)
+    condition: fire
+    data:
+    - refId: successful_runs
+      queryType: instant
+      relativeTimeRange:
+        from: 1800
+        to: 0
+      datasourceUid: P8E80F9AEF21F6940
+      model:
+        editorMode: code
+        expr: (sum(count_over_time({job="syslog", host="n8n", unit="icloud-dav-sync"} |~ "event=(synced|idle)" [30m]))) or vector(0)
+        intervalMs: 1000
+        maxDataPoints: 43200
+        queryType: instant
+    - refId: fire
+      queryType: ''
+      relativeTimeRange:
+        from: 0
+        to: 0
+      datasourceUid: __expr__
+      model:
+        conditions:
+        - evaluator:
+            params:
+            - 1
+            type: lt
+          operator:
+            type: and
+          query:
+            params: []
+          reducer:
+            type: last
+        expression: successful_runs
+        intervalMs: 1000
+        maxDataPoints: 43200
+        type: threshold
+    noDataState: OK
+    execErrState: Error
+    for: 5m
+    annotations:
+      description: "integr8's `/usr/local/bin/icloud-dav-sync.py` (iCloud calendars + contacts → Nextcloud, every 5 min via root cron + flock) emits Loki heartbeats `started`/`synced`/`idle`/`failed` per run. With */5 cadence we expect 6 successful (`synced` or `idle`) events per 30 min. Zero successful events for 30 min means cron is broken, the python script crashed, iCloud creds expired, OR Nextcloud auth expired. Check `journalctl -t icloud-dav-sync -n 20`, `sudo crontab -l | grep icloud`, `/var/log/icloud-dav-sync.log`, `/etc/icloud-dav/env` mode/contents. Possible steady-state errors: ~2 from Family events with malformed X-APPLE-STRUCTURED-LOCATION (Apple iPhone OS 26 line-folding bug). Runbook: applications/icloud-dav-sync/README.md"
+      summary: 'iCloud DAV sync stale: zero successful runs in 30 min'
+    labels:
+      sentinel: phase1
+      severity: warning
+    isPaused: false
+    notification_settings: null
+    record: null
+  - uid: icloud-mail-sync-stale
+    title: iCloud Mail sync (mail-mirror) stale (no successful run in 45m)
+    condition: fire
+    data:
+    - refId: successful_runs
+      queryType: instant
+      relativeTimeRange:
+        from: 2700
+        to: 0
+      datasourceUid: P8E80F9AEF21F6940
+      model:
+        editorMode: code
+        expr: (sum(count_over_time({job="syslog", host="mail-mirror", unit="icloud-mail-sync"} |~ "event=(synced|idle)" [45m]))) or vector(0)
+        intervalMs: 1000
+        maxDataPoints: 43200
+        queryType: instant
+    - refId: fire
+      queryType: ''
+      relativeTimeRange:
+        from: 0
+        to: 0
+      datasourceUid: __expr__
+      model:
+        conditions:
+        - evaluator:
+            params:
+            - 1
+            type: lt
+          operator:
+            type: and
+          query:
+            params: []
+          reducer:
+            type: last
+        expression: successful_runs
+        intervalMs: 1000
+        maxDataPoints: 43200
+        type: threshold
+    noDataState: OK
+    execErrState: Error
+    for: 5m
+    annotations:
+      description: "mail-mirror's `/usr/local/bin/icloud-mail-sync.sh` (iCloud Mail IMAP → /srv/mail-mirror/Maildir/, every 15 min via cron + flock) emits Loki heartbeats `synced`/`idle`/`failure`/`skipped` per run. With */15 cadence we expect ≥2 successful (`synced` or `idle`) events per 45 min. Zero successful events means cron is broken, mbsync crashed, IMAP creds expired (rotate via /etc/icloud-mail/imap.password), OR Apple revoked the app-specific password. Check `journalctl -u cron -n 20`, `tail /var/log/syslog | grep icloud-mail-sync`, `sudo -u mineracks /usr/local/bin/icloud-mail-sync.sh` to manually trigger. Initial bulk sync (~hours, multi-GB) is normal on first deploy. Runbook: applications/icloud-mail-mirror/README.md"
+      summary: 'iCloud Mail sync stale: zero successful runs in 45 min'
+    labels:
+      sentinel: phase1
+      severity: warning
+    isPaused: false
+    notification_settings: null
+    record: null
+  - uid: icloud-reminders-cloudkit-stale
+    title: iCloud Reminders CloudKit watcher stale (no alive heartbeat in 30m)
+    condition: fire
+    data:
+    - refId: successful_runs
+      queryType: instant
+      relativeTimeRange:
+        from: 1800
+        to: 0
+      datasourceUid: P8E80F9AEF21F6940
+      model:
+        editorMode: code
+        expr: (sum(count_over_time({unit="icloud-reminders-cloudkit-watcher"} |= "event=alive" [30m]))) or vector(0)
+        intervalMs: 1000
+        maxDataPoints: 43200
+        queryType: instant
+    - refId: fire
+      queryType: ''
+      relativeTimeRange:
+        from: 0
+        to: 0
+      datasourceUid: __expr__
+      model:
+        conditions:
+        - evaluator:
+            params:
+            - 1
+            type: lt
+          operator:
+            type: and
+          query:
+            params: []
+          reducer:
+            type: last
+        expression: successful_runs
+        intervalMs: 1000
+        maxDataPoints: 43200
+        type: threshold
+    noDataState: OK
+    execErrState: Error
+    for: 5m
+    annotations:
+      description: "Phase 6.1.5 of icloud-sovereign-backup. The Mac-Studio watcher daemon (`~/bin/icloud-reminders-cloudkit-watcher.py`, KeepAlive LaunchAgent) listens for `EKEventStoreChangedNotification` from EventKit and kicks the sync wrapper on a 10s debounce. It emits an `event=alive` heartbeat every 5 min as a liveness signal. Zero alive events in 30m (≥5 missed) means: the watcher process died and didn't respawn (TCC dropped, daemon crashed, KeepAlive disabled), the Mac Studio is offline/asleep, or Loki ingest is failing. The companion sync agent has a 6h `StartInterval` safety net so a dead watcher means lag of up to 6h, not zero sync. Check `launchctl list | grep icloud-reminders-cloudkit-watcher`, `tail /Users/USERNAME/Library/Logs/icloud-reminders-cloudkit-sync/watcher.stderr.log` (or `/tmp/watcher-test.log` if running outside launchd), and Mac Studio Tailscale connectivity to logs:3100. If `auth_blocked` events appear in Loki: System Settings → Privacy & Security → Reminders → add /usr/bin/python3 → ON. Runbook: roadmap/icloud-sovereign-backup/README.md (Phase 6.1.5)."
+      summary: 'iCloud Reminders CloudKit watcher stale: zero alive heartbeats in 30 min'
+    labels:
+      sentinel: phase1
+      severity: warning
+    isPaused: false
+    notification_settings: null
+    record: null
+  - uid: nextcloud-photos-sync-stale
+    title: Nextcloud photo sync (forward-only) stale (no successful run in 6h)
+    condition: fire
+    data:
+    - refId: successful_runs
+      queryType: instant
+      relativeTimeRange:
+        from: 21600
+        to: 0
+      datasourceUid: P8E80F9AEF21F6940
+      model:
+        editorMode: code
+        expr: (sum(count_over_time({job="nextcloud_photos_sync", event=~"idle|uploaded"}[6h]))) or vector(0)
+        intervalMs: 1000
+        maxDataPoints: 43200
+        queryType: instant
+    - refId: fire
+      queryType: ''
+      relativeTimeRange:
+        from: 0
+        to: 0
+      datasourceUid: __expr__
+      model:
+        conditions:
+        - evaluator:
+            params:
+            - 1
+            type: lt
+          operator:
+            type: and
+          query:
+            params: []
+          reducer:
+            type: last
+        expression: successful_runs
+        intervalMs: 1000
+        maxDataPoints: 43200
+        type: threshold
+    noDataState: OK
+    execErrState: Error
+    for: 10m
+    annotations:
+      description: "Phase 1.5 of icloud-sovereign-backup. Mac Studio's `~/bin/nextcloud-photo-sync.sh` (osxphotos export with --from-date 2026-05-08 → rclone WebDAV → Nextcloud Photos/iCloud-Camera/{YYYY}/{YYYY-MM}/) heartbeats `started`/`idle`/`uploaded`/`failed`/`locked`/`retrying` events to Loki on every invocation. Fires hourly via launchd at :30 (offset from immich-photo-sync at :00 to avoid concurrent osxphotos against the same .photoslibrary). Zero `idle`/`uploaded` events for 6h means launchd is unloaded, the script is broken, the Mac Studio is offline, the new rclone remote `nextcloud-photos` lost its app token, or Loki ingest is failing. Check `launchctl list | grep nextcloud-photo-sync`, `~/nextcloud-photo-sync.log`, `~/.config/nextcloud-photo-sync/env` (mode 600), and Tailscale connectivity to logs:3100. Runs independently of Immich — Immich healthy + Nextcloud-photos broken is a valid intermediate state. Runbook: roadmap/icloud-sovereign-backup/README.md (Phase 1.5)."
+      summary: 'Nextcloud photo sync stale: zero successful runs in 6 hours'
+    labels:
+      sentinel: phase1
+      severity: warning
+    isPaused: false
+    notification_settings: null
+    record: null
+  - uid: icloud-bookmarks-sync-stale
+    title: iCloud Bookmarks sync stale (no successful run in 12h)
+    condition: fire
+    data:
+    - refId: successful_runs
+      queryType: instant
+      relativeTimeRange:
+        from: 43200
+        to: 0
+      datasourceUid: P8E80F9AEF21F6940
+      model:
+        editorMode: code
+        expr: (sum(count_over_time({unit="icloud-bookmarks-sync"} |~ "event=(synced|idle)" [12h]))) or vector(0)
+        intervalMs: 1000
+        maxDataPoints: 43200
+        queryType: instant
+    - refId: fire
+      queryType: ''
+      relativeTimeRange:
+        from: 0
+        to: 0
+      datasourceUid: __expr__
+      model:
+        conditions:
+        - evaluator:
+            params:
+            - 1
+            type: lt
+          operator:
+            type: and
+          query:
+            params: []
+          reducer:
+            type: last
+        expression: successful_runs
+        intervalMs: 1000
+        maxDataPoints: 43200
+        type: threshold
+    noDataState: OK
+    execErrState: Error
+    for: 5m
+    annotations:
+      description: "Phase 6.2 of icloud-sovereign-backup. Mac-Studio LaunchAgent (`~/bin/icloud-bookmarks-sync.sh`) mirrors `~/Library/Safari/Bookmarks.plist` → Nextcloud Bookmarks. Event-driven via WatchPaths on `~/Library/Safari/`, with a 6h StartInterval safety net. Either trigger emits `event=synced` (changes pushed) or `event=idle` (no changes). Zero successful runs in 12h means: agent is unloaded, the responsible-process (env or python3) lost its Reminders TCC + Full Disk Access grants, the Mac Studio is offline/asleep, or Loki ingest is failing. Check `launchctl list | grep icloud-bookmarks-sync`, `~/Library/Logs/icloud-bookmarks-sync/stderr.log` (`PermissionError on Bookmarks.plist` = FDA missing). Runbook: roadmap/icloud-sovereign-backup/README.md (Phase 6.2)."
+      summary: 'iCloud Bookmarks sync stale: zero successful runs in 12h'
+    labels:
+      sentinel: phase1
+      severity: warning
+    isPaused: false
+    notification_settings: null
+    record: null
+  - uid: icloud-notes-sync-stale
+    title: iCloud Notes sync stale (no successful run in 12h)
+    condition: fire
+    data:
+    - refId: successful_runs
+      queryType: instant
+      relativeTimeRange:
+        from: 43200
+        to: 0
+      datasourceUid: P8E80F9AEF21F6940
+      model:
+        editorMode: code
+        expr: (sum(count_over_time({unit="icloud-notes-sync"} |~ "event=(synced|idle)" [12h]))) or vector(0)
+        intervalMs: 1000
+        maxDataPoints: 43200
+        queryType: instant
+    - refId: fire
+      queryType: ''
+      relativeTimeRange:
+        from: 0
+        to: 0
+      datasourceUid: __expr__
+      model:
+        conditions:
+        - evaluator:
+            params:
+            - 1
+            type: lt
+          operator:
+            type: and
+          query:
+            params: []
+          reducer:
+            type: last
+        expression: successful_runs
+        intervalMs: 1000
+        maxDataPoints: 43200
+        type: threshold
+    noDataState: OK
+    execErrState: Error
+    for: 5m
+    annotations:
+      description: "Phase 6.3 of icloud-sovereign-backup. Mac-Studio LaunchAgent (`~/bin/icloud-notes-sync.sh`) reads `~/Library/Group Containers/group.com.apple.notes/NoteStore.sqlite` (snapshot-copy + sidecars to /tmp before opening, since Notes.app holds an exclusive lock), decodes gzip+protobuf bodies, pushes to Nextcloud Notes app. Event-driven via WatchPaths on the same Group Containers dir, with 6h StartInterval safety net. Zero successful runs in 12h means: agent unloaded, env lost FDA, NoteStore schema changed under us, or Loki ingest failing. Check `launchctl list | grep icloud-notes-sync`, `~/Library/Logs/icloud-notes-sync/stderr.log` (`PermissionError` = FDA missing on env; `OperationalError: unable to open database` = stale snapshot copy / sqlite version mismatch). Runbook: roadmap/icloud-sovereign-backup/README.md (Phase 6.3)."
+      summary: 'iCloud Notes sync stale: zero successful runs in 12h'
+    labels:
+      sentinel: phase1
+      severity: warning
+    isPaused: false
+    notification_settings: null
+    record: null
+  - uid: icloud-keychain-import-drift
+    title: iCloud Keychain → VaultWarden import drift > 60 days
+    condition: fire
+    data:
+    - refId: successful_runs
+      queryType: instant
+      relativeTimeRange:
+        from: 5184000   # 60 days
+        to: 0
+      datasourceUid: P8E80F9AEF21F6940
+      model:
+        editorMode: code
+        expr: (sum(count_over_time({unit="keychain-to-bw"} |= "event=imported" [30d]))) or vector(0)
+        intervalMs: 1000
+        maxDataPoints: 43200
+        queryType: instant
+    - refId: fire
+      queryType: ''
+      relativeTimeRange:
+        from: 0
+        to: 0
+      datasourceUid: __expr__
+      model:
+        conditions:
+        - evaluator:
+            params:
+            - 1
+            type: lt
+          operator:
+            type: and
+          query:
+            params: []
+          reducer:
+            type: last
+        expression: successful_runs
+        intervalMs: 1000
+        maxDataPoints: 43200
+        type: threshold
+    noDataState: OK
+    execErrState: Error
+    for: 1h
+    annotations:
+      description: "Phase 4 of icloud-sovereign-backup: shadow mirror of iCloud Keychain → VaultWarden 'iCloud Keychain Mirror' folder, refreshed by manually running ~/bin/keychain-to-bw.sh on the user's MacBook (TouchID-gated, RAM-disk-only). Successful runs emit `event=imported` with the item count. Zero successful imports in 60d means: user forgot, the script broke, or VaultWarden is unreachable from the MacBook. Reminder cadence is roughly quarterly; alert at 60d gives a buffer. Runbook: scripts/keychain-to-bw.sh + applications/vaultwarden/README.md (Phase 4 section)."
+      summary: 'iCloud Keychain → VaultWarden import drift > 60 days'
+    labels:
+      sentinel: phase1
+      severity: warning
+    isPaused: false
+    notification_settings: null
+    record: null
+  - uid: health-stream-stale
+    title: Apple Health stream stale (no accepted POST in 48h)
+    condition: fire
+    data:
+    - refId: successful_runs
+      queryType: instant
+      relativeTimeRange:
+        from: 172800
+        to: 0
+      datasourceUid: P8E80F9AEF21F6940
+      model:
+        editorMode: code
+        expr: (sum(count_over_time({host="health-mirror", unit="health-ingest", event="accepted"}[48h]))) or vector(0)
+        intervalMs: 1000
+        maxDataPoints: 43200
+        queryType: instant
+    - refId: fire
+      queryType: ''
+      relativeTimeRange:
+        from: 0
+        to: 0
+      datasourceUid: __expr__
+      model:
+        conditions:
+        - evaluator:
+            params:
+            - 1
+            type: lt
+          operator:
+            type: and
+          query:
+            params: []
+          reducer:
+            type: last
+        expression: successful_runs
+        intervalMs: 1000
+        maxDataPoints: 43200
+        type: threshold
+    noDataState: OK
+    execErrState: Error
+    for: 30m
+    annotations:
+      description: "Phase 7 of icloud-sovereign-backup. iPhone Health Auto Export iOS app POSTs HealthKit deltas to https://health.example.com/ingest on its configured cadence (default Hourly). The FastAPI ingester on health-mirror VM (LAN_HOST / TAILNET_HOST) emits Loki heartbeats `{host=health-mirror, unit=health-ingest, event=accepted|rejected|started}` per POST. The 48h window is deliberate: iOS throttles Health Auto Export background refresh to roughly ONE POST/day, and that POST drifts ~1h later each day, so consecutive gaps routinely approach/exceed 24h (the prior 24h rule false-fired 2026-06-19 on a 24h47m drift gap; the earlier 6h rule false-fired nightly). The heartbeat plumbing is confirmed healthy — the ingester pushes `loki_push()` straight to Loki (`LOKI_URL` set, manual probe returned 204; 22 accepted events in the prior 7d). Zero `accepted` events in 48h means the iPhone-side automation has been demoted by iOS (typically after consecutive `Data caching did not complete successfully` failures), background app refresh is off, the bearer token was rotated server-side without updating iPhone, the URL has drifted (e.g. trailing whitespace — see memory cf_access_path_mismatch_silent_redirect), CF Tunnel is down, or the ingester has crashed. Diagnose by: (1) `ssh mineracks@health-mirror 'sudo docker compose ps'`, (2) CF Tunnel status via `cloudflared tunnel info 2a6442af-…`, (3) check newest row mtime in /data/archive.db, (4) Loki for any rejected events with reason= field, (5) iPhone Settings → General → Background App Refresh → Health Auto Export. Fix recipe in memory `phase7_health_streaming.md`. Runbook: applications/health-mirror/README.md."
+      summary: 'Apple Health stream stale: zero accepted POSTs in 48 hours'
+    labels:
+      sentinel: phase1
+      severity: warning
+    isPaused: false
+    notification_settings: null
+    record: null
+  - uid: mac-icloud-originals-stalled
+    title: Mac Studio iCloud Photos delivery stalled (no originals/ activity for >48h)
+    condition: fire
+    data:
+    - refId: stall_events
+      queryType: instant
+      relativeTimeRange:
+        from: 3600
+        to: 0
+      datasourceUid: P8E80F9AEF21F6940
+      model:
+        editorMode: code
+        expr: (sum(count_over_time({job="mac_icloud_auth"} |~ "hours_since_originals_touch=(4[89]|[5-9][0-9]|[0-9]{3,})" [1h]))) or vector(0)
+        intervalMs: 1000
+        maxDataPoints: 43200
+        queryType: instant
+    - refId: fire
+      queryType: ''
+      relativeTimeRange:
+        from: 0
+        to: 0
+      datasourceUid: __expr__
+      model:
+        conditions:
+        - evaluator:
+            params:
+            - 0
+            type: gt
+          operator:
+            type: and
+          query:
+            params: []
+          reducer:
+            type: last
+        expression: stall_events
+        intervalMs: 1000
+        maxDataPoints: 43200
+        type: threshold
+    noDataState: OK
+    execErrState: Error
+    for: 1h
+    annotations:
+      description: "iCloud Photos has stopped delivering new originals to the Mac Studio's Photos Library on PhotosSSD. No single-char subdir under originals/ has been touched in >=48h. This catches every common cause of silent iCloud Photos pause: expired auth session (MSNeedsPassword=1), iCloud quota full, macOS silently flipping 'Optimise Mac Storage' on, cloudphotod crashed/refusing to start, network down, PhotosSSD unmounted. Both Phase 1 (Immich) and Phase 1.5 (Nextcloud Photos) keep reporting `idle no changes` because they have nothing new to mirror. Diagnose with the latest heartbeat line in Loki: `{job=\"mac_icloud_auth\"} |~ \"heartbeat\"` shows `hours_since_originals_touch`, `cloudphotod=running|down`, `needs_password_hint=0|1`. If `cloudphotod=down` AND `needs_password_hint=1` → VNC to relay-mac, System Settings → Apple Account → enter password (origin: 2026-05-29 23:45 incident, MSNeedsPassword plist flag is a stale hint, not authoritative). If `cloudphotod=running` AND `needs_password_hint=0` AND originals/ frozen → suspect 'Optimise Mac Storage' silently toggled on, or genuinely no new photos taken (false positive). False-positive note: threshold raised 12h→48h on 2026-06-13 because the user typically photographs every ~2 days — 12h fired routinely on quiet days. A real stall persists indefinitely so 48h still catches it, just up to ~2 days later. Travelling away from phone for >48h without any new photos arriving will still fire this alert. Memory: `icloud_session_expiry_silent_break`. Runbook: applications/icloud-sync/README.md."
+      summary: 'Mac Studio iCloud Photos stalled — no new originals in >=48h'
+    labels:
+      sentinel: phase1
+      severity: warning
+    isPaused: false
+    notification_settings: null
+    record: null
+  - uid: icloud-delta-documents-stale
+    title: iCloud Documents delta daemon stale (no alive heartbeat in 20m)
+    condition: fire
+    data:
+    - refId: successful_runs
+      queryType: instant
+      relativeTimeRange:
+        from: 1200
+        to: 0
+      datasourceUid: P8E80F9AEF21F6940
+      model:
+        editorMode: code
+        expr: (sum(count_over_time({job="icloud_drive_sync", script="delta-documents", event=~"alive|started|synced"}[20m]))) or vector(0)
+        intervalMs: 1000
+        maxDataPoints: 43200
+        queryType: instant
+    - refId: fire
+      queryType: ''
+      relativeTimeRange:
+        from: 0
+        to: 0
+      datasourceUid: __expr__
+      model:
+        conditions:
+        - evaluator:
+            params:
+            - 1
+            type: lt
+          operator:
+            type: and
+          query:
+            params: []
+          reducer:
+            type: last
+        expression: successful_runs
+        intervalMs: 1000
+        maxDataPoints: 43200
+        type: threshold
+    noDataState: OK
+    execErrState: Error
+    for: 5m
+    annotations:
+      description: "Phase 2.6 of icloud-sovereign-backup. The Mac-Studio EVENT-DRIVEN daemon (`~/bin/icloud-delta-sync.py --watch`, KeepAlive LaunchAgent `com.mineracks.icloud-delta-documents`) watches ~/Documents via FSEvents and mirrors each change to Nextcloud within ~seconds (materialize -> rclone copyto -> evict; deletes -> soft-delete to nextcloud:.trash/deltasync/<date>). It emits `event=alive` every 5 min as a liveness signal (plus `synced`/`started`). Zero alive/started/synced events in 20m (>=3 missed alives) means the daemon died and KeepAlive didn't respawn it, the Mac Studio is offline/asleep, or Loki ingest is failing. The weekly --reconcile job (com.mineracks.icloud-delta-documents-reconcile, Sun 03:17) is only a mop-up, so a dead daemon means near-zero Documents sync until Sunday. Check `launchctl list | grep icloud-delta-documents`, `pgrep -f 'icloud-delta-sync.py --watch'`, `~/Library/Logs/icloud-delta-documents.log`, and Loki for `event=cb_error` (a bad path repeatedly failing) or `event=must_rescan` (FSEvents dropped events -> run --reconcile). Runbook: roadmap/icloud-sovereign-backup/phase-2.6-delta-streaming-cache.md."
+      summary: 'iCloud Documents delta daemon stale: zero alive heartbeats in 20 min'
+    labels:
+      sentinel: phase1
+      severity: warning
+    isPaused: false
+    notification_settings: null
+    record: null
+  - uid: photo-delta-sync-stale
+    title: Photos delta forwarder stale (no successful run in 5h)
+    condition: fire
+    data:
+    - refId: successful_runs
+      queryType: instant
+      relativeTimeRange:
+        from: 18000
+        to: 0
+      datasourceUid: P8E80F9AEF21F6940
+      model:
+        editorMode: code
+        expr: (sum(count_over_time({job="photo_delta_sync", event=~"idle|synced"}[5h]))) or vector(0)
+        intervalMs: 1000
+        maxDataPoints: 43200
+        queryType: instant
+    - refId: fire
+      queryType: ''
+      relativeTimeRange:
+        from: 0
+        to: 0
+      datasourceUid: __expr__
+      model:
+        conditions:
+        - evaluator:
+            params:
+            - 1
+            type: lt
+          operator:
+            type: and
+          query:
+            params: []
+          reducer:
+            type: last
+        expression: successful_runs
+        intervalMs: 1000
+        maxDataPoints: 43200
+        type: threshold
+    noDataState: OK
+    execErrState: Error
+    for: 15m
+    annotations:
+      description: "Phase 2.6 (Photos) of icloud-sovereign-backup, deployed 2026-07-04 after the SSD->internal Photos migration. EVENT-DRIVEN: the FSEvents daemon `com.mineracks.photo-delta-watch` (`~/bin/photo-delta-watch.py`, KeepAlive) fires `~/bin/photo-delta-sync.sh` ~8s after a new photo appears in the library, plus a 30-min safety pass; the weekly `com.mineracks.photo-delta-sync-mopup` (21-day buffer, Sun 04:23) is the deep backstop. The forwarder exports new iCloud photos with `osxphotos --from-date --download-missing` (materialises Optimise-evicted originals on demand), uploads to Immich + Nextcloud (`Photos/iCloud-Camera/`), then deletes the temp export (thin), heartbeating `started`/`synced`/`idle`/`failed`/`locked` to Loki `job=photo_delta_sync` per run. Between the event daemon + the 30-min safety pass expect >=1 successful (`idle` or `synced`) event per 5h. Zero in 5h means: the watch daemon died (check `pgrep -f photo-delta-watch.py`, `launchctl list | grep photo-delta`), osxphotos is failing (Photos.app lock held too long, library missing/renamed), Immich (VM 171) or the `nextcloud-photos` rclone remote lost auth, the Mac Studio is offline/asleep, or Loki ingest is failing. Check `~/photo-delta-sync.log` and Loki for `event=failed` (immich/rclone error) or a climbing `library_gb` (Optimise not re-thinning). NB the old Download-Originals `immich-photo-sync`/`nextcloud-photo-sync` jobs are disabled (read originals/ directly, break on Optimise). Runbook: roadmap/icloud-sovereign-backup/phase-2.6-delta-streaming-cache.md."
+      summary: 'Photos delta forwarder stale: zero successful runs in 5 hours'
+    labels:
+      sentinel: phase1
+      severity: warning
+    isPaused: false
+    notification_settings: null
+    record: null

@@ -1,0 +1,50 @@
+/* micloud iOS companion — French (fr). */
+
+/* source status */
+"status.uptodate" = "À jour";
+"status.syncing"  = "Synchronisation";
+"status.stale"    = "Obsolète";
+"status.error"    = "Erreur";
+"status.off"      = "Désactivé";
+
+/* overall header */
+"hdr.protected" = "Protégé · tout est en ordre";
+"hdr.syncing"   = "Synchronisation…";
+"hdr.attention" = "Attention requise";
+"hdr.idle"      = "Inactif";
+"hdr.checking"  = "Vérification…";
+
+/* errors */
+"err.notpaired"   = "Pas encore associé à un Nextcloud";
+"err.unreachable" = "Impossible d'accéder à l'état de votre Mac";
+
+/* summary + relative time */
+"summary.checked" = "vérifié il y a %@";
+"ago.now"  = "à l'instant";
+"ago.sec"  = "il y a %@ s";
+"ago.min"  = "il y a %@ min";
+"ago.hour" = "il y a %@ h";
+"ago.day"  = "il y a %@ j";
+
+/* Health card */
+"health.title"    = "Santé";
+"health.subtitle" = "Sauvegardez sur un stockage qui vous appartient";
+"health.action"   = "Sauvegarder Santé";
+"health.busy"     = "Sauvegarde en cours…";
+"health.requesting" = "Demande d'accès à Santé…";
+"health.unavailable" = "Les données de Santé ne sont pas disponibles sur cet appareil";
+"health.empty"    = "Aucune donnée de Santé à sauvegarder";
+"health.exporting" = "Exportation de %1$@ (%2$d)…";
+"health.done"     = "%d enregistrements de santé sauvegardés sur votre stockage";
+"health.failed"   = "Échec de la sauvegarde de Santé : %@";
+
+/* source names */
+"source.photos"    = "Photos";
+"source.documents" = "Documents";
+"source.calendars" = "Calendriers";
+"source.contacts"  = "Contacts";
+"source.reminders" = "Rappels";
+"source.notes"     = "Notes";
+"source.bookmarks" = "Signets";
+"source.mail"      = "Mail";
+"source.health"    = "Santé";

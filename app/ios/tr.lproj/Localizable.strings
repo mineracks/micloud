@@ -1,0 +1,50 @@
+/* micloud iOS companion — Turkish table. Bundled per-language; iOS picks the user's language. */
+
+/* source status */
+"status.uptodate" = "Güncel";
+"status.syncing"  = "Eşitleniyor";
+"status.stale"    = "Eski";
+"status.error"    = "Hata";
+"status.off"      = "Kapalı";
+
+/* overall header */
+"hdr.protected" = "Korunuyor · her şey yolunda";
+"hdr.syncing"   = "Eşitleniyor…";
+"hdr.attention" = "Dikkat gerekiyor";
+"hdr.idle"      = "Boşta";
+"hdr.checking"  = "Denetleniyor…";
+
+/* errors */
+"err.notpaired"   = "Henüz bir Nextcloud ile eşleştirilmedi";
+"err.unreachable" = "Mac'inizin durumuna ulaşılamadı";
+
+/* summary + relative time */
+"summary.checked" = "%@ denetlendi";
+"ago.now"  = "az önce";
+"ago.sec"  = "%@ sn önce";
+"ago.min"  = "%@ dk önce";
+"ago.hour" = "%@ sa önce";
+"ago.day"  = "%@ g önce";
+
+/* Health card */
+"health.title"    = "Sağlık";
+"health.subtitle" = "Sahibi olduğunuz depolamaya yedekleyin";
+"health.action"   = "Sağlık'ı Yedekle";
+"health.busy"     = "Yedekleniyor…";
+"health.requesting" = "Sağlık erişimi isteniyor…";
+"health.unavailable" = "Sağlık verileri bu aygıtta kullanılamıyor";
+"health.empty"    = "Yedeklenecek Sağlık verisi bulunamadı";
+"health.exporting" = "%1$@ dışa aktarılıyor (%2$d)…";
+"health.done"     = "%d sağlık kaydı depolamanıza yedeklendi";
+"health.failed"   = "Sağlık yedeklemesi başarısız oldu: %@";
+
+/* source names */
+"source.photos"    = "Fotoğraflar";
+"source.documents" = "Belgeler";
+"source.calendars" = "Takvimler";
+"source.contacts"  = "Kişiler";
+"source.reminders" = "Anımsatıcılar";
+"source.notes"     = "Notlar";
+"source.bookmarks" = "Yer İmleri";
+"source.mail"      = "Mail";
+"source.health"    = "Sağlık";

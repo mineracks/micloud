@@ -1,0 +1,50 @@
+/* micloud iOS companion — Traditional Chinese translation. Bundled per-language; iOS picks the user's language. */
+
+/* source status */
+"status.uptodate" = "已是最新";
+"status.syncing"  = "正在同步";
+"status.stale"    = "已過期";
+"status.error"    = "錯誤";
+"status.off"      = "關閉";
+
+/* overall header */
+"hdr.protected" = "已保護 · 一切正常";
+"hdr.syncing"   = "正在同步…";
+"hdr.attention" = "需要注意";
+"hdr.idle"      = "閒置";
+"hdr.checking"  = "正在檢查…";
+
+/* errors */
+"err.notpaired"   = "尚未與 Nextcloud 配對";
+"err.unreachable" = "無法取得你的 Mac 狀態";
+
+/* summary + relative time */
+"summary.checked" = "%@檢查過";
+"ago.now"  = "剛剛";
+"ago.sec"  = "%@秒前";
+"ago.min"  = "%@分鐘前";
+"ago.hour" = "%@小時前";
+"ago.day"  = "%@天前";
+
+/* Health card */
+"health.title"    = "健康";
+"health.subtitle" = "備份到你自己的儲存空間";
+"health.action"   = "備份「健康」";
+"health.busy"     = "正在備份…";
+"health.requesting" = "正在請求「健康」取用權限…";
+"health.unavailable" = "此裝置上沒有可用的「健康」資料";
+"health.empty"    = "找不到可備份的「健康」資料";
+"health.exporting" = "正在輸出 %1$@（%2$d）…";
+"health.done"     = "已將 %d 筆健康記錄備份到你的儲存空間";
+"health.failed"   = "「健康」備份失敗：%@";
+
+/* source names */
+"source.photos"    = "照片";
+"source.documents" = "文件";
+"source.calendars" = "行事曆";
+"source.contacts"  = "通訊錄";
+"source.reminders" = "提醒事項";
+"source.notes"     = "備忘錄";
+"source.bookmarks" = "書籤";
+"source.mail"      = "郵件";
+"source.health"    = "健康";

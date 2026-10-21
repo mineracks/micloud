@@ -1,0 +1,74 @@
+{
+  "uid": "immich-sync-stale",
+  "folderUID": "ffjlhxwamqfpca",
+  "ruleGroup": "Sentinel",
+  "title": "Immich photo sync stale (no successful run in 6h)",
+  "condition": "fire",
+  "data": [
+    {
+      "refId": "successful_runs",
+      "queryType": "instant",
+      "relativeTimeRange": {
+        "from": 21600,
+        "to": 0
+      },
+      "datasourceUid": "P8E80F9AEF21F6940",
+      "model": {
+        "editorMode": "code",
+        "expr": "(sum(count_over_time({job=\"immich_sync\", event=~\"idle|uploaded\"}[6h]))) or vector(0)",
+        "intervalMs": 1000,
+        "maxDataPoints": 43200,
+        "queryType": "instant"
+      }
+    },
+    {
+      "refId": "fire",
+      "queryType": "",
+      "relativeTimeRange": {
+        "from": 0,
+        "to": 0
+      },
+      "datasourceUid": "__expr__",
+      "model": {
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                1
+              ],
+              "type": "lt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": []
+            },
+            "reducer": {
+              "type": "last"
+            }
+          }
+        ],
+        "expression": "successful_runs",
+        "intervalMs": 1000,
+        "maxDataPoints": 43200,
+        "type": "threshold"
+      }
+    }
+  ],
+  "noDataState": "OK",
+  "execErrState": "Error",
+  "for": "10m",
+  "keep_firing_for": "1h",
+  "annotations": {
+    "description": "The Mac Studio launchd sync (osxphotos export → immich-cli upload) heartbeats `started`/`idle`/`uploaded` events to Loki on every invocation. With WatchPaths + an hourly StartInterval safety net we expect >=6 successful events per 6 hours. Zero events for 6h means launchd is unloaded, the script is broken, the Mac Studio is offline, or Loki ingest is failing. Check `launchctl list | grep immich-photo-sync`, `~/immich-sync.log`, and Tailscale connectivity to logs:3100. Dashboard: /d/immich-sync/immich-photo-sync",
+    "summary": "Immich photo sync stale: zero successful runs in 6 hours"
+  },
+  "labels": {
+    "sentinel": "phase1",
+    "severity": "warning"
+  },
+  "isPaused": false,
+  "notification_settings": null,
+  "record": null
+}

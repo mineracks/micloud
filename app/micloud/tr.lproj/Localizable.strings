@@ -1,0 +1,153 @@
+/* micloud — Türkçe */
+
+"header.protected" = "Korunuyor · her şey yolunda";
+"header.syncing"   = "Eşitleniyor…";
+"header.attention" = "Dikkat gerekiyor";
+"header.idle"      = "Boşta";
+"header.syncNow"   = "Şimdi eşitle";
+
+"lead.protected"   = "Her şey korunuyor.";
+"lead.attention"   = "Dikkatiniz gerekiyor.";
+"lead.lastChange"  = "Son değişiklik kopyalandı %@";
+
+"hero.eyebrow"     = "SİZE AİT DEPOLAMA";
+"hero.body"        = "Fotoğraflarınız ve dosyalarınız **size ait depolamaya** kopyalanır — kendi donanımınızda Immich ve Nextcloud.";
+"hero.stat.mirrored"     = "bu oturumda kopyalandı";
+"hero.stat.library"      = "kitaplıktaki fotoğraf";
+"hero.stat.oneway"       = "tek yönlü";
+"hero.stat.oneway.label" = "asla iCloud'a yazmaz";
+
+"status.uptodate"  = "Güncel";
+"status.syncing"   = "Eşitleniyor";
+"status.stale"     = "Eski";
+"status.error"     = "Hata";
+"status.off"       = "Kapalı";
+"status.syncingN"  = "Eşitleniyor · %d";
+"tile.notEnabled"  = "henüz etkin değil";
+"tile.target"      = "→ %1$@ · %2$@";
+
+"source.photos"    = "Fotoğraflar ve videolar";
+"source.documents" = "Belgeler ve dosyalar";
+"source.calendars" = "Takvimler";
+"source.contacts"  = "Kişiler";
+"source.reminders" = "Anımsatıcılar";
+"source.notes"     = "Notlar";
+"source.bookmarks" = "Yer imleri";
+
+"feed.title"    = "Canlı";
+"feed.subtitle" = "Değişiklikler bu Mac'e ulaştıkça";
+"feed.waiting"  = "İlk değişiklik bekleniyor…";
+
+"activity.title"    = "Etkinlik";
+"activity.subtitle" = "Depolamanıza kopyalanan öğeler";
+"activity.window"   = "son 60 sn";
+"activity.total"    = "bu dakikada %d";
+
+"footer.text"   = "Tek yönlü · micloud iCloud'unuza asla yazmaz · oturum açınca açılır";
+
+"backfill.title"      = "%@ yedekleniyor";
+"phase.scanning"      = "Taranıyor";
+"phase.transferring"  = "Yedekleniyor";
+"phase.paused"        = "Duraklatıldı";
+"phase.done"          = "Yedeklendi";
+"phase.blocked"       = "Dikkat gerekiyor";
+"phase.stopped"       = "Durduruldu";
+"metric.files" = "dosya";
+"metric.data"  = "veri";
+"metric.speed" = "hız";
+"metric.est"   = "tahmini";
+"backfill.etaLeft"    = "%@ kaldı";
+"backfill.unreadable" = "%d okunamadı";
+"backfill.safeClose"  = "Kapatmak güvenli — micloud kaldığı yerden devam eder.";
+
+"btn.pause"         = "Duraklat";
+"btn.resume"        = "Sürdür";
+"btn.stop"          = "Durdur";
+"btn.backupAnyway"  = "Yine de yedekle";
+"btn.ok"            = "Tamam";
+"btn.notNow"        = "Şimdi değil";
+
+"capacity.tight.title"   = "%@ neredeyse dolacak";
+"capacity.wontfit.title" = "%@ üzerinde yeterli alan yok";
+"capacity.tight.msg"     = "Bu yedek %1$@ ekliyor. %2$@ bittiğinde %%%3$d dolu olacak — micloud, sunucunuzun dolmaması için sınırın üzerinde uyarır.";
+"capacity.wontfit.msg"   = "Bu yedek %1$@ gerektiriyor ancak yalnızca %2$@ boş. micloud tamamlayamayacağı bir yedeği başlatmaz — %3$@ boşaltın (veya disk ekleyin) ve tekrar deneyin.";
+"capacity.diskline"      = "%1$@ disk · %2$@ boş · %3$@ eklenecek";
+
+"tip.wifi" = "Wi-Fi'desiniz. Kablolu bağlantı genellikle 3–5 kat daha hızlıdır — bu yedek %2$@ yerine yaklaşık %1$@ içinde bitebilir. Ethernet takın; micloud otomatik olarak geçiş yapar.";
+
+"lang.title"  = "Dil";
+"lang.system" = "Sistem dili";
+
+"ago.now" = "şimdi";
+
+"source.mail"   = "Mail";
+"source.health" = "Sağlık";
+"tile.proEdition" = "micloud pro edition'da kullanılabilir";
+
+/* ── onboarding wizard ── */
+"onb.step"              = "Adım %1$@ / %2$@";
+"onb.back"              = "Geri";
+"onb.continue"          = "Devam";
+
+"onb.welcome.title"     = "Kendi iCloud'unuz, sahibi olduğunuz depolamada";
+"onb.welcome.body"      = "micloud; fotoğraflarınızın, dosyalarınızın, takvimlerinizin ve daha fazlasının özel, gerçek zamanlı bir kopyasını size ait bir Nextcloud veya Immich'te tutar — iCloud'un yanı sıra çalışan, gerçekten açıp göz atabileceğiniz ikinci bir kopya.";
+"onb.welcome.begin"     = "Başla";
+
+"onb.phrase.title"      = "Kurtarma ifadenizi güvene alın";
+"onb.phrase.body"       = "Bağlandınız — micloud verilerinizi korumaya hazır. Son bir şey: bu 12 kelime, şifreleme anahtarınızın ta kendisidir. Bunları bir yere yazın ve güvenli, çevrimdışı bir yerde saklayın. Bunlara sahip olan herkes yedeğinizi okuyabilir; olmayanlar ise — biz dahil — okuyamaz. Bu kelimeleri asla görmeyiz ve hiçbir zaman sıfırlayamayız.";
+"onb.phrase.copy"       = "Kopyala";
+"onb.phrase.regen"      = "Yeniden oluştur";
+"onb.phrase.written"    = "Bir yere yazdım";
+
+"onb.confirm.title"     = "İfadenizi doğrulayın";
+"onb.confirm.body"      = "Kaydettiğinizi kanıtlamak için her konum için doğru kelimeye dokunun.";
+"onb.confirm.word"      = "Kelime %1$@";
+"onb.confirm.wrong"     = "Bu doğru değil — yazdığınız kopyayı kontrol edip yeniden deneyin.";
+
+"onb.backend.title"     = "Nereye gitsin?";
+"onb.backend.body"      = "micloud'un nereye yedekleyeceğini seçin. Her iki durumda da veriler sizindir ve denetlediğiniz depolamada tutulur. (Sıfır bilgi şifrelemesi mi istiyorsunuz? Pro'da açın.)";
+"onb.backend.diy.title" = "Kendi sunucum";
+"onb.backend.diy.body"  = "Mevcut Nextcloud'unuzu ve/veya Immich'inizi bağlayın. Tamamen kendi egemenliğinizde, ücretsiz.";
+"onb.backend.hosted.title" = "Biz barındıralım";
+"onb.backend.hosted.body"  = "Sizin için özel bir Nextcloud + Immich kuruyoruz. 24 saat ücretsiz deneme.";
+"onb.backend.hosted.badge" = "24 saat ücretsiz deneme";
+
+"onb.diy.title"         = "Nextcloud'unuzu bağlayın";
+"onb.diy.body"          = "Sunucu adresinizi ve bir uygulama parolasını girin. Nasıl yapılacağından emin değil misiniz? Adım adım bir kılavuz mevcut.";
+"onb.diy.url"           = "Nextcloud adresi";
+"onb.diy.user"          = "Kullanıcı adı";
+"onb.diy.pass"          = "Uygulama parolası";
+"onb.diy.immich"        = "Immich (isteğe bağlı, fotoğraflar için)";
+"onb.diy.immichKey"     = "Immich API anahtarı";
+"onb.diy.verify"        = "Bağlan ve doğrula";
+"onb.diy.verifying"     = "Doğrulanıyor…";
+"onb.diy.ok"            = "Bağlandı — %1$@ boş";
+"onb.diy.fail"          = "Bağlanılamadı. Adresi ve uygulama parolasını kontrol edin.";
+"onb.diy.fields"        = "Sunucu adresinizi, kullanıcı adınızı ve uygulama parolanızı girin.";
+"onb.diy.guide"         = "Bunları nasıl bulurum?";
+"onb.diy.help"          = "Takıldınız mı? Uzman kurulum randevusu alın";
+
+"onb.hosted.title"      = "Sizin için barındıralım";
+"onb.hosted.body"       = "micloud yalnızca size özel bir Nextcloud + Immich hazırlar — 24 saat ücretsiz — böylece iCloud'unuzu gerçekten göz atabileceğiniz bir yerde görebilirsiniz. Abone olarak koruyun; aksi hâlde deneme bitince otomatik olarak silinir.";
+"onb.hosted.soon"       = "Barındırmalı denemeler yakında açılıyor. Şimdilik kendi sunucunuzu bağlayın.";
+"onb.hosted.useDiy"     = "Bunun yerine kendiminkini bağla";
+
+"onb.done.title"        = "Korunuyorsunuz";
+"onb.done.body"         = "micloud, iCloud'unuzu izliyor ve sahibi olduğunuz depolamaya kopyalıyor. Bunların hepsini daha sonra ayarlardan değiştirebilirsiniz.";
+"onb.done.finish"       = "micloud'u aç";
+
+/* ── Pro edition / licensing ── */
+"pro.badge"           = "PRO";
+"pro.unlock"          = "Pro'yu aç";
+"tile.proReady"       = "Pro'ya dahil";
+"pro.sheet.title"     = "micloud Pro kilidini aç";
+"pro.sheet.body"      = "Lisans anahtarınızı yapıştırın. Bu Mac'te doğrulanır — micloud hiçbir zaman dışarıya bilgi göndermez.";
+"pro.sheet.unlock"    = "Kilidi aç";
+"pro.sheet.invalid"   = "Bu anahtar geçerli değil ya da süresi dolmuş.";
+"pro.sheet.buy"       = "Yok mu? Pro'yu edinin";
+
+/* ── recovery-phrase backup nudges ── */
+"onb.phrase.later"    = "Bana sonra hatırlat";
+"onb.preflight"       = "micloud klasörünüzde zaten bulunan %1$@ öğe bulundu — yeniden yüklenmeyecek, kaldığı yerden sürdürülecek. Diğer dosyalarınıza dokunulmaz.";
+"nudge.backup"        = "Verilerinizi korumak için kurtarma ifadenizi yedekleyin";
+"nudge.backupNow"     = "Şimdi yedekle";

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- local.cloudphotod.nudge — Mac Studio (relay-mac), ~/Library/LaunchAgents/
+     Every 4h: killall cloudphotod (launchd respawns it, re-registering its sync task)
+     + open -ga Photos (the foreground trigger a HEADLESS Mac otherwise never gets).
+
+     WHY: cloudphotod wedges on headless Macs — its sync.discretionary
+     BGNonRepeatingSystemTask self-reschedules, but a session can exit with
+     prediction "<no predictions>" while a CloudKit download is actually stuck,
+     so CPLBGSTRescheduler unregisters from dasd and never re-submits. On a normal
+     Mac, opening Photos.app re-exercises the sync path constantly and breaks the
+     deadlock; headless has no such trigger, so it stalls for days (observed
+     06-07..10, ~136 items behind) until a reboot. APNs reconnects don't recover it.
+     NOTE: `launchctl kickstart -k` is SIP-blocked (error 150) for Apple daemons —
+     must use killall (SIGTERM, SIP-safe). See memory cloudphotod_headless_wedge.
+     Install: launchctl bootstrap gui/$(id -u) <thisfile> -->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>local.cloudphotod.nudge</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/sh</string>
+    <string>-c</string>
+    <string>/usr/bin/killall cloudphotod 2>/dev/null; sleep 5; /usr/bin/open -ga Photos; echo "$(date) nudged"</string>
+  </array>
+  <key>StartInterval</key>
+  <integer>14400</integer>
+  <key>RunAtLoad</key>
+  <true/>
+  <key>StandardOutPath</key>
+  <string>/tmp/cloudphotod-nudge.log</string>
+  <key>StandardErrorPath</key>
+  <string>/tmp/cloudphotod-nudge.log</string>
+</dict>
+</plist>

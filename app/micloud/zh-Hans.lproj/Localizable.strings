@@ -1,0 +1,152 @@
+/* micloud — 简体中文 */
+
+"header.protected" = "已保护 · 一切正常";
+"header.syncing"   = "同步中…";
+"header.attention" = "需要注意";
+"header.idle"      = "空闲";
+"header.syncNow"   = "立即同步";
+
+"lead.protected"   = "一切都已受到保护。";
+"lead.attention"   = "需要您的注意。";
+"lead.lastChange"  = "上次更改已复制 %@";
+
+"hero.eyebrow"     = "属于您的存储空间";
+"hero.body"        = "您的照片和文件会被复制到**属于您的存储空间**——运行在您自己硬件上的 Immich 和 Nextcloud。";
+"hero.stat.mirrored"     = "本次会话已复制";
+"hero.stat.library"      = "图库中的照片";
+"hero.stat.oneway"       = "单向";
+"hero.stat.oneway.label" = "绝不写入 iCloud";
+
+"status.uptodate"  = "已是最新";
+"status.syncing"   = "同步中";
+"status.stale"     = "已过时";
+"status.error"     = "错误";
+"status.off"       = "关闭";
+"status.syncingN"  = "同步中 · %d";
+"tile.notEnabled"  = "尚未启用";
+"tile.target"      = "→ %1$@ · %2$@";
+
+"source.photos"    = "照片与视频";
+"source.documents" = "文稿与文件";
+"source.calendars" = "日历";
+"source.contacts"  = "通讯录";
+"source.reminders" = "提醒事项";
+"source.notes"     = "备忘录";
+"source.bookmarks" = "书签";
+
+"feed.title"    = "实时";
+"feed.subtitle" = "当更改到达此 Mac 时";
+"feed.waiting"  = "正在等待首次更改…";
+
+"activity.title"    = "活动";
+"activity.subtitle" = "已复制到您存储空间的项目";
+"activity.window"   = "过去 60 秒";
+"activity.total"    = "本分钟 %d 项";
+
+"footer.text"   = "单向 · micloud 绝不写入您的 iCloud · 登录时打开";
+
+"backfill.title"      = "正在备份 %@";
+"phase.scanning"      = "扫描中";
+"phase.transferring"  = "备份中";
+"phase.paused"        = "已暂停";
+"phase.done"          = "已备份";
+"phase.blocked"       = "需要注意";
+"phase.stopped"       = "已停止";
+"metric.files" = "个文件";
+"metric.data"  = "数据";
+"metric.speed" = "速度";
+"metric.est"   = "预计";
+"backfill.etaLeft"    = "剩余 %@";
+"backfill.unreadable" = "%d 项无法读取";
+"backfill.safeClose"  = "可以安全关闭——micloud 会从中断处继续。";
+
+"btn.pause"         = "暂停";
+"btn.resume"        = "继续";
+"btn.stop"          = "停止";
+"btn.backupAnyway"  = "仍然备份";
+"btn.ok"            = "好";
+"btn.notNow"        = "以后再说";
+
+"capacity.tight.title"   = "%@ 空间将变得紧张";
+"capacity.wontfit.title" = "%@ 空间不足";
+"capacity.tight.msg"     = "此次备份将增加 %1$@。完成后 %2$@ 将占用 %3$d%%——micloud 会在超过上限时提醒，以免您的服务器被写满。";
+"capacity.wontfit.msg"   = "此次备份需要 %1$@，但仅剩 %2$@ 可用。micloud 不会开始无法完成的备份——请释放 %3$@（或增加磁盘）后重试。";
+"capacity.diskline"      = "磁盘 %1$@ · 可用 %2$@ · 待添加 %3$@";
+
+"tip.wifi" = "您正在使用 Wi-Fi。有线连接通常快 3–5 倍——此次备份可能在约 %1$@ 内完成，而非 %2$@。接入以太网后 micloud 会自动切换。";
+
+"lang.title"  = "语言";
+"lang.system" = "系统语言";
+
+"ago.now" = "刚刚";
+
+"source.mail"   = "邮件";
+"source.health" = "健康";
+"tile.proEdition" = "在 micloud pro edition 中提供";
+
+/* ── onboarding wizard ── */
+"onb.step"              = "第 %1$@ 步，共 %2$@ 步";
+"onb.back"              = "返回";
+"onb.continue"          = "继续";
+
+"onb.welcome.title"     = "属于您自己的 iCloud，存储在您掌控的空间";
+"onb.welcome.body"      = "micloud 会将您的照片、文件、日历等内容的私有副本实时保存到属于您自己的 Nextcloud 或 Immich 上——这是一份您真正可以打开和浏览的第二副本，与 iCloud 并行运作。";
+"onb.welcome.begin"     = "开始使用";
+
+"onb.phrase.title"      = "保护您的恢复助记词";
+"onb.phrase.body"       = "已连接——micloud 已准备好保护您的数据。最后一件事：这 12 个单词就是您的加密密钥。请将它们抄写下来，妥善保管在离线的安全之处。拥有它们的人都能读取您的备份；没有它们的人——包括我们——则无法读取。我们从不查看这些单词，也永远无法重置它们。";
+"onb.phrase.copy"       = "复制";
+"onb.phrase.regen"      = "重新生成";
+"onb.phrase.written"    = "我已抄写下来";
+
+"onb.confirm.title"     = "确认您的助记词";
+"onb.confirm.body"      = "请为每个位置点选正确的单词，以证明您已妥善保存。";
+"onb.confirm.word"      = "第 %1$@ 个单词";
+"onb.confirm.wrong"     = "不正确——请对照您的抄写副本后重试。";
+
+"onb.backend.title"     = "备份存放在哪里？";
+"onb.backend.body"      = "选择 micloud 的备份目的地。无论选哪种，都是您的数据，存放在您掌控的存储空间上。（想要零知识加密？在 Pro 中开启即可。）";
+"onb.backend.diy.title" = "我自己的服务器";
+"onb.backend.diy.body"  = "连接您现有的 Nextcloud 和/或 Immich。完全自主掌控，免费。";
+"onb.backend.hosted.title" = "由我们托管";
+"onb.backend.hosted.body"  = "我们为您搭建专属的 Nextcloud + Immich。免费试用 24 小时。";
+"onb.backend.hosted.badge" = "免费试用 24 小时";
+
+"onb.diy.title"         = "连接您的 Nextcloud";
+"onb.diy.body"          = "输入您的服务器地址和一个应用专用密码。不确定怎么做？这里有分步指南。";
+"onb.diy.url"           = "Nextcloud 地址";
+"onb.diy.user"          = "用户名";
+"onb.diy.pass"          = "应用专用密码";
+"onb.diy.immich"        = "Immich（可选，用于照片）";
+"onb.diy.immichKey"     = "Immich API 密钥";
+"onb.diy.verify"        = "连接并验证";
+"onb.diy.verifying"     = "正在验证…";
+"onb.diy.ok"            = "已连接——%1$@ 可用";
+"onb.diy.fail"          = "无法连接。请检查地址和应用专用密码。";
+"onb.diy.fields"        = "请输入您的服务器地址、用户名和应用专用密码。";
+"onb.diy.guide"         = "我在哪里找到这些信息？";
+"onb.diy.help"          = "遇到困难？预约专家协助设置";
+
+"onb.hosted.title"      = "我们为您托管";
+"onb.hosted.body"       = "micloud 为您单独配置一个专属的 Nextcloud + Immich——免费使用 24 小时——让您在真正可以浏览的地方看到自己的 iCloud。订阅即可继续保留；否则试用结束时将自动删除。";
+"onb.hosted.soon"       = "托管试用即将开放。目前请先连接您自己的服务器。";
+"onb.hosted.useDiy"     = "改为连接我自己的服务器";
+
+"onb.done.title"        = "您已受到保护";
+"onb.done.body"         = "micloud 正在监视您的 iCloud，并将其复制到您掌控的存储空间。您日后可随时在设置中更改这些内容。";
+"onb.done.finish"       = "打开 micloud";
+
+/* ── Pro edition / licensing ── */
+"pro.badge"           = "PRO";
+"pro.unlock"          = "解锁 Pro";
+"tile.proReady"       = "Pro 已包含";
+"pro.sheet.title"     = "解锁 micloud Pro";
+"pro.sheet.body"      = "粘贴您的许可证密钥。它会在这台 Mac 上验证——micloud 绝不会回传数据。";
+"pro.sheet.unlock"    = "解锁";
+"pro.sheet.invalid"   = "该密钥无效或已过期。";
+"pro.sheet.buy"       = "还没有？获取 Pro";
+
+"onb.phrase.later"      = "稍后提醒我";
+"onb.preflight"         = "在您的 micloud 文件夹中已找到 %1$@ 个项目——它们将被继续，而不会重新上传。您的其他文件不受影响。";
+"nudge.backup"          = "备份您的恢复助记词以保护您的数据";
+"nudge.backupNow"       = "立即备份";

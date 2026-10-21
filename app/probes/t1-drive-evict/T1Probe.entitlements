@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- The App Sandbox — the whole point of the probe is to run UNDER it. -->
+    <key>com.apple.security.app-sandbox</key>
+    <true/>
+    <!-- User grants one iCloud Drive file via the open panel (security-scoped).
+         No Apple Developer provisioning profile is needed for this entitlement,
+         so the probe ad-hoc-signs and runs locally without the paid membership. -->
+    <key>com.apple.security.files.user-selected.read-write</key>
+    <true/>
+</dict>
+</plist>

@@ -1,0 +1,153 @@
+/* micloud — Nederlands */
+
+"header.protected" = "Beschermd · alles in orde";
+"header.syncing"   = "Bezig met synchroniseren…";
+"header.attention" = "Aandacht vereist";
+"header.idle"      = "Inactief";
+"header.syncNow"   = "Nu synchroniseren";
+
+"lead.protected"   = "Alles is beschermd.";
+"lead.attention"   = "Vereist uw aandacht.";
+"lead.lastChange"  = "Laatste wijziging gekopieerd %@";
+
+"hero.eyebrow"     = "OPSLAG DIE VAN U IS";
+"hero.body"        = "Uw foto's en bestanden worden gekopieerd naar **opslag die van u is** — Immich en Nextcloud, op uw eigen hardware.";
+"hero.stat.mirrored"     = "deze sessie gekopieerd";
+"hero.stat.library"      = "foto's in bibliotheek";
+"hero.stat.oneway"       = "eenrichting";
+"hero.stat.oneway.label" = "schrijft nooit naar iCloud";
+
+"status.uptodate"  = "Up-to-date";
+"status.syncing"   = "Synchroniseren";
+"status.stale"     = "Verouderd";
+"status.error"     = "Fout";
+"status.off"       = "Uit";
+"status.syncingN"  = "Synchroniseren · %d";
+"tile.notEnabled"  = "nog niet ingeschakeld";
+"tile.target"      = "→ %1$@ · %2$@";
+
+"source.photos"    = "Foto's en video's";
+"source.documents" = "Documenten en bestanden";
+"source.calendars" = "Agenda's";
+"source.contacts"  = "Contacten";
+"source.reminders" = "Herinneringen";
+"source.notes"     = "Notities";
+"source.bookmarks" = "Bladwijzers";
+
+"feed.title"    = "Live";
+"feed.subtitle" = "Zodra wijzigingen deze Mac bereiken";
+"feed.waiting"  = "Wachten op de eerste wijziging…";
+
+"activity.title"    = "Activiteit";
+"activity.subtitle" = "Items gekopieerd naar uw opslag";
+"activity.window"   = "laatste 60 s";
+"activity.total"    = "%d deze minuut";
+
+"footer.text"   = "Eenrichting · micloud schrijft nooit naar uw iCloud · opent bij inloggen";
+
+"backfill.title"      = "Back-up van %@";
+"phase.scanning"      = "Scannen";
+"phase.transferring"  = "Back-up maken";
+"phase.paused"        = "Gepauzeerd";
+"phase.done"          = "Geback-upt";
+"phase.blocked"       = "Aandacht vereist";
+"phase.stopped"       = "Gestopt";
+"metric.files" = "bestanden";
+"metric.data"  = "gegevens";
+"metric.speed" = "snelheid";
+"metric.est"   = "schatting";
+"backfill.etaLeft"    = "%@ resterend";
+"backfill.unreadable" = "%d onleesbaar";
+"backfill.safeClose"  = "Veilig te sluiten — micloud gaat verder waar het gebleven was.";
+
+"btn.pause"         = "Pauzeren";
+"btn.resume"        = "Hervatten";
+"btn.stop"          = "Stoppen";
+"btn.backupAnyway"  = "Toch back-uppen";
+"btn.ok"            = "OK";
+"btn.notNow"        = "Niet nu";
+
+"capacity.tight.title"   = "%@ zou bijna vol raken";
+"capacity.wontfit.title" = "Onvoldoende ruimte op %@";
+"capacity.tight.msg"     = "Deze back-up voegt %1$@ toe. %2$@ zou aan het eind %3$d%% vol zijn — micloud waarschuwt boven de limiet zodat uw server niet volloopt.";
+"capacity.wontfit.msg"   = "Deze back-up heeft %1$@ nodig maar er is slechts %2$@ vrij. micloud start geen back-up die het niet kan voltooien — maak %3$@ vrij (of voeg een schijf toe) en probeer opnieuw.";
+"capacity.diskline"      = "%1$@ schijf · %2$@ vrij · %3$@ toe te voegen";
+
+"tip.wifi" = "U zit op wifi. Een bekabelde verbinding is doorgaans 3–5× sneller — deze back-up zou in ongeveer %1$@ klaar kunnen zijn in plaats van %2$@. Sluit ethernet aan en micloud schakelt automatisch over.";
+
+"lang.title"  = "Taal";
+"lang.system" = "Systeemtaal";
+
+"ago.now" = "nu";
+
+"source.mail"   = "Mail";
+"source.health" = "Gezondheid";
+"tile.proEdition" = "Beschikbaar in micloud pro edition";
+
+/* ── onboarding wizard ── */
+"onb.step"              = "Stap %1$@ van %2$@";
+"onb.back"              = "Terug";
+"onb.continue"          = "Doorgaan";
+
+"onb.welcome.title"     = "Uw iCloud, op opslag die van u is";
+"onb.welcome.body"      = "micloud bewaart een privé, realtime kopie van uw foto's, bestanden, agenda's en meer op een Nextcloud of Immich die van u is — een tweede kopie die u echt kunt openen en doorbladeren, naast iCloud.";
+"onb.welcome.begin"     = "Aan de slag";
+
+"onb.phrase.title"      = "Beveilig uw herstelzin";
+"onb.phrase.body"       = "U bent verbonden — micloud is klaar om uw gegevens te beschermen. Nog één ding: deze 12 woorden ZIJN uw versleutelingssleutel. Schrijf ze op en bewaar ze veilig en offline. Wie ze heeft, kan uw back-up lezen; wie ze niet heeft — wij inbegrepen — kan dat niet. Wij zien deze woorden nooit en kunnen ze nooit opnieuw instellen.";
+"onb.phrase.copy"       = "Kopiëren";
+"onb.phrase.regen"      = "Opnieuw genereren";
+"onb.phrase.written"    = "Ik heb ze opgeschreven";
+
+"onb.confirm.title"     = "Bevestig uw zin";
+"onb.confirm.body"      = "Tik het juiste woord aan voor elke positie, om te bewijzen dat u ze hebt bewaard.";
+"onb.confirm.word"      = "Woord %1$@";
+"onb.confirm.wrong"     = "Dat klopt niet — controleer uw opgeschreven kopie en probeer opnieuw.";
+
+"onb.backend.title"     = "Waar moet het naartoe?";
+"onb.backend.body"      = "Kies waar micloud een back-up maakt. Hoe dan ook zijn het uw gegevens, op opslag die u beheert. (Wilt u zero-knowledge-versleuteling? Schakel die in bij Pro.)";
+"onb.backend.diy.title" = "Mijn eigen server";
+"onb.backend.diy.body"  = "Verbind uw bestaande Nextcloud en/of Immich. Volledig soeverein, gratis.";
+"onb.backend.hosted.title" = "Laat ons het hosten";
+"onb.backend.hosted.body"  = "Wij zetten een privé-Nextcloud + Immich voor u op. 24 uur gratis proberen.";
+"onb.backend.hosted.badge" = "Gratis 24 u proefperiode";
+
+"onb.diy.title"         = "Verbind uw Nextcloud";
+"onb.diy.body"          = "Voer uw serveradres en een app-wachtwoord in. Weet u niet hoe? Er is een stapsgewijze handleiding.";
+"onb.diy.url"           = "Nextcloud-adres";
+"onb.diy.user"          = "Gebruikersnaam";
+"onb.diy.pass"          = "App-wachtwoord";
+"onb.diy.immich"        = "Immich (optioneel, voor foto's)";
+"onb.diy.immichKey"     = "Immich API-sleutel";
+"onb.diy.verify"        = "Verbinden en verifiëren";
+"onb.diy.verifying"     = "Bezig met verifiëren…";
+"onb.diy.ok"            = "Verbonden — %1$@ vrij";
+"onb.diy.fail"          = "Verbinden mislukt. Controleer het adres en het app-wachtwoord.";
+"onb.diy.fields"        = "Voer uw serveradres, gebruikersnaam en app-wachtwoord in.";
+"onb.diy.guide"         = "Hoe vind ik deze?";
+"onb.diy.help"          = "Vastgelopen? Boek onboarding met een expert";
+
+"onb.hosted.title"      = "Wij hosten het voor u";
+"onb.hosted.body"       = "micloud zet een privé-Nextcloud + Immich alleen voor u op — 24 uur gratis — zodat u uw iCloud kunt zien op een plek die u echt kunt doorbladeren. Behoud het met een abonnement; anders wordt het automatisch verwijderd wanneer de proefperiode eindigt.";
+"onb.hosted.soon"       = "Gehoste proefperiodes gaan binnenkort open. Verbind voorlopig uw eigen server.";
+"onb.hosted.useDiy"     = "Verbind in plaats daarvan de mijne";
+
+"onb.done.title"        = "U bent beschermd";
+"onb.done.body"         = "micloud houdt uw iCloud in de gaten en spiegelt die naar opslag die van u is. U kunt dit alles later in de instellingen wijzigen.";
+"onb.done.finish"       = "micloud openen";
+
+/* ── Pro edition / licensing ── */
+"pro.badge"           = "PRO";
+"pro.unlock"          = "Pro ontgrendelen";
+"tile.proReady"       = "Inbegrepen in Pro";
+"pro.sheet.title"     = "micloud Pro ontgrendelen";
+"pro.sheet.body"      = "Plak uw licentiesleutel. Deze wordt op deze Mac geverifieerd — micloud belt nooit naar huis.";
+"pro.sheet.unlock"    = "Ontgrendelen";
+"pro.sheet.invalid"   = "Die sleutel is ongeldig of verlopen.";
+"pro.sheet.buy"       = "Heeft u er geen? Koop Pro";
+
+/* ── recovery-phrase backup nudges ── */
+"onb.phrase.later"    = "Herinner me later";
+"onb.preflight"       = "%1$@ items gevonden die al in uw micloud-map staan — ze worden hervat, niet opnieuw geüpload. Uw andere bestanden blijven ongemoeid.";
+"nudge.backup"        = "Maak een back-up van uw herstelzin om uw gegevens te beschermen";
+"nudge.backupNow"     = "Nu back-uppen";

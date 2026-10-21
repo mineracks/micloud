@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<!--
+  com.mineracks.icloud-reminders-cloudkit-sync — Phase 6.1.5
+
+  Mac-Studio launchd that runs the EventKit → Nextcloud Tasks sync.
+  Event-driven: launchd WatchPaths fires the agent the moment Apple's
+  Reminders SQLite store writes (i.e. as soon as the user ticks/edits a
+  reminder on any device + iCloud sync lands on the Mac). A 6-hour
+  StartInterval is the safety net for cases where the WAL doesn't fire
+  (rare — laptop sleep, Reminders.app process death, etc.).
+
+  Loaded as a LaunchAgent (per-user, runs under Aqua session) rather
+  than a LaunchDaemon so it inherits TCC permissions for Reminders.app
+  from the logged-in user.
+
+  Install on Mac Studio:
+    cp applications/icloud-sync/scripts/LaunchAgents/com.mineracks.icloud-reminders-cloudkit-sync.plist \
+       ~/Library/LaunchAgents/
+    launchctl load ~/Library/LaunchAgents/com.mineracks.icloud-reminders-cloudkit-sync.plist
+    launchctl kickstart -k gui/$(id -u)/com.mineracks.icloud-reminders-cloudkit-sync
+
+  Pre-flight permissions (one-time, manual on the Mac Studio):
+    System Settings → Privacy & Security → Automation
+      sshd-keygen-wrapper → Reminders → ON  (covers SSH-driven runs)
+    The orchestrator uses EventKit/PyObjC, not osascript, so the
+    legacy Automation→osascript→Reminders grant is no longer needed.
+-->
+<!--
+  WatchPaths note: the active Reminders SQLite store filename includes
+  a per-host UUID (e.g. Data-29B57FB0-….sqlite-wal). Watching the parent
+  Stores/ directory catches all of: WAL writes from CloudKit sync, the
+  base sqlite file rolling over, and any new store the OS introduces in
+  a future macOS release. launchd kqueue events coalesce so a burst of
+  WAL writes (user rapidly ticking 5 things) becomes ~1 sync run.
+-->
+<dict>
+  <key>Label</key>
+  <string>com.mineracks.icloud-reminders-cloudkit-sync</string>
+
+  <!-- Invoke through /usr/bin/env so env is the responsible process for TCC.
+       See the watcher plist for the full rationale. -->
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/bin/env</string>
+    <string>/Users/USERNAME/bin/icloud-reminders-cloudkit-sync.sh</string>
+  </array>
+
+  <!-- WatchPaths attempted 2026-05-08 against the Reminders sqlite Stores
+       dir. macOS routes Group Containers/ FSEvents through TCC and silently
+       drops them for processes without Full Disk Access. We don't grant FDA
+       to bash on principle (broad blast radius). For true event-driven sync
+       use EKEventStoreChangedNotification from a Cocoa daemon — see the
+       follow-up issue (TODO link).
+       <key>WatchPaths</key>
+       <array>
+         <string>/Users/USERNAME/Library/Group Containers/group.com.apple.reminders/Container_v1/Stores</string>
+       </array>
+  -->
+
+  <!-- 6-hour safety net cadence. The companion watcher daemon
+       (com.mineracks.icloud-reminders-cloudkit-watcher) drives event-
+       triggered sync via EKEventStoreChangedNotification + a 10s
+       debounce, so this StartInterval only ever fires if the watcher
+       has died, the notification API silently dropped a change, or the
+       Mac was asleep through a sync window. -->
+  <key>StartInterval</key>
+  <integer>21600</integer>
+
+  <!-- Run on load too, so we don't wait for the first WAL write. -->
+  <key>RunAtLoad</key>
+  <true/>
+
+  <!-- Throttle: minimum spacing between exit and next launch. WatchPaths +
+       30s throttle = naturally debounces a burst of ticks into ≤1 sync per
+       30s, while still being responsive. Crash-loop protection still
+       intact (a script that fails immediately can fire at most once per
+       30s, not in tight loop). -->
+  <key>ThrottleInterval</key>
+  <integer>30</integer>
+
+  <key>StandardOutPath</key>
+  <string>/Users/USERNAME/Library/Logs/icloud-reminders-cloudkit-sync/stdout.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/USERNAME/Library/Logs/icloud-reminders-cloudkit-sync/stderr.log</string>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key>
+    <string>/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+  </dict>
+
+  <key>ProcessType</key>
+  <string>Background</string>
+</dict>
+</plist>

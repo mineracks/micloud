@@ -1,0 +1,222 @@
+/* micloud — English (source) */
+
+"header.protected" = "Protected · all healthy";
+"header.syncing"   = "Syncing…";
+"header.attention" = "Attention needed";
+"header.idle"      = "Idle";
+"header.syncNow"   = "Sync now";
+
+"lead.protected"   = "Everything's protected.";
+"lead.attention"   = "Needs your attention.";
+"lead.lastChange"  = "Last change mirrored %@";
+
+"hero.eyebrow"     = "STORAGE YOU OWN";
+"hero.body"        = "Your photos and files are mirrored to **storage you own** — Immich and Nextcloud, on your own hardware.";
+"hero.stat.mirrored"     = "mirrored today";
+"hero.stat.library"      = "photos in library";
+"hero.stat.oneway"       = "one-way";
+"hero.stat.oneway.label" = "never writes to iCloud";
+
+"status.uptodate"  = "Up to date";
+"status.syncing"   = "Syncing";
+"status.stale"     = "Stale";
+"status.error"     = "Error";
+"status.off"       = "Off";
+"status.syncingN"  = "Syncing · %d";
+"status.waiting"   = "Waiting";
+"tile.kept"        = "%d kept from before";
+"tile.notEnabled"  = "not yet enabled";
+"tile.target"      = "→ %1$@ · %2$@";
+
+"source.photos"    = "Photos & videos";
+"source.documents" = "Documents & Drive";
+"source.calendars" = "Calendars";
+"source.contacts"  = "Contacts";
+"source.reminders" = "Reminders";
+"source.notes"     = "Notes";
+"source.bookmarks" = "Bookmarks";
+
+"feed.title"    = "Live";
+"feed.subtitle" = "As changes reach this Mac";
+"feed.waiting"  = "Waiting for the first change…";
+
+"activity.title"    = "Activity";
+"activity.subtitle" = "Items mirrored to your storage";
+"activity.window"   = "last 60s";
+"activity.total"    = "%d this minute";
+
+"footer.text"   = "One-way · micloud never writes to your iCloud · open at login";
+
+"backfill.title"      = "Backing up %@";
+"phase.scanning"      = "Scanning";
+"phase.transferring"  = "Backing up";
+"phase.paused"        = "Paused";
+"phase.done"          = "Backed up";
+"phase.blocked"       = "Needs attention";
+"phase.stopped"       = "Stopped";
+"metric.files" = "files";
+"metric.data"  = "data";
+"metric.speed" = "speed";
+"backfill.stalled" = "waiting — nothing moved for 2 min";
+"metric.est"   = "est.";
+"metric.already" = "already there";
+"backfill.etaLeft"    = "%@ left";
+"eta.day"             = "~1 day";
+"eta.days"            = "~%@ days";
+"backfill.unreadable" = "%d couldn't be transferred";
+"backfill.retrying"   = "%d waiting to retry";
+"backfill.kept"       = "%d kept from before — no longer on this Mac, still in your storage";
+"backfill.target.toGo"     = "%1$@ · %2$@ files · %3$@ to go";
+"backfill.target.complete" = "complete · %@ files";
+"backfill.safeClose"  = "Safe to close — micloud resumes where it left off.";
+
+"btn.pause"         = "Pause";
+"btn.resume"        = "Resume";
+"btn.stop"          = "Stop";
+"btn.retry"         = "Retry";
+"btn.backupAnyway"  = "Back up anyway";
+"btn.ok"            = "OK";
+"btn.notNow"        = "Not now";
+
+"capacity.tight.title"   = "%@ would get tight";
+"capacity.wontfit.title" = "Not enough space on %@";
+"capacity.tight.msg"     = "This backup adds %1$@. %2$@ would be %3$d%% full when it finishes — micloud warns above the limit so you don't run your own server out of room.";
+"capacity.wontfit.msg"   = "This backup needs %1$@ but only %2$@ is free. micloud won't start a backup it can't finish — free up %3$@ (or add a disk), then try again.";
+"capacity.diskline"      = "%1$@ disk · %2$@ free · %3$@ to add";
+
+"tip.wifi" = "You're on Wi-Fi. A wired connection is typically 3–5× faster — this backup could finish in about %1$@ instead of %2$@. Plug in Ethernet and micloud switches over automatically.";
+
+"lang.title"  = "Language";
+"lang.system" = "System default";
+
+"ago.now" = "now";
+
+"source.messages" = "Messages";
+"source.mail"   = "Mail";
+"source.health" = "Health";
+"tile.proEdition" = "Available in micloud pro edition";
+
+/* ── onboarding wizard ── */
+"onb.step"              = "Step %1$@ of %2$@";
+"onb.back"              = "Back";
+"onb.continue"          = "Continue";
+
+"onb.welcome.title"     = "Your iCloud, on storage you own";
+"onb.welcome.body"      = "micloud keeps a private, real-time copy of your photos, files, calendars and more on a Nextcloud or Immich that belongs to you — a second copy you can actually open and browse, working right alongside iCloud.";
+"onb.welcome.begin"     = "Get started";
+"onb.welcome.monitor"   = "Just watch a backup that's running on another Mac";
+"onb.monitor.title"     = "Watch another Mac";
+"onb.monitor.body"      = "Sign in to the same Nextcloud that Mac backs up to. This Mac won't sync anything — it shows that Mac's dashboard, live, from wherever you are.";
+"onb.monitor.start"     = "Start watching";
+"onb.monitor.back"      = "Back";
+"monitor.watching"      = "Watching %1$@";
+"monitor.offline"       = "%1$@ hasn't reported since %2$@";
+"monitor.waiting"       = "Waiting for the first report from your Mac…";
+
+"onb.phrase.title"      = "Secure your recovery phrase";
+"onb.phrase.body"       = "You're connected — micloud is ready to protect your data. Last thing: these 12 words ARE your encryption key. Write them down and keep them safe and offline. Anyone with them can read your backup; anyone without them — including us — cannot. We never see them and can never reset them.";
+"onb.phrase.later"      = "Remind me later";
+"onb.preflight"         = "Found %1$@ items already in your micloud folder — they'll be resumed, not re-uploaded. Your other files are untouched.";
+"onb.phrase.copy"       = "Copy";
+"onb.phrase.regen"      = "Regenerate";
+"onb.phrase.written"    = "I've written them down";
+
+"onb.confirm.title"     = "Confirm your phrase";
+"onb.confirm.body"      = "Tap the right word for each position, to prove you saved it.";
+"onb.confirm.word"      = "Word %1$@";
+"onb.confirm.wrong"     = "That's not right — check your written copy and try again.";
+
+"onb.backend.title"     = "Where should it go?";
+"onb.backend.body"      = "Choose where micloud backs up. Either way it's your data on storage you control. (Want zero-knowledge encryption? Turn it on in Pro.)";
+"onb.backend.diy.title" = "My own server";
+"onb.backend.diy.body"  = "Connect your existing Nextcloud and/or Immich. Fully self-sovereign, free.";
+"onb.backend.hosted.title" = "Let us host it";
+"onb.backend.hosted.body"  = "We spin up a private Nextcloud + Immich for you. Free to try for 24 hours.";
+"onb.backend.hosted.badge" = "Free 24h trial";
+
+"onb.diy.title"         = "Connect your Nextcloud";
+"onb.diy.body"          = "Enter your server address, then sign in the way you normally do. micloud receives its own app password from your server — nothing to copy.";
+"onb.diy.url"           = "Nextcloud address";
+"onb.diy.user"          = "Username";
+"onb.diy.pass"          = "App password";
+"onb.diy.immich"        = "Immich (optional, for photos)";
+"onb.diy.immichKey"     = "Immich API key";
+"onb.diy.verify"        = "Connect & verify";
+"onb.diy.verifying"     = "Verifying…";
+"onb.diy.ok"            = "Connected — %1$@ free";
+"onb.diy.fail"          = "Couldn't connect. Check the address and app password.";
+"onb.diy.fields"        = "Enter your server address, username and app password.";
+"onb.diy.guide"         = "How do I find these?";
+"onb.diy.help"          = "Stuck? Book expert onboarding";
+"onb.diy.signin"         = "Sign in with Nextcloud";
+"onb.diy.signin.waiting" = "Finish signing in in your browser, then come back here. Nothing to copy — this closes by itself.";
+"onb.diy.signin.cancel"  = "Cancel";
+"onb.diy.signin.as"      = "Signed in as %1$@";
+"onb.diy.signin.again"   = "Sign in again";
+"onb.diy.manual"         = "Use an app password instead";
+"onb.diy.immichSignin"         = "Sign in with Immich";
+"onb.diy.immichSignin.waiting" = "Finish signing in in your browser, then come back here. Nothing to copy — this closes by itself.";
+"onb.diy.immichManual"         = "Use email and password instead";
+"onb.diy.immichNoOAuth"        = "This Immich has no browser sign-in — use email and password, or an API key.";
+"onb.diy.immichEmail"    = "Immich email";
+"onb.diy.immichPassword" = "Immich password";
+"onb.diy.immichLink"     = "Link Immich";
+"onb.diy.immichLinking"  = "Linking…";
+"onb.diy.immichLinked"   = "Immich linked — micloud has its own key, your password was not kept.";
+"onb.diy.immichHaveKey"  = "I already have an API key";
+"onb.diy.immichKeyPage"  = "Open the API keys page on your Immich";
+"onb.diy.immichFail"     = "Couldn't sign in. If you use Google or another single sign-on for Immich there is no password — create an API key instead (link below).";
+"onb.diy.immichFields"   = "Enter the Immich address, email and password.";
+
+/* permissions card (dashboard) */
+"perm.title"            = "A few permissions still need your OK";
+"perm.body"             = "macOS asks you, not us. Each one takes a click and this card clears itself.";
+"perm.allow"            = "Allow";
+"perm.allowed"          = "Allowed";
+"perm.waiting"          = "Waiting for your answer in the macOS prompt…";
+"perm.allDone"          = "All set — every permission is granted.";
+"perm.openSettings"     = "Open Settings";
+"perm.photos"           = "Photos";
+"perm.photos.hint"      = "Lets micloud read your photo library to mirror it.";
+"perm.photos.settings"  = "Turn on micloud under Privacy & Security → Photos.";
+"perm.calendars"        = "Calendars";
+"perm.calendars.hint"   = "Full access, so every calendar is backed up.";
+"perm.calendars.settings" = "Turn on micloud under Privacy & Security → Calendars.";
+"perm.reminders"        = "Reminders";
+"perm.reminders.hint"   = "Full access, so every list is backed up.";
+"perm.reminders.settings" = "Turn on micloud under Privacy & Security → Reminders.";
+"perm.contacts"         = "Contacts";
+"perm.contacts.hint"    = "Read-only, to back up your address book.";
+"perm.contacts.settings" = "Turn on micloud under Privacy & Security → Contacts.";
+"perm.drive"            = "iCloud Drive folder";
+"perm.drive.hint"       = "Default is your whole iCloud Drive, Desktop and Documents included — just click “Mirror iCloud Drive” in the panel.";
+"perm.drive.settings"   = "Choose the folder to mirror.";
+"perm.localnet"         = "Local network";
+"perm.localnet.hint"    = "Lets micloud report its health to your own monitoring.";
+"perm.localnet.settings" = "Health reports are not getting through (%1$@). Privacy & Security → Local Network → switch micloud on.";
+"perm.fda"              = "Full Disk Access";
+"perm.fda.hint"         = "Needed for Safari bookmarks, Notes and Messages.";
+"perm.fda.settings"     = "Privacy & Security → Full Disk Access → switch micloud on. Only you can do this; macOS does not let apps ask.";
+
+"onb.hosted.title"      = "We'll host it for you";
+"onb.hosted.body"       = "micloud spins up a private Nextcloud + Immich just for you — free for 24 hours — so you can see your iCloud living somewhere you can actually browse it. Keep it by subscribing; otherwise it's automatically deleted when the trial ends.";
+"onb.hosted.soon"       = "Hosted trials are opening shortly. For now, connect your own server.";
+"onb.hosted.useDiy"     = "Connect my own instead";
+
+"onb.done.title"        = "You're protected";
+"onb.done.body"         = "micloud is watching your iCloud and mirroring it to storage you own. You can change any of this later in settings.";
+"onb.done.finish"       = "Open micloud";
+
+/* ── Pro edition / licensing ── */
+"pro.badge"           = "PRO";
+"pro.unlock"          = "Unlock Pro";
+"tile.proReady"       = "Included in Pro";
+"pro.sheet.title"     = "Unlock micloud Pro";
+"pro.sheet.body"      = "Paste your license key. It's verified on this Mac — micloud never phones home.";
+"pro.sheet.unlock"    = "Unlock";
+"pro.sheet.invalid"   = "That key isn't valid, or it has expired.";
+"pro.sheet.buy"       = "Don't have one? Get Pro";
+
+/* recovery-phrase backup nudge (deferred-backup path) */
+"nudge.backup"    = "Back up your recovery phrase to protect your data";
+"nudge.backupNow" = "Back up now";

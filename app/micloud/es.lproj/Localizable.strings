@@ -1,0 +1,153 @@
+/* micloud — Español */
+
+"header.protected" = "Protegido · todo correcto";
+"header.syncing"   = "Sincronizando…";
+"header.attention" = "Requiere atención";
+"header.idle"      = "Inactivo";
+"header.syncNow"   = "Sincronizar";
+
+"lead.protected"   = "Todo está protegido.";
+"lead.attention"   = "Requiere tu atención.";
+"lead.lastChange"  = "Último cambio copiado %@";
+
+"hero.eyebrow"     = "ALMACENAMIENTO QUE ES TUYO";
+"hero.body"        = "Tus fotos y archivos se copian a **almacenamiento que es tuyo** — Immich y Nextcloud, en tu propio hardware.";
+"hero.stat.mirrored"     = "copiados esta sesión";
+"hero.stat.library"      = "fotos en la biblioteca";
+"hero.stat.oneway"       = "un solo sentido";
+"hero.stat.oneway.label" = "nunca escribe en iCloud";
+
+"status.uptodate"  = "Al día";
+"status.syncing"   = "Sincronizando";
+"status.stale"     = "Desactualizado";
+"status.error"     = "Error";
+"status.off"       = "Inactivo";
+"status.syncingN"  = "Sincronizando · %d";
+"tile.notEnabled"  = "aún no activado";
+"tile.target"      = "→ %1$@ · %2$@";
+
+"source.photos"    = "Fotos y vídeos";
+"source.documents" = "Documentos y archivos";
+"source.calendars" = "Calendarios";
+"source.contacts"  = "Contactos";
+"source.reminders" = "Recordatorios";
+"source.notes"     = "Notas";
+"source.bookmarks" = "Marcadores";
+
+"feed.title"    = "En vivo";
+"feed.subtitle" = "A medida que los cambios llegan a este Mac";
+"feed.waiting"  = "Esperando el primer cambio…";
+
+"activity.title"    = "Actividad";
+"activity.subtitle" = "Elementos copiados a tu almacenamiento";
+"activity.window"   = "últimos 60 s";
+"activity.total"    = "%d este minuto";
+
+"footer.text"   = "Un solo sentido · micloud nunca escribe en tu iCloud · se abre al iniciar sesión";
+
+"backfill.title"      = "Copiando %@";
+"phase.scanning"      = "Analizando";
+"phase.transferring"  = "Copiando";
+"phase.paused"        = "En pausa";
+"phase.done"          = "Copiado";
+"phase.blocked"       = "Requiere atención";
+"phase.stopped"       = "Detenido";
+"metric.files" = "archivos";
+"metric.data"  = "datos";
+"metric.speed" = "velocidad";
+"metric.est"   = "est.";
+"backfill.etaLeft"    = "%@ restante";
+"backfill.unreadable" = "%d no se pudieron leer";
+"backfill.safeClose"  = "Puedes cerrar — micloud continúa donde lo dejó.";
+
+"btn.pause"         = "Pausar";
+"btn.resume"        = "Reanudar";
+"btn.stop"          = "Detener";
+"btn.backupAnyway"  = "Copiar de todos modos";
+"btn.ok"            = "OK";
+"btn.notNow"        = "Ahora no";
+
+"capacity.tight.title"   = "%@ quedaría casi lleno";
+"capacity.wontfit.title" = "Espacio insuficiente en %@";
+"capacity.tight.msg"     = "Esta copia añade %1$@. %2$@ quedaría al %3$d%% al terminar — micloud avisa por encima del límite para no saturar tu servidor.";
+"capacity.wontfit.msg"   = "Esta copia necesita %1$@ pero solo hay %2$@ libres. micloud no inicia una copia que no puede terminar — libera %3$@ (o añade un disco) e inténtalo de nuevo.";
+"capacity.diskline"      = "%1$@ de disco · %2$@ libres · %3$@ por añadir";
+
+"tip.wifi" = "Estás en Wi-Fi. Una conexión por cable suele ser 3–5× más rápida — esta copia podría terminar en unos %1$@ en vez de %2$@. Conecta Ethernet y micloud cambia automáticamente.";
+
+"lang.title"  = "Idioma";
+"lang.system" = "Idioma del sistema";
+
+"ago.now" = "ahora";
+
+"source.mail"   = "Mail";
+"source.health" = "Salud";
+"tile.proEdition" = "Disponible en micloud pro edition";
+
+/* ── onboarding wizard ── */
+"onb.step"              = "Paso %1$@ de %2$@";
+"onb.back"              = "Atrás";
+"onb.continue"          = "Continuar";
+
+"onb.welcome.title"     = "Tu iCloud, en un almacenamiento que es tuyo";
+"onb.welcome.body"      = "micloud mantiene una copia privada y en tiempo real de tus fotos, archivos, calendarios y mucho más en un Nextcloud o Immich que te pertenece — una segunda copia que puedes abrir y explorar de verdad, funcionando junto a iCloud.";
+"onb.welcome.begin"     = "Empezar";
+
+"onb.phrase.title"      = "Protege tu frase de recuperación";
+"onb.phrase.body"       = "Ya estás conectado — micloud está listo para proteger tus datos. Una última cosa: estas 12 palabras SON tu clave de cifrado. Anótalas y guárdalas en un lugar seguro y sin conexión. Cualquiera que las tenga puede leer tu copia de seguridad; quien no las tenga — nosotros incluidos — no puede. Nunca vemos estas palabras y jamás podemos restablecerlas.";
+"onb.phrase.copy"       = "Copiar";
+"onb.phrase.regen"      = "Regenerar";
+"onb.phrase.written"    = "Ya las he anotado";
+
+"onb.confirm.title"     = "Confirma tu frase";
+"onb.confirm.body"      = "Toca la palabra correcta en cada posición para demostrar que la guardaste.";
+"onb.confirm.word"      = "Palabra %1$@";
+"onb.confirm.wrong"     = "No es correcto — revisa tu copia escrita e inténtalo de nuevo.";
+
+"onb.backend.title"     = "¿Dónde debe guardarse?";
+"onb.backend.body"      = "Elige dónde hace micloud las copias de seguridad. En cualquier caso son tus datos, en un almacenamiento que tú controlas. (¿Quieres cifrado de conocimiento cero? Actívalo en Pro.)";
+"onb.backend.diy.title" = "Mi propio servidor";
+"onb.backend.diy.body"  = "Conecta tu Nextcloud o Immich existente. Totalmente autosoberano, gratis.";
+"onb.backend.hosted.title" = "Que lo alojemos nosotros";
+"onb.backend.hosted.body"  = "Ponemos en marcha un Nextcloud + Immich privado solo para ti. Gratis durante 24 horas para probarlo.";
+"onb.backend.hosted.badge" = "Prueba gratis de 24 h";
+
+"onb.diy.title"         = "Conecta tu Nextcloud";
+"onb.diy.body"          = "Introduce la dirección de tu servidor y una contraseña de aplicación. ¿No sabes cómo? Hay una guía paso a paso.";
+"onb.diy.url"           = "Dirección de Nextcloud";
+"onb.diy.user"          = "Nombre de usuario";
+"onb.diy.pass"          = "Contraseña de aplicación";
+"onb.diy.immich"        = "Immich (opcional, para las fotos)";
+"onb.diy.immichKey"     = "Clave API de Immich";
+"onb.diy.verify"        = "Conectar y verificar";
+"onb.diy.verifying"     = "Verificando…";
+"onb.diy.ok"            = "Conectado — %1$@ libres";
+"onb.diy.fail"          = "No se pudo conectar. Comprueba la dirección y la contraseña de aplicación.";
+"onb.diy.fields"        = "Introduce la dirección de tu servidor, tu nombre de usuario y tu contraseña de aplicación.";
+"onb.diy.guide"         = "¿Cómo encuentro estos datos?";
+"onb.diy.help"          = "¿Atascado? Reserva una configuración con un experto";
+
+"onb.hosted.title"      = "Lo alojamos por ti";
+"onb.hosted.body"       = "micloud pone en marcha un Nextcloud + Immich privado solo para ti — gratis durante 24 horas — para que veas tu iCloud viviendo en un lugar que puedes explorar de verdad. Consérvalo suscribiéndote; de lo contrario, se elimina automáticamente al terminar la prueba.";
+"onb.hosted.soon"       = "Las pruebas alojadas se abren muy pronto. Por ahora, conecta tu propio servidor.";
+"onb.hosted.useDiy"     = "Conectar el mío en su lugar";
+
+"onb.done.title"        = "Estás protegido";
+"onb.done.body"         = "micloud vigila tu iCloud y lo refleja en un almacenamiento que es tuyo. Puedes cambiar todo esto más adelante en los ajustes.";
+"onb.done.finish"       = "Abrir micloud";
+
+/* ── Pro edition / licensing ── */
+"pro.badge"           = "PRO";
+"pro.unlock"          = "Desbloquear Pro";
+"tile.proReady"       = "Incluido en Pro";
+"pro.sheet.title"     = "Desbloquear micloud Pro";
+"pro.sheet.body"      = "Pega tu clave de licencia. Se verifica en este Mac: micloud nunca se conecta a servidores externos.";
+"pro.sheet.unlock"    = "Desbloquear";
+"pro.sheet.invalid"   = "Esa clave no es válida o ha caducado.";
+"pro.sheet.buy"       = "¿No tienes una? Consigue Pro";
+
+/* ── onboarding additions ── */
+"onb.phrase.later"      = "Recordármelo más tarde";
+"onb.preflight"         = "Se encontraron %1$@ elementos que ya estaban en tu carpeta micloud — se reanudarán, no se volverán a subir. Tus demás archivos permanecen intactos.";
+"nudge.backup"    = "Haz una copia de tu frase de recuperación para proteger tus datos";
+"nudge.backupNow" = "Hacer copia ahora";

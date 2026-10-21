@@ -1,0 +1,3698 @@
+{
+  "annotations": {
+    "list": []
+  },
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 100,
+      "panels": [],
+      "title": "📷  Photos — iCloud → Immich",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "description": "HEALTHY: ≥1 successful run in 1h, no failures in 24h. WARNING: successes + at least one failure. INVESTIGATE: zero successes + ≥1 failure. UNKNOWN: no data at all.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "type": "range",
+              "options": {
+                "from": -0.5,
+                "to": 0.5,
+                "result": {
+                  "color": "text",
+                  "index": 0,
+                  "text": "UNKNOWN"
+                }
+              }
+            },
+            {
+              "type": "range",
+              "options": {
+                "from": 0.5,
+                "to": 1.5,
+                "result": {
+                  "color": "red",
+                  "index": 1,
+                  "text": "INVESTIGATE"
+                }
+              }
+            },
+            {
+              "type": "range",
+              "options": {
+                "from": 1.5,
+                "to": 2.5,
+                "result": {
+                  "color": "yellow",
+                  "index": 2,
+                  "text": "WARNING"
+                }
+              }
+            },
+            {
+              "type": "range",
+              "options": {
+                "from": 2.5,
+                "to": 3.5,
+                "result": {
+                  "color": "green",
+                  "index": 3,
+                  "text": "HEALTHY"
+                }
+              }
+            },
+            {
+              "type": "special",
+              "options": {
+                "match": "null",
+                "result": {
+                  "color": "text",
+                  "text": "NO DATA"
+                }
+              }
+            }
+          ],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 0.5
+              },
+              {
+                "color": "yellow",
+                "value": 1.5
+              },
+              {
+                "color": "green",
+                "value": 2.5
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 0,
+        "y": 1
+      },
+      "id": 1,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "(sum(count_over_time({job=\"immich_sync\", event=~\"idle|uploaded\"}[3h]))) or vector(0)",
+          "hide": true,
+          "queryType": "instant",
+          "refId": "A_raw"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "(sum(count_over_time({job=\"immich_sync\", event=\"failed\"}[24h]))) or vector(0)",
+          "hide": true,
+          "queryType": "instant",
+          "refId": "B_raw"
+        },
+        {
+          "datasource": {
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "A_raw",
+          "hide": true,
+          "reducer": "last",
+          "refId": "A",
+          "settings": {
+            "mode": "replaceNN",
+            "replaceWithValue": 0
+          },
+          "type": "reduce"
+        },
+        {
+          "datasource": {
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "B_raw",
+          "hide": true,
+          "reducer": "last",
+          "refId": "B",
+          "settings": {
+            "mode": "replaceNN",
+            "replaceWithValue": 0
+          },
+          "type": "reduce"
+        },
+        {
+          "datasource": {
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "($A >= 1) * ($B == 0) * 3 + ($A >= 1) * ($B > 0) * 2 + ($A == 0) * ($B > 0) * 1",
+          "refId": "score",
+          "type": "math"
+        }
+      ],
+      "title": "Photos: health",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "description": "Photos newly synced from iCloud → Immich.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "blue",
+            "mode": "fixed"
+          },
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 6,
+        "y": 1
+      },
+      "id": 2,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "sum(sum_over_time({job=\"immich_sync\", event=~\"idle|uploaded\"} | regexp \"added=(?P<added>\\\\d+)\" | unwrap added [24h]))",
+          "queryType": "instant",
+          "refId": "A"
+        }
+      ],
+      "title": "Photos added (24h)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "description": "Photos with detected size/mtime changes — re-uploaded to Immich (Immich dedupes by hash).",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "yellow",
+            "mode": "fixed"
+          },
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "yellow",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 12,
+        "y": 1
+      },
+      "id": 3,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "sum(sum_over_time({job=\"immich_sync\", event=~\"idle|uploaded\"} | regexp \"changed=(?P<changed>\\\\d+)\" | unwrap changed [24h]))",
+          "queryType": "instant",
+          "refId": "A"
+        }
+      ],
+      "title": "Photos changed (24h)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "description": "Photos removed from iCloud library (file no longer present in originals/). Immich keeps the asset — count is informational only.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "orange",
+            "mode": "fixed"
+          },
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "orange",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 18,
+        "y": 1
+      },
+      "id": 4,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "sum(sum_over_time({job=\"immich_sync\", event=~\"idle|uploaded\"} | regexp \"deleted=(?P<deleted>\\\\d+)\" | unwrap deleted [24h]))",
+          "queryType": "instant",
+          "refId": "A"
+        }
+      ],
+      "title": "Photos deleted (24h)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "description": "Stacked added / changed / deleted per interval.",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "drawStyle": "bars",
+            "fillOpacity": 80,
+            "lineInterpolation": "linear",
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            }
+          },
+          "unit": "short"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "added"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "changed"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "deleted"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 6
+      },
+      "id": 5,
+      "options": {
+        "legend": {
+          "calcs": [
+            "sum"
+          ],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "sum(sum_over_time({job=\"immich_sync\", event=~\"idle|uploaded\"} | regexp \"added=(?P<added>\\\\d+)\" | unwrap added [$__interval]))",
+          "legendFormat": "added",
+          "queryType": "range",
+          "refId": "added"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "sum(sum_over_time({job=\"immich_sync\", event=~\"idle|uploaded\"} | regexp \"changed=(?P<changed>\\\\d+)\" | unwrap changed [$__interval]))",
+          "legendFormat": "changed",
+          "queryType": "range",
+          "refId": "changed"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "sum(sum_over_time({job=\"immich_sync\", event=~\"idle|uploaded\"} | regexp \"deleted=(?P<deleted>\\\\d+)\" | unwrap deleted [$__interval]))",
+          "legendFormat": "deleted",
+          "queryType": "range",
+          "refId": "deleted"
+        }
+      ],
+      "title": "Photos: activity over time",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 14
+      },
+      "id": 101,
+      "panels": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "description": "Plain-English event stream from immich-photo-sync.sh on Mac Studio.",
+          "gridPos": {
+            "h": 10,
+            "w": 24,
+            "x": 0,
+            "y": 15
+          },
+          "id": 6,
+          "options": {
+            "dedupStrategy": "none",
+            "enableLogDetails": true,
+            "prettifyLogMessage": false,
+            "showCommonLabels": false,
+            "showLabels": false,
+            "showTime": true,
+            "sortOrder": "Descending",
+            "wrapLogMessage": true
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "P8E80F9AEF21F6940"
+              },
+              "expr": "{job=\"immich_sync\"} != \"started\"",
+              "maxLines": 100,
+              "queryType": "range",
+              "refId": "A"
+            }
+          ],
+          "title": "Photos: recent events",
+          "type": "logs"
+        }
+      ],
+      "title": "📷  Photos: recent events (click to expand)",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 15
+      },
+      "id": 200,
+      "panels": [],
+      "title": "📁  Files — iCloud Drive → Nextcloud",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "description": "Combined health for both rclone scripts (drive-hourly + documents-15m). HEALTHY: ≥1 success in 4h with zero failures or rclone errors in 24h. WARNING: success + failures. INVESTIGATE: zero success + failures.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "type": "range",
+              "options": {
+                "from": -0.5,
+                "to": 0.5,
+                "result": {
+                  "color": "text",
+                  "index": 0,
+                  "text": "UNKNOWN"
+                }
+              }
+            },
+            {
+              "type": "range",
+              "options": {
+                "from": 0.5,
+                "to": 1.5,
+                "result": {
+                  "color": "red",
+                  "index": 1,
+                  "text": "INVESTIGATE"
+                }
+              }
+            },
+            {
+              "type": "range",
+              "options": {
+                "from": 1.5,
+                "to": 2.5,
+                "result": {
+                  "color": "yellow",
+                  "index": 2,
+                  "text": "WARNING"
+                }
+              }
+            },
+            {
+              "type": "range",
+              "options": {
+                "from": 2.5,
+                "to": 3.5,
+                "result": {
+                  "color": "green",
+                  "index": 3,
+                  "text": "HEALTHY"
+                }
+              }
+            },
+            {
+              "type": "special",
+              "options": {
+                "match": "null",
+                "result": {
+                  "color": "text",
+                  "text": "NO DATA"
+                }
+              }
+            }
+          ],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 0.5
+              },
+              {
+                "color": "yellow",
+                "value": 1.5
+              },
+              {
+                "color": "green",
+                "value": 2.5
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 0,
+        "y": 16
+      },
+      "id": 11,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "(sum(count_over_time({job=\"icloud_drive_sync\", event=~\"idle|uploaded\"}[4h]))) or vector(0)",
+          "hide": true,
+          "queryType": "instant",
+          "refId": "A_raw"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "(sum(count_over_time({job=\"icloud_drive_sync\", event=\"failed\"}[24h]))) or vector(0)",
+          "hide": true,
+          "queryType": "instant",
+          "refId": "B_raw"
+        },
+        {
+          "datasource": {
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "A_raw",
+          "hide": true,
+          "reducer": "last",
+          "refId": "A",
+          "settings": {
+            "mode": "replaceNN",
+            "replaceWithValue": 0
+          },
+          "type": "reduce"
+        },
+        {
+          "datasource": {
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "B_raw",
+          "hide": true,
+          "reducer": "last",
+          "refId": "B",
+          "settings": {
+            "mode": "replaceNN",
+            "replaceWithValue": 0
+          },
+          "type": "reduce"
+        },
+        {
+          "datasource": {
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "($A >= 1) * ($B == 0) * 3 + ($A >= 1) * ($B > 0) * 2 + ($A == 0) * ($B > 0) * 1",
+          "refId": "score",
+          "type": "math"
+        }
+      ],
+      "title": "Files: health",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "blue",
+            "mode": "fixed"
+          },
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 6,
+        "y": 16
+      },
+      "id": 12,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "sum(sum_over_time({job=\"icloud_drive_sync\", event=~\"idle|uploaded\"} | regexp \"added=(?P<added>\\\\d+)\" | unwrap added [24h]))",
+          "queryType": "instant",
+          "refId": "A"
+        }
+      ],
+      "title": "Files added (24h)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "yellow",
+            "mode": "fixed"
+          },
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "yellow",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 12,
+        "y": 16
+      },
+      "id": 13,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "sum(sum_over_time({job=\"icloud_drive_sync\", event=~\"idle|uploaded\"} | regexp \"changed=(?P<changed>\\\\d+)\" | unwrap changed [24h]))",
+          "queryType": "instant",
+          "refId": "A"
+        }
+      ],
+      "title": "Files changed (24h)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "description": "Deletions = files moved to nextcloud:.trash/ via --backup-dir.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "orange",
+            "mode": "fixed"
+          },
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "orange",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 18,
+        "y": 16
+      },
+      "id": 14,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "sum(sum_over_time({job=\"icloud_drive_sync\", event=~\"idle|uploaded\"} | regexp \"deleted=(?P<deleted>\\\\d+)\" | unwrap deleted [24h]))",
+          "queryType": "instant",
+          "refId": "A"
+        }
+      ],
+      "title": "Files deleted (24h)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "description": "Stacked added / changed / deleted per interval, split by script.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "bars",
+            "fillOpacity": 80,
+            "lineInterpolation": "linear",
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            }
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 21
+      },
+      "id": 15,
+      "options": {
+        "legend": {
+          "calcs": [
+            "sum"
+          ],
+          "displayMode": "table",
+          "placement": "right"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "sum by (script) (sum_over_time({job=\"icloud_drive_sync\", event=~\"idle|uploaded\"} | regexp \"added=(?P<added>\\\\d+)\" | unwrap added [$__interval]))",
+          "legendFormat": "{{script}} added",
+          "queryType": "range",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "sum by (script) (sum_over_time({job=\"icloud_drive_sync\", event=~\"idle|uploaded\"} | regexp \"changed=(?P<changed>\\\\d+)\" | unwrap changed [$__interval]))",
+          "legendFormat": "{{script}} changed",
+          "queryType": "range",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "sum by (script) (sum_over_time({job=\"icloud_drive_sync\", event=~\"idle|uploaded\"} | regexp \"deleted=(?P<deleted>\\\\d+)\" | unwrap deleted [$__interval]))",
+          "legendFormat": "{{script}} deleted",
+          "queryType": "range",
+          "refId": "C"
+        }
+      ],
+      "title": "Files: activity over time",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 29
+      },
+      "id": 201,
+      "panels": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "description": "Plain-English event stream from both rclone wrappers (drive-hourly, documents-15m).",
+          "gridPos": {
+            "h": 10,
+            "w": 24,
+            "x": 0,
+            "y": 30
+          },
+          "id": 16,
+          "options": {
+            "dedupStrategy": "none",
+            "enableLogDetails": true,
+            "prettifyLogMessage": false,
+            "showCommonLabels": false,
+            "showLabels": true,
+            "showTime": true,
+            "sortOrder": "Descending",
+            "wrapLogMessage": true
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "P8E80F9AEF21F6940"
+              },
+              "expr": "{job=\"icloud_drive_sync\"} != \"started\"",
+              "maxLines": 100,
+              "queryType": "range",
+              "refId": "A"
+            }
+          ],
+          "title": "Files: recent events",
+          "type": "logs"
+        }
+      ],
+      "title": "📁  Files: recent events (click to expand)",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 30
+      },
+      "id": 300,
+      "panels": [],
+      "title": "📅  Calendars — iCloud → Nextcloud",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "description": "HEALTHY: ≥1 successful run in 1h, no script-level failures in 24h. Per-source counters in adjacent panels reflect actual Calendars activity.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "type": "range",
+              "options": {
+                "from": -0.5,
+                "to": 0.5,
+                "result": {
+                  "color": "text",
+                  "index": 0,
+                  "text": "UNKNOWN"
+                }
+              }
+            },
+            {
+              "type": "range",
+              "options": {
+                "from": 0.5,
+                "to": 1.5,
+                "result": {
+                  "color": "red",
+                  "index": 1,
+                  "text": "INVESTIGATE"
+                }
+              }
+            },
+            {
+              "type": "range",
+              "options": {
+                "from": 1.5,
+                "to": 2.5,
+                "result": {
+                  "color": "yellow",
+                  "index": 2,
+                  "text": "WARNING"
+                }
+              }
+            },
+            {
+              "type": "range",
+              "options": {
+                "from": 2.5,
+                "to": 3.5,
+                "result": {
+                  "color": "green",
+                  "index": 3,
+                  "text": "HEALTHY"
+                }
+              }
+            },
+            {
+              "type": "special",
+              "options": {
+                "match": "null",
+                "result": {
+                  "color": "text",
+                  "text": "NO DATA"
+                }
+              }
+            }
+          ],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 0.5
+              },
+              {
+                "color": "yellow",
+                "value": 1.5
+              },
+              {
+                "color": "green",
+                "value": 2.5
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 0,
+        "y": 31
+      },
+      "id": 21,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "(sum(count_over_time({job=\"syslog\", host=\"n8n\", unit=\"icloud-dav-sync\"} |~ \"event=(synced|idle)\"[1h]))) or vector(0)",
+          "hide": true,
+          "queryType": "instant",
+          "refId": "A_raw"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "(sum(count_over_time({job=\"syslog\", host=\"n8n\", unit=\"icloud-dav-sync\"} |~ \"event=failed\"[6h]))) or vector(0)",
+          "hide": true,
+          "queryType": "instant",
+          "refId": "B_raw"
+        },
+        {
+          "datasource": {
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "A_raw",
+          "hide": true,
+          "reducer": "last",
+          "refId": "A",
+          "settings": {
+            "mode": "replaceNN",
+            "replaceWithValue": 0
+          },
+          "type": "reduce"
+        },
+        {
+          "datasource": {
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "B_raw",
+          "hide": true,
+          "reducer": "last",
+          "refId": "B",
+          "settings": {
+            "mode": "replaceNN",
+            "replaceWithValue": 0
+          },
+          "type": "reduce"
+        },
+        {
+          "datasource": {
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "($A >= 1) * ($B == 0) * 3 + ($A >= 1) * ($B > 0) * 2 + ($A == 0) * ($B > 0) * 1",
+          "refId": "score",
+          "type": "math"
+        }
+      ],
+      "title": "Calendars: health",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "description": "New events pulled from iCloud and pushed to Nextcloud (cal_pushed). Steady state is 0 — non-zero means iCloud added new events since last cron tick.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "blue",
+            "mode": "fixed"
+          },
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 6,
+        "y": 31
+      },
+      "id": 22,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "sum(sum_over_time({job=\"syslog\", host=\"n8n\", unit=\"icloud-dav-sync\"} | regexp \"cal_pushed=(?P<cal_pushed>\\\\d+)\" | unwrap cal_pushed [24h]))",
+          "queryType": "instant",
+          "refId": "A"
+        }
+      ],
+      "title": "Calendars added (24h)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "description": "Events whose iCloud etag changed since last sync (cal_changed) — content updated, re-pushed to Nextcloud.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "yellow",
+            "mode": "fixed"
+          },
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "yellow",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 12,
+        "y": 31
+      },
+      "id": 23,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "sum(sum_over_time({job=\"syslog\", host=\"n8n\", unit=\"icloud-dav-sync\"} | regexp \"cal_changed=(?P<cal_changed>\\\\d+)\" | unwrap cal_changed [24h]))",
+          "queryType": "instant",
+          "refId": "A"
+        }
+      ],
+      "title": "Calendars changed (24h)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "description": "Events removed from iCloud — script DELETEs them from Nextcloud (cal_deleted).",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "orange",
+            "mode": "fixed"
+          },
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "orange",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 18,
+        "y": 31
+      },
+      "id": 24,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "sum(sum_over_time({job=\"syslog\", host=\"n8n\", unit=\"icloud-dav-sync\"} | regexp \"cal_deleted=(?P<cal_deleted>\\\\d+)\" | unwrap cal_deleted [24h]))",
+          "queryType": "instant",
+          "refId": "A"
+        }
+      ],
+      "title": "Calendars deleted (24h)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "description": "Stacked added / changed / deleted per interval for the 3 synced iCloud calendars (Calendar / Work Calendar / Family).",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "drawStyle": "bars",
+            "fillOpacity": 80,
+            "lineInterpolation": "linear",
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            }
+          },
+          "unit": "short"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "added"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "changed"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "deleted"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 36
+      },
+      "id": 25,
+      "options": {
+        "legend": {
+          "calcs": [
+            "sum"
+          ],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "sum(sum_over_time({job=\"syslog\", host=\"n8n\", unit=\"icloud-dav-sync\"} | regexp \"cal_pushed=(?P<cal_pushed>\\\\d+)\" | unwrap cal_pushed [$__interval]))",
+          "legendFormat": "added",
+          "queryType": "range",
+          "refId": "added"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "sum(sum_over_time({job=\"syslog\", host=\"n8n\", unit=\"icloud-dav-sync\"} | regexp \"cal_changed=(?P<cal_changed>\\\\d+)\" | unwrap cal_changed [$__interval]))",
+          "legendFormat": "changed",
+          "queryType": "range",
+          "refId": "changed"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "sum(sum_over_time({job=\"syslog\", host=\"n8n\", unit=\"icloud-dav-sync\"} | regexp \"cal_deleted=(?P<cal_deleted>\\\\d+)\" | unwrap cal_deleted [$__interval]))",
+          "legendFormat": "deleted",
+          "queryType": "range",
+          "refId": "deleted"
+        }
+      ],
+      "title": "Calendars: activity over time",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 44
+      },
+      "id": 301,
+      "panels": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "description": "Plain-English event stream from icloud-dav-sync.py — heartbeats include cal_* counters per run.",
+          "gridPos": {
+            "h": 10,
+            "w": 24,
+            "x": 0,
+            "y": 45
+          },
+          "id": 26,
+          "options": {
+            "dedupStrategy": "none",
+            "enableLogDetails": true,
+            "prettifyLogMessage": false,
+            "showCommonLabels": false,
+            "showLabels": false,
+            "showTime": true,
+            "sortOrder": "Descending",
+            "wrapLogMessage": true
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "P8E80F9AEF21F6940"
+              },
+              "expr": "{job=\"syslog\", host=\"n8n\", unit=\"icloud-dav-sync\"} != \"started\" ",
+              "maxLines": 100,
+              "queryType": "range",
+              "refId": "A"
+            }
+          ],
+          "title": "Calendars: recent events",
+          "type": "logs"
+        }
+      ],
+      "title": "📅  Calendars: recent events (click to expand)",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 45
+      },
+      "id": 400,
+      "panels": [],
+      "title": "👥  Contacts — iCloud → Nextcloud",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "description": "HEALTHY: ≥1 successful run in 1h, no script-level failures in 24h. Per-source counters in adjacent panels reflect actual Contacts activity.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "type": "range",
+              "options": {
+                "from": -0.5,
+                "to": 0.5,
+                "result": {
+                  "color": "text",
+                  "index": 0,
+                  "text": "UNKNOWN"
+                }
+              }
+            },
+            {
+              "type": "range",
+              "options": {
+                "from": 0.5,
+                "to": 1.5,
+                "result": {
+                  "color": "red",
+                  "index": 1,
+                  "text": "INVESTIGATE"
+                }
+              }
+            },
+            {
+              "type": "range",
+              "options": {
+                "from": 1.5,
+                "to": 2.5,
+                "result": {
+                  "color": "yellow",
+                  "index": 2,
+                  "text": "WARNING"
+                }
+              }
+            },
+            {
+              "type": "range",
+              "options": {
+                "from": 2.5,
+                "to": 3.5,
+                "result": {
+                  "color": "green",
+                  "index": 3,
+                  "text": "HEALTHY"
+                }
+              }
+            },
+            {
+              "type": "special",
+              "options": {
+                "match": "null",
+                "result": {
+                  "color": "text",
+                  "text": "NO DATA"
+                }
+              }
+            }
+          ],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 0.5
+              },
+              {
+                "color": "yellow",
+                "value": 1.5
+              },
+              {
+                "color": "green",
+                "value": 2.5
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 0,
+        "y": 46
+      },
+      "id": 31,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "(sum(count_over_time({job=\"syslog\", host=\"n8n\", unit=\"icloud-dav-sync\"} |~ \"event=(synced|idle)\"[1h]))) or vector(0)",
+          "hide": true,
+          "queryType": "instant",
+          "refId": "A_raw"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "(sum(count_over_time({job=\"syslog\", host=\"n8n\", unit=\"icloud-dav-sync\"} |~ \"event=failed\"[6h]))) or vector(0)",
+          "hide": true,
+          "queryType": "instant",
+          "refId": "B_raw"
+        },
+        {
+          "datasource": {
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "A_raw",
+          "hide": true,
+          "reducer": "last",
+          "refId": "A",
+          "settings": {
+            "mode": "replaceNN",
+            "replaceWithValue": 0
+          },
+          "type": "reduce"
+        },
+        {
+          "datasource": {
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "B_raw",
+          "hide": true,
+          "reducer": "last",
+          "refId": "B",
+          "settings": {
+            "mode": "replaceNN",
+            "replaceWithValue": 0
+          },
+          "type": "reduce"
+        },
+        {
+          "datasource": {
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "($A >= 1) * ($B == 0) * 3 + ($A >= 1) * ($B > 0) * 2 + ($A == 0) * ($B > 0) * 1",
+          "refId": "score",
+          "type": "math"
+        }
+      ],
+      "title": "Contacts: health",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "description": "New vCards pulled from iCloud and pushed to Nextcloud (con_pushed).",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "blue",
+            "mode": "fixed"
+          },
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 6,
+        "y": 46
+      },
+      "id": 32,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "sum(sum_over_time({job=\"syslog\", host=\"n8n\", unit=\"icloud-dav-sync\"} | regexp \"con_pushed=(?P<con_pushed>\\\\d+)\" | unwrap con_pushed [24h]))",
+          "queryType": "instant",
+          "refId": "A"
+        }
+      ],
+      "title": "Contacts added (24h)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "description": "vCards whose iCloud etag changed (con_changed) — re-pushed to Nextcloud.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "yellow",
+            "mode": "fixed"
+          },
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "yellow",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 12,
+        "y": 46
+      },
+      "id": 33,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "sum(sum_over_time({job=\"syslog\", host=\"n8n\", unit=\"icloud-dav-sync\"} | regexp \"con_changed=(?P<con_changed>\\\\d+)\" | unwrap con_changed [24h]))",
+          "queryType": "instant",
+          "refId": "A"
+        }
+      ],
+      "title": "Contacts changed (24h)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "description": "vCards removed from iCloud — DELETEd from Nextcloud (con_deleted).",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "orange",
+            "mode": "fixed"
+          },
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "orange",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 18,
+        "y": 46
+      },
+      "id": 34,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "sum(sum_over_time({job=\"syslog\", host=\"n8n\", unit=\"icloud-dav-sync\"} | regexp \"con_deleted=(?P<con_deleted>\\\\d+)\" | unwrap con_deleted [24h]))",
+          "queryType": "instant",
+          "refId": "A"
+        }
+      ],
+      "title": "Contacts deleted (24h)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "description": "Stacked added / changed / deleted per interval for the iCloud `card` address book.",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "drawStyle": "bars",
+            "fillOpacity": 80,
+            "lineInterpolation": "linear",
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            }
+          },
+          "unit": "short"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "added"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "changed"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "deleted"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 51
+      },
+      "id": 35,
+      "options": {
+        "legend": {
+          "calcs": [
+            "sum"
+          ],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "sum(sum_over_time({job=\"syslog\", host=\"n8n\", unit=\"icloud-dav-sync\"} | regexp \"con_pushed=(?P<con_pushed>\\\\d+)\" | unwrap con_pushed [$__interval]))",
+          "legendFormat": "added",
+          "queryType": "range",
+          "refId": "added"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "sum(sum_over_time({job=\"syslog\", host=\"n8n\", unit=\"icloud-dav-sync\"} | regexp \"con_changed=(?P<con_changed>\\\\d+)\" | unwrap con_changed [$__interval]))",
+          "legendFormat": "changed",
+          "queryType": "range",
+          "refId": "changed"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "sum(sum_over_time({job=\"syslog\", host=\"n8n\", unit=\"icloud-dav-sync\"} | regexp \"con_deleted=(?P<con_deleted>\\\\d+)\" | unwrap con_deleted [$__interval]))",
+          "legendFormat": "deleted",
+          "queryType": "range",
+          "refId": "deleted"
+        }
+      ],
+      "title": "Contacts: activity over time",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 59
+      },
+      "id": 401,
+      "panels": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "description": "Same heartbeat stream as Calendars (single script handles both). Look for con_* counters.",
+          "gridPos": {
+            "h": 10,
+            "w": 24,
+            "x": 0,
+            "y": 60
+          },
+          "id": 36,
+          "options": {
+            "dedupStrategy": "none",
+            "enableLogDetails": true,
+            "prettifyLogMessage": false,
+            "showCommonLabels": false,
+            "showLabels": false,
+            "showTime": true,
+            "sortOrder": "Descending",
+            "wrapLogMessage": true
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "P8E80F9AEF21F6940"
+              },
+              "expr": "{job=\"syslog\", host=\"n8n\", unit=\"icloud-dav-sync\"} != \"started\" ",
+              "maxLines": 100,
+              "queryType": "range",
+              "refId": "A"
+            }
+          ],
+          "title": "Contacts: recent events",
+          "type": "logs"
+        }
+      ],
+      "title": "👥  Contacts: recent events (click to expand)",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 60
+      },
+      "id": 500,
+      "panels": [],
+      "title": "📨  Mail — iCloud → mail-mirror Maildir",
+      "type": "row",
+      "description": ""
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "description": "HEALTHY: ≥1 successful run in 1h, no script-level failures in 24h. Per-source counters in adjacent panels reflect actual Mail activity.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "type": "range",
+              "options": {
+                "from": -0.5,
+                "to": 0.5,
+                "result": {
+                  "color": "text",
+                  "index": 0,
+                  "text": "UNKNOWN"
+                }
+              }
+            },
+            {
+              "type": "range",
+              "options": {
+                "from": 0.5,
+                "to": 1.5,
+                "result": {
+                  "color": "red",
+                  "index": 1,
+                  "text": "INVESTIGATE"
+                }
+              }
+            },
+            {
+              "type": "range",
+              "options": {
+                "from": 1.5,
+                "to": 2.5,
+                "result": {
+                  "color": "yellow",
+                  "index": 2,
+                  "text": "WARNING"
+                }
+              }
+            },
+            {
+              "type": "range",
+              "options": {
+                "from": 2.5,
+                "to": 3.5,
+                "result": {
+                  "color": "green",
+                  "index": 3,
+                  "text": "HEALTHY"
+                }
+              }
+            },
+            {
+              "type": "special",
+              "options": {
+                "match": "null",
+                "result": {
+                  "color": "text",
+                  "text": "NO DATA"
+                }
+              }
+            }
+          ],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 0.5
+              },
+              {
+                "color": "yellow",
+                "value": 1.5
+              },
+              {
+                "color": "green",
+                "value": 2.5
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 0,
+        "y": 61
+      },
+      "id": 51,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "(sum(count_over_time({job=\"syslog\", host=\"mail-mirror\", unit=\"icloud-mail-sync\"} |~ \"event=(synced|idle)\"[1h]))) or vector(0)",
+          "hide": true,
+          "queryType": "instant",
+          "refId": "A_raw"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "(sum(count_over_time({job=\"syslog\", host=\"mail-mirror\", unit=\"icloud-mail-sync\"} |~ \"event=failure\"[6h]))) or vector(0)",
+          "hide": true,
+          "queryType": "instant",
+          "refId": "B_raw"
+        },
+        {
+          "datasource": {
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "A_raw",
+          "hide": true,
+          "reducer": "last",
+          "refId": "A",
+          "settings": {
+            "mode": "replaceNN",
+            "replaceWithValue": 0
+          },
+          "type": "reduce"
+        },
+        {
+          "datasource": {
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "B_raw",
+          "hide": true,
+          "reducer": "last",
+          "refId": "B",
+          "settings": {
+            "mode": "replaceNN",
+            "replaceWithValue": 0
+          },
+          "type": "reduce"
+        },
+        {
+          "datasource": {
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "($A >= 1) * ($B == 0) * 3 + ($A >= 1) * ($B > 0) * 2 + ($A == 0) * ($B > 0) * 1",
+          "refId": "score",
+          "type": "math"
+        }
+      ],
+      "title": "Mail: health",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "description": "Total messages currently in the mail-mirror Maildir (i.e. mirrored from iCloud to NC). Reported by the icloud-mail-sync heartbeat after each mbsync run.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "blue",
+            "mode": "fixed"
+          },
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 6,
+        "y": 61
+      },
+      "id": 52,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "max(last_over_time({job=\"syslog\", host=\"mail-mirror\", unit=\"icloud-mail-sync\"} |~ \"event=idle\" | logfmt | unwrap total_msgs [10m]))",
+          "queryType": "instant",
+          "refId": "A"
+        }
+      ],
+      "title": "Mail: total in NC",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "description": "Net new messages mirrored to the Maildir over the last 24h (latest total_msgs minus earliest total_msgs in window).",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "yellow",
+            "mode": "fixed"
+          },
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "yellow",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 12,
+        "y": 61
+      },
+      "id": 53,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "sum(sum_over_time({job=\"syslog\", host=\"mail-mirror\", unit=\"icloud-mail-sync\"} |~ \"event=(synced|idle)\" | logfmt | unwrap added [24h]))",
+          "queryType": "instant",
+          "refId": "A"
+        }
+      ],
+      "title": "Mail: 24h growth",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "description": "Average mbsync run duration (seconds) over the last 24h. mbsync's wall-clock per pass — usually ~120-150s when steady-state, longer on bulk catch-up.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "orange",
+            "mode": "fixed"
+          },
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "orange",
+                "value": null
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 18,
+        "y": 61
+      },
+      "id": 54,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "avg(avg_over_time({job=\"syslog\", host=\"mail-mirror\", unit=\"icloud-mail-sync\"} |~ \"event=idle\" | logfmt | unwrap duration_s [24h]))",
+          "queryType": "instant",
+          "refId": "A"
+        }
+      ],
+      "title": "Mail: avg sync (24h)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "description": "Messages added to the Maildir per interval bucket. mbsync emits `added=N` per run from a state-file delta (file-count now − file-count prev run). Sums across heartbeats in the bucket. Auto-scales to whatever time range is selected. Bar height = how many new messages mbsync pulled during that interval.",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "drawStyle": "bars",
+            "fillOpacity": 80,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 4,
+            "showPoints": "never",
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            }
+          },
+          "unit": "short",
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {"id": "byName", "options": "added"},
+            "properties": [{"id": "color", "value": {"fixedColor": "blue", "mode": "fixed"}}]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 66
+      },
+      "id": 55,
+      "options": {
+        "legend": {
+          "calcs": ["sum", "max"],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "sum(sum_over_time({job=\"syslog\", host=\"mail-mirror\", unit=\"icloud-mail-sync\"} |~ \"event=(synced|idle)\" | logfmt | unwrap added [$__interval]))",
+          "legendFormat": "added",
+          "queryType": "range",
+          "refId": "added"
+        }
+      ],
+      "title": "Mail: messages added per interval",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 74
+      },
+      "id": 501,
+      "panels": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "description": "Same heartbeat stream as Calendars (single script handles both). Look for con_* counters.",
+          "gridPos": {
+            "h": 10,
+            "w": 24,
+            "x": 0,
+            "y": 60
+          },
+          "id": 36,
+          "options": {
+            "dedupStrategy": "none",
+            "enableLogDetails": true,
+            "prettifyLogMessage": false,
+            "showCommonLabels": false,
+            "showLabels": false,
+            "showTime": true,
+            "sortOrder": "Descending",
+            "wrapLogMessage": true
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "P8E80F9AEF21F6940"
+              },
+              "expr": "{job=\"syslog\", host=\"mail-mirror\", unit=\"icloud-mail-sync\"} != \"started\" ",
+              "maxLines": 100,
+              "queryType": "range",
+              "refId": "A"
+            }
+          ],
+          "title": "Mail: recent events",
+          "type": "logs"
+        }
+      ],
+      "title": "📨  Mail: recent events (click to expand)",
+      "type": "row",
+      "description": ""
+    },
+    {
+      "id": 600,
+      "type": "row",
+      "title": "🔔  Reminders (CloudKit) — iPhone → Nextcloud Tasks",
+      "description": "Phase 6.1.5: EventKit-driven mirror of post-2018 CloudKit reminders that the legacy CalDAV endpoint can't see. Watcher daemon listens for EKEventStoreChangedNotification and debounces 10s before kicking the sync. ~25-35s end-to-end iPhone tap → Nextcloud Tasks.",
+      "collapsed": false,
+      "panels": [],
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 76
+      }
+    },
+    {
+      "id": 601,
+      "type": "stat",
+      "title": "Watcher heartbeats (30m)",
+      "description": "event=alive heartbeat fires every 5min. Expect ~6 in 30m. <5 means missed beats; <3 means watcher dead.",
+      "gridPos": {
+        "x": 0,
+        "y": 77,
+        "w": 8,
+        "h": 6
+      },
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "sum(count_over_time({unit=\"icloud-reminders-cloudkit-watcher\"} |= \"event=alive\" [30m])) or vector(0)",
+          "queryType": "instant",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 3
+              },
+              {
+                "color": "green",
+                "value": 5
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.4.1"
+    },
+    {
+      "id": 602,
+      "type": "stat",
+      "title": "Kicks (24h)",
+      "description": "Each kick fires when EventKit signals a Reminders.app change. Bursts of edits debounce into one kick.",
+      "gridPos": {
+        "x": 8,
+        "y": 77,
+        "w": 8,
+        "h": 6
+      },
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "sum(count_over_time({unit=\"icloud-reminders-cloudkit-watcher\"} |= \"event=kick \" [24h])) or vector(0)",
+          "queryType": "instant",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.4.1"
+    },
+    {
+      "id": 603,
+      "type": "stat",
+      "title": "Reminders synced (24h)",
+      "description": "event=synced fires after the script PUTs ≥1 changed/pushed/deleted reminder to Nextcloud.",
+      "gridPos": {
+        "x": 16,
+        "y": 77,
+        "w": 8,
+        "h": 6
+      },
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "sum(count_over_time({unit=\"icloud-reminders-cloudkit-sync\"} |= \"event=synced\" [24h])) or vector(0)",
+          "queryType": "instant",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.4.1"
+    },
+    {
+      "id": 604,
+      "type": "timeseries",
+      "title": "Activity (kicks + syncs)",
+      "description": "Kicks (watcher firing) and synced events (sync producing changes) over time.",
+      "gridPos": {
+        "x": 0,
+        "y": 83,
+        "w": 24,
+        "h": 8
+      },
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "sum(count_over_time({unit=\"icloud-reminders-cloudkit-watcher\"} |= \"event=kick \" [5m]))",
+          "legendFormat": "kicks",
+          "queryType": "range",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "sum(count_over_time({unit=\"icloud-reminders-cloudkit-sync\"} |= \"event=synced\" [5m]))",
+          "legendFormat": "synced",
+          "queryType": "range",
+          "refId": "B"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "bars",
+            "fillOpacity": 50,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.4.1"
+    },
+    {
+      "id": 700,
+      "type": "row",
+      "collapsed": true,
+      "title": "🔔  Reminders (CloudKit): recent events (click to expand)",
+      "description": "",
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 91
+      },
+      "panels": [
+        {
+          "id": 605,
+          "type": "logs",
+          "title": "Reminders (CloudKit): recent events",
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "description": "Combined sync + watcher events. Filter out 'started' for less noise.",
+          "gridPos": {
+            "h": 10,
+            "w": 24,
+            "x": 0,
+            "y": 92
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "P8E80F9AEF21F6940"
+              },
+              "expr": "{job=\"icloud_reminders_cloudkit\"} != \"event=started\"",
+              "maxLines": 100,
+              "queryType": "range",
+              "refId": "A"
+            }
+          ],
+          "options": {
+            "dedupStrategy": "none",
+            "enableLogDetails": true,
+            "prettifyLogMessage": false,
+            "showCommonLabels": false,
+            "showLabels": false,
+            "showTime": true,
+            "sortOrder": "Descending",
+            "wrapLogMessage": true
+          }
+        }
+      ]
+    },
+    {
+      "id": 800,
+      "type": "row",
+      "title": "🔖  Bookmarks (Safari) — iCloud → Nextcloud Bookmarks",
+      "description": "Phase 6.2: mirrors ~/Library/Safari/Bookmarks.plist (which Apple keeps in lock-step with iCloud Bookmarks via CloudKit) into the Nextcloud Bookmarks app. Event-driven via launchd WatchPaths on ~/Library/Safari, with a 6h StartInterval safety net. Manifest-diffs by SHA so unchanged bookmarks aren't re-PUT.",
+      "collapsed": false,
+      "panels": [],
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 92
+      }
+    },
+    {
+      "id": 801,
+      "type": "stat",
+      "title": "Successful runs (12h)",
+      "description": "At least 1 expected per 12h via the 6h fallback timer alone. Red = sync stuck or daemon dead.",
+      "gridPos": {
+        "x": 0,
+        "y": 93,
+        "w": 8,
+        "h": 6
+      },
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "sum(count_over_time({unit=\"icloud-bookmarks-sync\"} |~ \"event=(synced|idle)\" [12h])) or vector(0)",
+          "queryType": "instant",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.4.1"
+    },
+    {
+      "id": 802,
+      "type": "stat",
+      "title": "Bookmarks pushed (24h)",
+      "description": "New bookmarks created in Nextcloud over the last 24h.",
+      "gridPos": {
+        "x": 8,
+        "y": 93,
+        "w": 8,
+        "h": 6
+      },
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "sum(sum_over_time({unit=\"icloud-bookmarks-sync\"} | logfmt | unwrap pushed [24h])) or vector(0)",
+          "queryType": "instant",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.4.1"
+    },
+    {
+      "id": 803,
+      "type": "stat",
+      "title": "Bookmarks changed (24h)",
+      "description": "Bookmarks updated (URL or title or description changed) in last 24h.",
+      "gridPos": {
+        "x": 16,
+        "y": 93,
+        "w": 8,
+        "h": 6
+      },
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "sum(sum_over_time({unit=\"icloud-bookmarks-sync\"} | logfmt | unwrap changed [24h])) or vector(0)",
+          "queryType": "instant",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.4.1"
+    },
+    {
+      "id": 900,
+      "type": "row",
+      "collapsed": true,
+      "title": "🔖  Bookmarks: recent events (click to expand)",
+      "description": "",
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 99
+      },
+      "panels": [
+        {
+          "id": 805,
+          "type": "logs",
+          "title": "Bookmarks: recent events",
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "description": "All sync events. Filter out 'started' for less noise.",
+          "gridPos": {
+            "h": 10,
+            "w": 24,
+            "x": 0,
+            "y": 100
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "P8E80F9AEF21F6940"
+              },
+              "expr": "{job=\"icloud_bookmarks\"} != \"event=started\"",
+              "maxLines": 100,
+              "queryType": "range",
+              "refId": "A"
+            }
+          ],
+          "options": {
+            "dedupStrategy": "none",
+            "enableLogDetails": true,
+            "prettifyLogMessage": false,
+            "showCommonLabels": false,
+            "showLabels": false,
+            "showTime": true,
+            "sortOrder": "Descending",
+            "wrapLogMessage": true
+          }
+        }
+      ]
+    },
+    {
+      "id": 1000,
+      "type": "row",
+      "collapsed": false,
+      "panels": [],
+      "title": "📝  Notes (Apple) — iCloud → Nextcloud Notes",
+      "description": "Phase 6.3: parses ~/Library/Group Containers/group.com.apple.notes/NoteStore.sqlite (snapshot-copy approach because Notes.app holds an exclusive lock), decodes gzip+protobuf note bodies, pushes to the Nextcloud Notes app. AppleScript path is unworkable (-1712 timeouts on CloudKit-backed notes, same wall as Reminders). Event-driven via WatchPaths on the Group Containers dir + 6h fallback timer.",
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 100
+      }
+    },
+    {
+      "id": 1001,
+      "type": "stat",
+      "title": "Successful runs (12h)",
+      "description": "≥1 expected per 12h via the 6h safety net alone. Red = sync stuck or daemon dead.",
+      "gridPos": {
+        "x": 0,
+        "y": 101,
+        "w": 8,
+        "h": 6
+      },
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "sum(count_over_time({unit=\"icloud-notes-sync\"} |~ \"event=(synced|idle)\" [12h])) or vector(0)",
+          "queryType": "instant",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.4.1"
+    },
+    {
+      "id": 1002,
+      "type": "stat",
+      "title": "Notes pushed (24h)",
+      "description": "New notes created in Nextcloud over the last 24h.",
+      "gridPos": {
+        "x": 8,
+        "y": 101,
+        "w": 8,
+        "h": 6
+      },
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "sum(sum_over_time({unit=\"icloud-notes-sync\"} | logfmt | unwrap pushed [24h])) or vector(0)",
+          "queryType": "instant",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.4.1"
+    },
+    {
+      "id": 1003,
+      "type": "stat",
+      "title": "Notes changed (24h)",
+      "description": "Notes whose title/body/category SHA changed in the last 24h.",
+      "gridPos": {
+        "x": 16,
+        "y": 101,
+        "w": 8,
+        "h": 6
+      },
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "sum(sum_over_time({unit=\"icloud-notes-sync\"} | logfmt | unwrap changed [24h])) or vector(0)",
+          "queryType": "instant",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.4.1"
+    },
+    {
+      "id": 1100,
+      "type": "row",
+      "collapsed": true,
+      "title": "📝  Notes: recent events (click to expand)",
+      "description": "",
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 107
+      },
+      "panels": [
+        {
+          "id": 1005,
+          "type": "logs",
+          "title": "Notes: recent events",
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "description": "All sync events. Filter out 'started' for less noise.",
+          "gridPos": {
+            "h": 10,
+            "w": 24,
+            "x": 0,
+            "y": 108
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "P8E80F9AEF21F6940"
+              },
+              "expr": "{job=\"icloud_notes\"} != \"event=started\"",
+              "maxLines": 100,
+              "queryType": "range",
+              "refId": "A"
+            }
+          ],
+          "options": {
+            "dedupStrategy": "none",
+            "enableLogDetails": true,
+            "prettifyLogMessage": false,
+            "showCommonLabels": false,
+            "showLabels": false,
+            "showTime": true,
+            "sortOrder": "Descending",
+            "wrapLogMessage": true
+          }
+        }
+      ]
+    },
+    {
+      "collapsed": false,
+      "gridPos": {"h": 1, "w": 24, "x": 0, "y": 118},
+      "id": 1500,
+      "panels": [],
+      "title": "📷  Photos — iCloud → Nextcloud (Phase 1.5, forward-only)",
+      "type": "row"
+    },
+    {
+      "datasource": {"type": "loki", "uid": "P8E80F9AEF21F6940"},
+      "description": "HEALTHY: ≥1 successful run in 3h, no failures in 24h. WARNING: successes + at least one failure. INVESTIGATE: zero successes + ≥1 failure. UNKNOWN: no data at all. Phase 1.5 = capture-date ≥ 2026-05-08, parallel pipeline to Immich.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {"mode": "thresholds"},
+          "mappings": [
+            {"type": "range", "options": {"from": -0.5, "to": 0.5, "result": {"color": "text", "index": 0, "text": "UNKNOWN"}}},
+            {"type": "range", "options": {"from": 0.5, "to": 1.5, "result": {"color": "red", "index": 1, "text": "INVESTIGATE"}}},
+            {"type": "range", "options": {"from": 1.5, "to": 2.5, "result": {"color": "yellow", "index": 2, "text": "WARNING"}}},
+            {"type": "range", "options": {"from": 2.5, "to": 3.5, "result": {"color": "green", "index": 3, "text": "HEALTHY"}}},
+            {"type": "special", "options": {"match": "null", "result": {"color": "text", "text": "NO DATA"}}}
+          ],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {"color": "text", "value": null},
+              {"color": "red", "value": 0.5},
+              {"color": "yellow", "value": 1.5},
+              {"color": "green", "value": 2.5}
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {"h": 5, "w": 6, "x": 0, "y": 119},
+      "id": 1501,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false},
+        "textMode": "value"
+      },
+      "targets": [
+        {"datasource": {"type": "loki", "uid": "P8E80F9AEF21F6940"}, "expr": "(sum(count_over_time({job=\"nextcloud_photos_sync\", event=~\"idle|uploaded\"}[3h]))) or vector(0)", "hide": true, "queryType": "instant", "refId": "A_raw"},
+        {"datasource": {"type": "loki", "uid": "P8E80F9AEF21F6940"}, "expr": "(sum(count_over_time({job=\"nextcloud_photos_sync\", event=\"failed\"}[24h]))) or vector(0)", "hide": true, "queryType": "instant", "refId": "B_raw"},
+        {"datasource": {"type": "__expr__", "uid": "__expr__"}, "expression": "A_raw", "hide": true, "reducer": "last", "refId": "A", "settings": {"mode": "replaceNN", "replaceWithValue": 0}, "type": "reduce"},
+        {"datasource": {"type": "__expr__", "uid": "__expr__"}, "expression": "B_raw", "hide": true, "reducer": "last", "refId": "B", "settings": {"mode": "replaceNN", "replaceWithValue": 0}, "type": "reduce"},
+        {"datasource": {"type": "__expr__", "uid": "__expr__"}, "expression": "($A >= 1) * ($B == 0) * 3 + ($A >= 1) * ($B > 0) * 2 + ($A == 0) * ($B > 0) * 1", "refId": "score", "type": "math"}
+      ],
+      "title": "Photos→NC: health",
+      "type": "stat"
+    },
+    {
+      "datasource": {"type": "loki", "uid": "P8E80F9AEF21F6940"},
+      "description": "New photos exported by osxphotos to staging (capture date ≥ 2026-05-08).",
+      "fieldConfig": {
+        "defaults": {"color": {"fixedColor": "blue", "mode": "fixed"}, "noValue": "0", "thresholds": {"mode": "absolute", "steps": [{"color": "blue", "value": null}]}, "unit": "short"},
+        "overrides": []
+      },
+      "gridPos": {"h": 5, "w": 6, "x": 6, "y": 119},
+      "id": 1502,
+      "options": {"colorMode": "value", "graphMode": "area", "justifyMode": "center", "orientation": "auto", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "textMode": "value"},
+      "targets": [
+        {"datasource": {"type": "loki", "uid": "P8E80F9AEF21F6940"}, "expr": "sum(sum_over_time({job=\"nextcloud_photos_sync\", event=~\"idle|uploaded\"} | regexp \"new=(?P<new>\\\\d+)\" | unwrap new [24h]))", "queryType": "instant", "refId": "A"}
+      ],
+      "title": "Photos→NC new (24h)",
+      "type": "stat"
+    },
+    {
+      "datasource": {"type": "loki", "uid": "P8E80F9AEF21F6940"},
+      "description": "Photos re-exported by osxphotos --update (edits propagate as updated files).",
+      "fieldConfig": {
+        "defaults": {"color": {"fixedColor": "yellow", "mode": "fixed"}, "noValue": "0", "thresholds": {"mode": "absolute", "steps": [{"color": "yellow", "value": null}]}, "unit": "short"},
+        "overrides": []
+      },
+      "gridPos": {"h": 5, "w": 6, "x": 12, "y": 119},
+      "id": 1503,
+      "options": {"colorMode": "value", "graphMode": "area", "justifyMode": "center", "orientation": "auto", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "textMode": "value"},
+      "targets": [
+        {"datasource": {"type": "loki", "uid": "P8E80F9AEF21F6940"}, "expr": "sum(sum_over_time({job=\"nextcloud_photos_sync\", event=~\"idle|uploaded\"} | regexp \"updated=(?P<updated>\\\\d+)\" | unwrap updated [24h]))", "queryType": "instant", "refId": "A"}
+      ],
+      "title": "Photos→NC updated (24h)",
+      "type": "stat"
+    },
+    {
+      "datasource": {"type": "loki", "uid": "P8E80F9AEF21F6940"},
+      "description": "Files actually transferred by rclone copy to Nextcloud's WebDAV.",
+      "fieldConfig": {
+        "defaults": {"color": {"fixedColor": "purple", "mode": "fixed"}, "noValue": "0", "thresholds": {"mode": "absolute", "steps": [{"color": "purple", "value": null}]}, "unit": "short"},
+        "overrides": []
+      },
+      "gridPos": {"h": 5, "w": 6, "x": 18, "y": 119},
+      "id": 1504,
+      "options": {"colorMode": "value", "graphMode": "area", "justifyMode": "center", "orientation": "auto", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "textMode": "value"},
+      "targets": [
+        {"datasource": {"type": "loki", "uid": "P8E80F9AEF21F6940"}, "expr": "sum(sum_over_time({job=\"nextcloud_photos_sync\", event=~\"idle|uploaded\"} | regexp \"transferred=(?P<transferred>\\\\d+)\" | unwrap transferred [24h]))", "queryType": "instant", "refId": "A"}
+      ],
+      "title": "Photos→NC transferred (24h)",
+      "type": "stat"
+    },
+    {
+      "datasource": {"type": "loki", "uid": "P8E80F9AEF21F6940"},
+      "description": "Stacked new + updated per interval — osxphotos truth (true new/edited photos exported from Photos.app). The rclone-derived `transferred` count is intentionally omitted here because osxphotos --touch-file resets mtime on metadata-only changes, causing rclone to re-upload byte-identical files. transferred is still surfaced as the (24h) stat above as a diagnostic.",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {"drawStyle": "bars", "fillOpacity": 80, "lineInterpolation": "linear", "stacking": {"group": "A", "mode": "normal"}},
+          "unit": "short"
+        },
+        "overrides": [
+          {"matcher": {"id": "byName", "options": "new"}, "properties": [{"id": "color", "value": {"fixedColor": "blue", "mode": "fixed"}}]},
+          {"matcher": {"id": "byName", "options": "updated"}, "properties": [{"id": "color", "value": {"fixedColor": "yellow", "mode": "fixed"}}]}
+        ]
+      },
+      "gridPos": {"h": 8, "w": 24, "x": 0, "y": 124},
+      "id": 1505,
+      "options": {"legend": {"calcs": ["sum"], "displayMode": "list", "placement": "bottom"}, "tooltip": {"mode": "multi", "sort": "desc"}},
+      "targets": [
+        {"datasource": {"type": "loki", "uid": "P8E80F9AEF21F6940"}, "expr": "sum(sum_over_time({job=\"nextcloud_photos_sync\", event=~\"idle|uploaded\"} | regexp \"new=(?P<new>\\\\d+)\" | unwrap new [$__interval]))", "legendFormat": "new", "queryType": "range", "refId": "new"},
+        {"datasource": {"type": "loki", "uid": "P8E80F9AEF21F6940"}, "expr": "sum(sum_over_time({job=\"nextcloud_photos_sync\", event=~\"idle|uploaded\"} | regexp \"updated=(?P<updated>\\\\d+)\" | unwrap updated [$__interval]))", "legendFormat": "updated", "queryType": "range", "refId": "updated"}
+      ],
+      "title": "Photos→NC: activity over time",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {"h": 1, "w": 24, "x": 0, "y": 132},
+      "id": 1506,
+      "panels": [
+        {
+          "datasource": {"type": "loki", "uid": "P8E80F9AEF21F6940"},
+          "description": "Plain-English event stream from nextcloud-photo-sync.sh on Mac Studio.",
+          "gridPos": {"h": 10, "w": 24, "x": 0, "y": 133},
+          "id": 1507,
+          "options": {"dedupStrategy": "none", "enableLogDetails": true, "prettifyLogMessage": false, "showCommonLabels": false, "showLabels": false, "showTime": true, "sortOrder": "Descending", "wrapLogMessage": true},
+          "targets": [
+            {"datasource": {"type": "loki", "uid": "P8E80F9AEF21F6940"}, "expr": "{job=\"nextcloud_photos_sync\"} != \"started\"", "maxLines": 100, "queryType": "range", "refId": "A"}
+          ],
+          "title": "Photos→NC: recent events",
+          "type": "logs"
+        }
+      ],
+      "title": "📷  Photos→NC: recent events (click to expand)",
+      "type": "row"
+    }
+  ],
+  "refresh": "1m",
+  "schemaVersion": 39,
+  "tags": [
+    "mineracks",
+    "icloud",
+    "sync",
+    "photos",
+    "files",
+    "calendars",
+    "contacts",
+    "mail",
+    "reminders",
+    "bookmarks",
+    "notes"
+  ],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-24h",
+    "to": "now"
+  },
+  "timezone": "Australia/Brisbane",
+  "title": "iCloud Synchronisation",
+  "uid": "immich-sync"
+}

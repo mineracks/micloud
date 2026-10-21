@@ -1,0 +1,50 @@
+/* micloud iOS companion — Arabic (ar). */
+
+/* source status */
+"status.uptodate" = "مُحدَّث";
+"status.syncing"  = "جارٍ المزامنة";
+"status.stale"    = "قديم";
+"status.error"    = "خطأ";
+"status.off"      = "إيقاف";
+
+/* overall header */
+"hdr.protected" = "محمي · كل شيء على ما يُرام";
+"hdr.syncing"   = "جارٍ المزامنة…";
+"hdr.attention" = "يتطلب الانتباه";
+"hdr.idle"      = "خامل";
+"hdr.checking"  = "جارٍ التحقق…";
+
+/* errors */
+"err.notpaired"   = "لم يتم الاقتران بـ Nextcloud بعد";
+"err.unreachable" = "تعذّر الوصول إلى حالة الـ Mac";
+
+/* summary + relative time */
+"summary.checked" = "تم التحقق منذ %@";
+"ago.now"  = "الآن";
+"ago.sec"  = "منذ %@ ث";
+"ago.min"  = "منذ %@ د";
+"ago.hour" = "منذ %@ س";
+"ago.day"  = "منذ %@ ي";
+
+/* Health card */
+"health.title"    = "الصحة";
+"health.subtitle" = "انسخ احتياطيًا إلى مساحة تخزين تملكها";
+"health.action"   = "نسخ الصحة احتياطيًا";
+"health.busy"     = "جارٍ النسخ الاحتياطي…";
+"health.requesting" = "جارٍ طلب الوصول إلى الصحة…";
+"health.unavailable" = "بيانات الصحة غير متوفرة على هذا الجهاز";
+"health.empty"    = "لم يتم العثور على بيانات صحية للنسخ الاحتياطي";
+"health.exporting" = "جارٍ تصدير %1$@ (%2$d)…";
+"health.done"     = "تم نسخ %d من السجلات الصحية احتياطيًا إلى مساحة التخزين الخاصة بك";
+"health.failed"   = "فشل النسخ الاحتياطي للصحة: %@";
+
+/* source names */
+"source.photos"    = "الصور";
+"source.documents" = "المستندات";
+"source.calendars" = "التقويمات";
+"source.contacts"  = "جهات الاتصال";
+"source.reminders" = "التذكيرات";
+"source.notes"     = "الملاحظات";
+"source.bookmarks" = "الإشارات المرجعية";
+"source.mail"      = "البريد";
+"source.health"    = "الصحة";

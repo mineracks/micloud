@@ -1,0 +1,50 @@
+/* micloud iOS companion — Italian table. Bundled per-language; iOS picks the user's language. */
+
+/* source status */
+"status.uptodate" = "Aggiornato";
+"status.syncing"  = "Sincronizzazione";
+"status.stale"    = "Non aggiornato";
+"status.error"    = "Errore";
+"status.off"      = "Off";
+
+/* overall header */
+"hdr.protected" = "Protetto · tutto in ordine";
+"hdr.syncing"   = "Sincronizzazione…";
+"hdr.attention" = "Richiede attenzione";
+"hdr.idle"      = "Inattivo";
+"hdr.checking"  = "Verifica…";
+
+/* errors */
+"err.notpaired"   = "Non ancora associato a un Nextcloud";
+"err.unreachable" = "Impossibile raggiungere lo stato del tuo Mac";
+
+/* summary + relative time */
+"summary.checked" = "verificato %@";
+"ago.now"  = "adesso";
+"ago.sec"  = "%@ s fa";
+"ago.min"  = "%@ min fa";
+"ago.hour" = "%@ h fa";
+"ago.day"  = "%@ g fa";
+
+/* Health card */
+"health.title"    = "Salute";
+"health.subtitle" = "Esegui il backup su uno spazio di archiviazione tuo";
+"health.action"   = "Backup di Salute";
+"health.busy"     = "Backup in corso…";
+"health.requesting" = "Richiesta di accesso a Salute…";
+"health.unavailable" = "I dati di Salute non sono disponibili su questo dispositivo";
+"health.empty"    = "Nessun dato di Salute da salvare";
+"health.exporting" = "Esportazione di %1$@ (%2$d)…";
+"health.done"     = "Eseguito il backup di %d dati di salute nel tuo spazio di archiviazione";
+"health.failed"   = "Backup di Salute non riuscito: %@";
+
+/* source names */
+"source.photos"    = "Foto";
+"source.documents" = "Documenti";
+"source.calendars" = "Calendari";
+"source.contacts"  = "Contatti";
+"source.reminders" = "Promemoria";
+"source.notes"     = "Note";
+"source.bookmarks" = "Segnalibri";
+"source.mail"      = "Mail";
+"source.health"    = "Salute";

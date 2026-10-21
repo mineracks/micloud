@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  icloud-sovereign-backup Phase 2.6 (Photos) — weekly MOP-UP for the hourly photo-delta-sync.
+  Runs with a 21-day look-back buffer to catch photos that synced in late (phone offline while
+  travelling, iCloud sync lag) and slipped past the hourly 2-day window. Immich (hash) + rclone
+  (size) dedup the overlap. Sun 04:23.
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.mineracks.photo-delta-sync-mopup</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/bash</string>
+    <string>/Users/USERNAME/bin/photo-delta-sync.sh</string>
+    <string>21</string>
+  </array>
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Weekday</key><integer>0</integer>
+    <key>Hour</key><integer>4</integer>
+    <key>Minute</key><integer>23</integer>
+  </dict>
+  <key>StandardOutPath</key>
+  <string>/Users/USERNAME/Library/Logs/photo-delta-sync.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/USERNAME/Library/Logs/photo-delta-sync.log</string>
+</dict>
+</plist>

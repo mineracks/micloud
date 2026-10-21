@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- micloud relay: launch at login in PRODUCTION mode and keep it running. Install with configure.sh.
+     Edit MICLOUD_LOKI_URL / MICLOUD_HOST_LABEL for the fleet; remove them for a self-host user. -->
+<plist version="1.0"><dict>
+  <key>Label</key><string>com.mineracks.micloud</string>
+  <key>ProgramArguments</key><array><string>/Applications/micloud.app/Contents/MacOS/micloud</string></array>
+  <key>EnvironmentVariables</key><dict>
+    <key>MICLOUD_PRODUCTION</key><string>1</string>
+    <key>MICLOUD_LOKI_URL</key><string>http://LOKI_HOST:3100/loki/api/v1/push</string>
+    <key>MICLOUD_HOST_LABEL</key><string>relay-mac</string>
+    <key>MICLOUD_NC_PHOTOS_PATH</key><string>Photos/iCloud-Camera</string>
+    <key>MICLOUD_NC_DOCUMENTS_PATH</key><string></string>
+  </dict>
+  <!-- launchd starts a service with iCloud materialisation OFF: any read of a placeholder fails with EDEADLK.
+       The lanes pull files on purpose, so turn it on; enumeration only stats, so nothing downloads by accident. -->
+  <key>MaterializeDatalessFiles</key><true/>
+  <key>RunAtLoad</key><true/>
+  <key>KeepAlive</key><true/>
+  <key>ThrottleInterval</key><integer>15</integer>
+  <key>ProcessType</key><string>Interactive</string>
+  <key>StandardOutPath</key><string>/tmp/micloud.log</string>
+  <key>StandardErrorPath</key><string>/tmp/micloud.log</string>
+</dict></plist>

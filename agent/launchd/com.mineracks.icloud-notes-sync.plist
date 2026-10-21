@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<!--
+  com.mineracks.icloud-notes-sync — Phase 6.3
+
+  Mac-Studio launchd that mirrors Apple Notes → Nextcloud Notes by reading
+  the local CoreData store. AppleScript Notes is unworkable (-1712 hangs
+  on CloudKit fetch, same as Reminders) and EventKit doesn't cover Notes,
+  so we read NoteStore.sqlite directly + decode the gzip+protobuf bodies.
+
+  Event-driven: WatchPaths on `~/Library/Group Containers/group.com.apple.notes/`
+  Container_v1/Stores. Same caveat as Reminders' WatchPaths attempt — Group
+  Containers FSEvents need Full Disk Access on the responsible-process for
+  events to surface. We invoke through `/usr/bin/env` (which the user
+  granted FDA earlier), so this should fire reliably.
+
+  Plus a 6h StartInterval safety net in case WatchPaths drops anything.
+-->
+<dict>
+  <key>Label</key>
+  <string>com.mineracks.icloud-notes-sync</string>
+
+  <!-- env-as-responsible-process: gives us Reminders Automation grant
+       (inherited cleanly) AND Full Disk Access (granted manually for the
+       Bookmarks plist). NoteStore.sqlite needs FDA to read. -->
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/bin/env</string>
+    <string>/Users/USERNAME/bin/icloud-notes-sync.sh</string>
+  </array>
+
+  <key>WatchPaths</key>
+  <array>
+    <string>/Users/USERNAME/Library/Group Containers/group.com.apple.notes/Container_v1/Stores</string>
+  </array>
+
+  <key>StartInterval</key>
+  <integer>21600</integer>
+
+  <key>RunAtLoad</key>
+  <true/>
+
+  <key>ThrottleInterval</key>
+  <integer>30</integer>
+
+  <key>StandardOutPath</key>
+  <string>/Users/USERNAME/Library/Logs/icloud-notes-sync/stdout.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/USERNAME/Library/Logs/icloud-notes-sync/stderr.log</string>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key>
+    <string>/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+  </dict>
+
+  <key>ProcessType</key>
+  <string>Background</string>
+</dict>
+</plist>
