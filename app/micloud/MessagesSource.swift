@@ -29,9 +29,14 @@ final class MessagesSource: BackfillSource, @unchecked Sendable {
         try? fm.createDirectory(at: staging, withIntermediateDirectories: true)
     }
 
+    /// The bundled copy first (relay builds made with --bundle-exporter), then a Homebrew / local install:
+    /// imessage-exporter is GPL-3.0, so the downloadable release does not ship it and asks for
+    /// `brew install imessage-exporter` instead.
     static var exporter: URL? {
-        let u = Bundle.main.bundleURL.appendingPathComponent("Contents/MacOS/imessage-exporter")
-        return FileManager.default.isExecutableFile(atPath: u.path) ? u : nil
+        let candidates = [Bundle.main.bundleURL.appendingPathComponent("Contents/MacOS/imessage-exporter"),
+                          URL(fileURLWithPath: "/opt/homebrew/bin/imessage-exporter"),
+                          URL(fileURLWithPath: "/usr/local/bin/imessage-exporter")]
+        return candidates.first { FileManager.default.isExecutableFile(atPath: $0.path) }
     }
 
     private func snapshotDB(to dst: URL) throws {
@@ -54,7 +59,7 @@ final class MessagesSource: BackfillSource, @unchecked Sendable {
         lock.lock(); let last = manifest.extra["exported_at"] as? Double ?? 0; lock.unlock()
         let fm = FileManager.default
         if Date().timeIntervalSince1970 - last < minInterval, fm.fileExists(atPath: exportDir.path) { return }
-        guard let exporter = Self.exporter else { throw Failure(description: "imessage-exporter not bundled — rebuild the app with MICLOUD_RELAY=1") }
+        guard let exporter = Self.exporter else { throw Failure(description: "imessage-exporter not found — brew install imessage-exporter (or rebuild with --bundle-exporter)") }
         let copy = staging.appendingPathComponent("chat-copy.db")
         try snapshotDB(to: copy); defer { try? fm.removeItem(at: copy) }
         let fresh = staging.appendingPathComponent("full-html.new", isDirectory: true)

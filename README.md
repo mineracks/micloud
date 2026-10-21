@@ -57,7 +57,22 @@ archive are all live. It is not yet in the App Store, so today you build it from
 
 Expect rough edges around first-run setup. Open an issue when you hit one.
 
-## Building
+## Download (macOS)
+
+Grab the latest `micloud-<version>.zip` from the
+[Releases page](https://github.com/mineracks/micloud/releases). It is Developer ID signed and
+notarised, so unzip it, drag `micloud.app` to Applications and open it. The first run asks for
+the Photos, Calendars, Contacts and Reminders permissions it needs, and the Notes, Safari,
+Messages and Mail lanes also need Full Disk Access (System Settings, Privacy & Security).
+
+The Messages lane renders your history with [imessage-exporter](https://github.com/ReagentX/imessage-exporter),
+which is GPL-3.0 and therefore not bundled. Install it with `brew install imessage-exporter`
+and the lane picks it up from `/opt/homebrew/bin`.
+
+The iPhone companion, which also archives Apple Health, is not on the App Store yet. Build it
+from source with your own Apple developer team: see [`app/ios/README.md`](app/ios/README.md).
+
+## Building from source
 
 You need macOS with Xcode's Command Line Tools (Swift 6), a Nextcloud server, and optionally an
 Immich server. Full Xcode is only needed for App Store packaging.
@@ -73,8 +88,9 @@ cd app/micloud && ./build.sh && ./run.sh
 cd app/ios && ./build-ios.sh
 ```
 
-`app/micloud/SIGNING.md` covers Developer ID signing and notarisation, and `app/micloud/configure.sh`
-points an installed app at your servers.
+`app/micloud/SIGNING.md` covers Developer ID signing and notarisation, `app/micloud/release.sh`
+produces the notarised download zip, and `app/micloud/configure.sh` points an installed app at
+your servers. The iPhone companion has its own [`README`](app/ios/README.md).
 
 ## Privacy
 

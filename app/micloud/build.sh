@@ -52,6 +52,8 @@ if [ "${MICLOUD_RELAY:-0}" = "1" ]; then
 else
   sed -i '' 's|ATS_POLICY|<key>NSAllowsLocalNetworking</key><true/>|' "$APP/Contents/Info.plist"
 fi
+# Version/build for a release download (release.sh sets them); the defaults keep local dev builds as before.
+sed -i '' "s|<key>CFBundleShortVersionString</key><string>0.1</string>|<key>CFBundleShortVersionString</key><string>${MICLOUD_MAC_VERSION:-0.1}</string>|; s|<key>CFBundleVersion</key><string>1</string>|<key>CFBundleVersion</key><string>${MICLOUD_MAC_BUILD:-1}</string>|" "$APP/Contents/Info.plist"
 plutil -lint "$APP/Contents/Info.plist" >/dev/null
 
 mkdir -p kit && cp ../MicloudKit/Sources/MicloudKit/*.swift kit/ 2>/dev/null || true
